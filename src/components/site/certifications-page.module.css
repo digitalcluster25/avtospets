@@ -1,0 +1,158 @@
+.page {
+  background: #ffffff;
+  min-height: 100vh;
+}
+
+.main {
+  min-height: 0;
+}
+
+.heroSection {
+  background: linear-gradient(180deg, #ebedee 68.393%, #d1d5db 100%);
+  padding: 48px 48px 94px;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+  margin: 0 auto;
+  width: 1112px;
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.breadcrumbs {
+  display: flex;
+  gap: 4px;
+  width: 1112px;
+}
+
+.breadcrumbMuted,
+.breadcrumbCurrent {
+  font-family: var(--font-ui), sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.breadcrumbMuted {
+  color: #666666;
+}
+
+.breadcrumbCurrent {
+  color: #0f0f0f;
+}
+
+.title {
+  color: #0e131c;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+  width: 1112px;
+}
+
+.description {
+  color: #374151;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  gap: 20px;
+  line-height: 30px;
+  width: 1112px;
+}
+
+.description p {
+  margin: 0;
+}
+
+.groups {
+  display: flex;
+  flex-direction: column;
+  gap: 54px;
+  width: 1112px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 1112px;
+}
+
+.groupTitle {
+  color: #0f0f0f;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+}
+
+.fileList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 1112px;
+}
+
+.fileRow {
+  align-items: center;
+  background: #f8f8f8;
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+  min-height: 64px;
+  padding: 16px;
+  text-align: left;
+  transition: background-color 500ms ease;
+  width: 1112px;
+}
+
+.fileRow:hover,
+.fileRow:focus-visible {
+  background: #f1f2f4;
+  outline: none;
+}
+
+.pdfIcon {
+  display: block;
+  flex: 0 0 auto;
+  height: 32px;
+  position: relative;
+  width: 32px;
+}
+
+.pdfIconInner {
+  inset: 3.13% 14% 2.08% 14%;
+  position: absolute;
+}
+
+.pdfIconAsset {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.fileName {
+  color: #374151;
+  flex: 1 0 0;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 26px;
+  margin: 0;
+  min-width: 0;
+}

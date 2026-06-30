@@ -1,0 +1,409 @@
+.page {
+  background: #ffffff;
+  min-height: 100vh;
+}
+
+.main {
+  min-height: 0;
+}
+
+.hero {
+  background: linear-gradient(to bottom, #ebedee 0%, #ebedee 68.393%, #d1d5db 100%);
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.heroInner {
+  align-items: center;
+  display: flex;
+  gap: 44px;
+  height: 702px;
+  margin: 0 auto;
+  width: 1344px;
+}
+
+.heroCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 650px;
+}
+
+.heroHead {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.breadcrumbs {
+  display: flex;
+  gap: 4px;
+}
+
+.breadcrumbMuted,
+.breadcrumbCurrent {
+  font-family: var(--font-ui), sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.breadcrumbMuted {
+  color: #666666;
+}
+
+.breadcrumbCurrent {
+  color: #0f0f0f;
+}
+
+.heroTitle {
+  color: #0e131c;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+}
+
+.heroBody {
+  color: #374151;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  gap: 20px;
+  line-height: 30px;
+  width: 650px;
+}
+
+.heroBody p {
+  margin: 0;
+}
+
+.heroImageCard {
+  border-radius: 16px;
+  height: 520px;
+  overflow: hidden;
+  position: relative;
+  width: 650px;
+}
+
+.heroImage {
+  border-radius: 16px;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.heroGlow {
+  background: rgba(241, 64, 78, 0.1);
+  border-radius: 18641400px;
+  bottom: -702px;
+  filter: blur(150px);
+  height: 800px;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  width: 1440px;
+}
+
+.dealerSection {
+  align-items: center;
+  background: #f3f4f6;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  overflow: clip;
+  padding: 94px 64px;
+  width: 100%;
+}
+
+.dealerTitleBlock {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  text-align: center;
+  width: 800px;
+}
+
+.sectionTitle {
+  color: #0e131c;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+}
+
+.dealerBody,
+.partnersBody {
+  color: #374151;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 30px;
+  margin: 0;
+}
+
+.dealerCards {
+  display: flex;
+  gap: 24px;
+  width: 1312px;
+}
+
+.dealerCard {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  gap: 32px;
+  min-width: 0;
+  padding: 32px;
+}
+
+.dealerIconWrap {
+  align-items: center;
+  background: #f3f4f6;
+  border-radius: 24px;
+  display: flex;
+  height: 48px;
+  justify-content: center;
+  width: 48px;
+}
+
+.dealerIcon {
+  display: block;
+  height: 24px;
+  width: 24px;
+}
+
+.dealerTextBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.dealerCardTitle {
+  color: #0f0f0f;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+}
+
+.dealerCardBody {
+  color: #374151;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 26px;
+  margin: 0;
+}
+
+.teamSection {
+  align-items: center;
+  background: #0e131c;
+  display: flex;
+  gap: 44px;
+  justify-content: center;
+  overflow: clip;
+  padding: 64px 48px;
+  position: relative;
+  width: 100%;
+}
+
+.teamSection::before {
+  background: rgba(220, 31, 46, 0.1);
+  border-radius: 18641400px;
+  content: "";
+  filter: blur(150px);
+  height: 800px;
+  left: 50%;
+  position: absolute;
+  top: calc(50% + 31.5px);
+  transform: translate(-50%, -50%);
+  width: 800px;
+}
+
+.teamCopy,
+.teamImageCard {
+  flex: 0 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.teamCopy {
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 650px;
+}
+
+.teamTitle {
+  color: #ffffff;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+}
+
+.teamBody {
+  color: #ffffff;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 30px;
+  margin: 0;
+}
+
+.teamImageCard {
+  border-radius: 16px;
+  height: 428px;
+  overflow: hidden;
+  width: 650px;
+}
+
+.teamImage {
+  border-radius: 16px;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.partnersSection {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+  padding: 94px 48px;
+  width: 100%;
+}
+
+.partnersTitleBlock {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+  width: 1112px;
+}
+
+.partnersBody {
+  width: 962px;
+}
+
+.partnersGrid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(4, 266px);
+  grid-template-rows: repeat(6, 160px);
+  width: 1112px;
+}
+
+.partnerCard {
+  background: #f3f4f6;
+  border: 1px solid #ededed;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+.partnerLogo {
+  border-radius: 16px;
+  height: 100%;
+  mix-blend-mode: darken;
+  object-fit: cover;
+  width: 100%;
+}
+
+@media (max-width: 1439px) {
+  .heroInner,
+  .dealerCards,
+  .partnersTitleBlock,
+  .partnersGrid,
+  .partnersBody {
+    width: 100%;
+  }
+
+  .heroInner {
+    padding: 0 24px;
+  }
+
+  .dealerCards {
+    flex-wrap: wrap;
+  }
+
+  .partnersGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .heroInner,
+  .teamSection {
+    flex-direction: column;
+  }
+
+  .heroInner {
+    gap: 32px;
+    height: auto;
+    padding: 48px 16px 64px;
+    width: 100%;
+  }
+
+  .heroCopy,
+  .heroBody,
+  .heroImageCard,
+  .dealerTitleBlock,
+  .teamCopy,
+  .partnersTitleBlock,
+  .partnersBody {
+    width: 100%;
+  }
+
+  .heroTitle,
+  .sectionTitle,
+  .teamTitle {
+    font-size: 36px;
+  }
+
+  .heroImageCard {
+    height: 320px;
+  }
+
+  .dealerSection,
+  .partnersSection {
+    padding: 64px 16px;
+  }
+
+  .dealerCards {
+    flex-direction: column;
+  }
+
+  .teamSection {
+    padding: 64px 16px;
+  }
+
+  .teamImageCard {
+    height: 320px;
+    width: 100%;
+  }
+
+  .partnersGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+  }
+
+  .partnerCard {
+    height: 140px;
+  }
+}

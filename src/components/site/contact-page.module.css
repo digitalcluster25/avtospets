@@ -1,0 +1,176 @@
+.page {
+  background: #ffffff;
+  min-height: 100vh;
+}
+
+.topArea {
+  background: transparent;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.hero {
+  background: linear-gradient(90deg, #ffffff 0 50%, #f3f4f6 50% 100%);
+  width: 100%;
+}
+
+.heroShell {
+  display: grid;
+  grid-template-columns: 720px 720px;
+  margin: 0 auto;
+  min-height: 661px;
+  width: 1440px;
+}
+
+.leftPanel {
+  align-items: flex-start;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-height: 661px;
+  padding: 48px 48px 94px;
+}
+
+.copyBlock {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.headGroup {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.breadcrumbs {
+  display: flex;
+  gap: 4px;
+}
+
+.breadcrumbMuted,
+.breadcrumbCurrent {
+  font-family: var(--font-ui), sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.breadcrumbMuted {
+  color: #666666;
+}
+
+.breadcrumbCurrent {
+  color: #0f0f0f;
+}
+
+.title {
+  color: #0e131c;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+  width: 100%;
+}
+
+.description {
+  color: #374151;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 30px;
+  margin: 0;
+  width: 100%;
+}
+
+.rightPanel {
+  background: #f3f4f6;
+  min-height: 661px;
+  padding: 94px 80px;
+}
+
+.contactList {
+  width: 100%;
+}
+
+.contactRow {
+  border-top: 1px solid #dbdbdb;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 32px 0;
+  width: 100%;
+}
+
+.contactLabel {
+  color: #666666;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  line-height: normal;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.contactValue {
+  color: #0e131c;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+  width: 100%;
+}
+
+.contactValue p {
+  margin: 0;
+}
+
+@media (max-width: 1439px) {
+  .heroShell {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .heroShell {
+    grid-template-columns: 1fr;
+  }
+
+  .leftPanel,
+  .rightPanel {
+    min-height: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .leftPanel {
+    padding-bottom: 64px;
+    padding-top: 48px;
+  }
+
+  .rightPanel {
+    padding-bottom: 64px;
+    padding-top: 64px;
+  }
+
+  .title {
+    font-size: 48px;
+  }
+
+  .contactValue {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}

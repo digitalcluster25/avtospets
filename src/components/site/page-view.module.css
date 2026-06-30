@@ -1,0 +1,358 @@
+.shell {
+  display: grid;
+  min-height: 100vh;
+}
+
+.hero {
+  padding: 1.5rem 0 0;
+}
+
+.heroPanel {
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0)),
+    linear-gradient(135deg, rgba(213, 75, 50, 0.18), rgba(20, 27, 34, 0.84));
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  position: relative;
+}
+
+.heroPanel::after {
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.2) 0, transparent 54%),
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+  content: "";
+  inset: auto -10% -30% auto;
+  position: absolute;
+  width: min(36rem, 60vw);
+  aspect-ratio: 1;
+}
+
+.heroGrid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  position: relative;
+  z-index: 1;
+}
+
+.heroContent {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.heroTitle {
+  font-family: var(--font-heading), sans-serif;
+  font-size: clamp(3rem, 8vw, 6.8rem);
+  letter-spacing: 0.04em;
+  line-height: 0.92;
+  max-width: 10ch;
+  text-transform: uppercase;
+}
+
+.heroDescription {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  max-width: 42rem;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.primaryAction,
+.secondaryAction {
+  min-width: 0;
+}
+
+.primaryAction {
+  border-radius: 10px;
+}
+
+.secondaryAction {
+  border-radius: 10px;
+}
+
+.heroFacts {
+  display: grid;
+  gap: 1rem;
+}
+
+.factCard {
+  backdrop-filter: blur(14px);
+  background: rgba(10, 15, 20, 0.42);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  display: grid;
+  gap: 0.5rem;
+  padding: 1.25rem;
+}
+
+.factValue {
+  font-family: var(--font-heading), sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.factLabel {
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.section {
+  padding: var(--section-space) 0 0;
+}
+
+.sectionHeader {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  max-width: 48rem;
+}
+
+.sectionTitle {
+  font-family: var(--font-heading), sans-serif;
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.sectionDescription {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.cardGrid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  display: grid;
+  gap: 1rem;
+  min-height: 100%;
+  padding: 1.5rem;
+}
+
+.cardIndex {
+  color: var(--accent-strong);
+  font-family: var(--font-heading), sans-serif;
+  font-size: 1.4rem;
+}
+
+.cardTitle {
+  font-family: var(--font-heading), sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.cardBody {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.statsGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.stat {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+}
+
+.statValue {
+  display: block;
+  font-family: var(--font-heading), sans-serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.statLabel {
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.gallery {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.galleryItem {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0)),
+    var(--surface-strong);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  display: grid;
+  gap: 1rem;
+  grid-column: span 4;
+  min-height: 240px;
+  padding: 1.25rem;
+}
+
+.galleryCaption {
+  color: var(--text-muted);
+  margin-top: auto;
+}
+
+.galleryAccent {
+  background: linear-gradient(135deg, var(--accent-soft), transparent);
+  border-radius: var(--radius-md);
+  min-height: 120px;
+}
+
+.quoteGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.quote {
+  background: var(--surface-light);
+  border-radius: var(--radius-lg);
+  color: var(--text-dark);
+  display: grid;
+  gap: 1rem;
+  min-height: 100%;
+  padding: 1.75rem;
+}
+
+.quoteText {
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.quoteAuthor {
+  color: rgba(21, 32, 43, 0.76);
+  font-weight: 500;
+}
+
+.documents {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.document {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  display: grid;
+  gap: 0.75rem;
+  padding: 1.5rem;
+}
+
+.documentName {
+  font-family: var(--font-heading), sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.documentMeta {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.contactGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1.1fr 0.9fr;
+}
+
+.contactPanel,
+.contactList {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+}
+
+.contactPanel {
+  display: grid;
+  gap: 1rem;
+}
+
+.contactList {
+  display: grid;
+  gap: 1rem;
+}
+
+.contactItem {
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  gap: 0.35rem;
+  padding-bottom: 1rem;
+}
+
+.contactItem:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.contactLabel {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.contactValue {
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.footerSpace {
+  padding-bottom: 3rem;
+}
+
+@media (max-width: 1100px) {
+  .heroGrid,
+  .contactGrid,
+  .statsGrid,
+  .cardGrid,
+  .documents,
+  .quoteGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .galleryItem {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 780px) {
+  .heroGrid,
+  .contactGrid,
+  .statsGrid,
+  .cardGrid,
+  .documents,
+  .quoteGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .galleryItem {
+    grid-column: span 12;
+  }
+
+  .heroTitle {
+    max-width: none;
+  }
+}

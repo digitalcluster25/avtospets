@@ -1,0 +1,384 @@
+.footer {
+  background: #0e131c;
+  box-sizing: border-box;
+  min-width: 100%;
+  min-height: 478.052px;
+  overflow: clip;
+  position: relative;
+  width: 100%;
+}
+
+.inner {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  margin: 0 auto;
+  min-height: 478.052px;
+  padding: 64px 48px;
+  position: relative;
+  width: 1440px;
+  z-index: 1;
+}
+
+.glowRight,
+.glowLeft {
+  background: rgba(220, 31, 46, 0.1);
+  border-radius: 18641400px;
+  filter: blur(150px);
+  height: 580px;
+  position: absolute;
+  width: 580px;
+}
+
+.glowRight {
+  left: calc(50% + 445px);
+  top: calc(50% - 192.03px);
+  transform: translate(-50%, -50%);
+}
+
+.glowLeft {
+  left: calc(50% - 427px);
+  top: calc(50% + 97.97px);
+  transform: translate(-50%, -50%);
+}
+
+.top {
+  display: grid;
+  gap: 203px;
+  grid-template-columns: 489px 108px 341px;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.brandColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 489px;
+}
+
+.logo {
+  display: block;
+  height: 38.904px;
+  width: 259px;
+}
+
+.description {
+  color: #ffffff;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  margin: 0;
+  opacity: 0.7;
+  width: 489px;
+}
+
+.socials {
+  display: flex;
+  gap: 24px;
+}
+
+.socialButton {
+  align-items: center;
+  background: rgba(51, 66, 86, 0.3);
+  border-radius: 999px;
+  display: inline-flex;
+  justify-content: center;
+  height: 48px;
+  position: relative;
+  transition:
+    background-color 500ms ease,
+    color 500ms ease;
+  width: 48px;
+}
+
+.socialButton::before,
+.navLink::before,
+.phoneRow::before,
+.contactRow::before {
+  background: rgba(15, 15, 15, 0.1);
+  border-radius: 10px;
+  content: "";
+  inset: -6px -10px;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transition: opacity 500ms ease;
+}
+
+.socialButton::before {
+  border-radius: 999px;
+  inset: 0;
+}
+
+.socialButton:hover::before,
+.socialButton:focus-visible::before,
+.navLink:hover::before,
+.navLink:focus-visible::before,
+.phoneRow:hover::before,
+.phoneRow:focus-visible::before,
+.contactRow:hover::before,
+.contactRow:focus-visible::before {
+  opacity: 1;
+}
+
+.socialButton:hover .socialIcon,
+.socialButton:focus-visible .socialIcon,
+.socialButton:hover .socialIconInstagram,
+.socialButton:hover .socialIconFacebook,
+.socialButton:hover .socialIconLinkedin,
+.socialButton:focus-visible .socialIconInstagram,
+.socialButton:focus-visible .socialIconFacebook,
+.socialButton:focus-visible .socialIconLinkedin,
+.navLink:hover,
+.navLink:focus-visible,
+.phoneRow:hover,
+.phoneRow:focus-visible,
+.contactRow:hover,
+.contactRow:focus-visible {
+  color: #fd3626;
+}
+
+.socialButton:hover .socialIcon,
+.socialButton:hover .socialIconInstagram,
+.socialButton:hover .socialIconFacebook,
+.socialButton:hover .socialIconLinkedin,
+.socialButton:focus-visible .socialIcon,
+.socialButton:focus-visible .socialIconInstagram,
+.socialButton:focus-visible .socialIconFacebook,
+.socialButton:focus-visible .socialIconLinkedin {
+  background-color: #fd3626;
+}
+
+.socialIcon {
+  background-color: #d1d5db;
+  display: block;
+  flex: 0 0 auto;
+  position: relative;
+  transition: background-color 500ms ease;
+  z-index: 1;
+}
+
+.socialIconInstagram {
+  height: 18px;
+  mask: url("/figma/footer-2821/insta.svg") center / contain no-repeat;
+  -webkit-mask: url("/figma/footer-2821/insta.svg") center / contain no-repeat;
+  width: 18px;
+}
+
+.socialIconFacebook {
+  height: 20px;
+  mask: url("/figma/footer-2821/facebook.svg") center / contain no-repeat;
+  -webkit-mask: url("/figma/footer-2821/facebook.svg") center / contain no-repeat;
+  width: 10.7117px;
+}
+
+.socialIconLinkedin {
+  height: 20px;
+  mask: url("/figma/footer-2821/linkedin.svg") center / contain no-repeat;
+  -webkit-mask: url("/figma/footer-2821/linkedin.svg") center / contain no-repeat;
+  width: 20.0002px;
+}
+
+.navColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 108px;
+}
+
+.columnLabel {
+  color: #ffffff;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  margin: 0;
+  opacity: 0.5;
+  text-transform: uppercase;
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.navLink {
+  color: #f3f4f6;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  padding: 4px 0;
+  position: relative;
+  text-decoration: none;
+  transition: color 500ms ease;
+}
+
+.contactsColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+  width: 341px;
+}
+
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.phoneRow,
+.contactRow,
+.addressRow {
+  align-items: center;
+  color: inherit;
+  display: flex;
+  gap: 10px;
+  position: relative;
+  text-decoration: none;
+}
+
+.addressRow {
+  align-items: flex-start;
+  width: 100%;
+}
+
+.contactIcon {
+  background-color: rgba(243, 244, 246, 0.3);
+  flex: 0 0 auto;
+  height: 20px;
+  transition: background-color 500ms ease;
+  width: 20px;
+}
+
+.contactIconCall {
+  mask: url("/figma/footer-2821/call.svg") center / contain no-repeat;
+  -webkit-mask: url("/figma/footer-2821/call.svg") center / contain no-repeat;
+}
+
+.contactIconSms {
+  mask: url("/figma/footer-2821/sms.svg") center / contain no-repeat;
+  -webkit-mask: url("/figma/footer-2821/sms.svg") center / contain no-repeat;
+}
+
+.contactIconLocation {
+  mask: url("/figma/footer-2821/location.svg") center / contain no-repeat;
+  -webkit-mask: url("/figma/footer-2821/location.svg") center / contain no-repeat;
+}
+
+.phoneText {
+  color: #f3f4f6;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 30px;
+  transition: color 500ms ease;
+  white-space: nowrap;
+}
+
+.contactText,
+.contactTextBlock {
+  color: #f3f4f6;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  transition: color 500ms ease;
+}
+
+.phoneRow:hover .contactIcon,
+.phoneRow:focus-visible .contactIcon,
+.contactRow:hover .contactIcon,
+.contactRow:focus-visible .contactIcon {
+  background-color: #fd3626;
+}
+
+.contactTextBlock {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  margin: 0;
+  min-width: 0;
+}
+
+.bottom {
+  align-items: center;
+  border-top: 1px solid #1c1c1c;
+  display: flex;
+  height: 52.552px;
+  justify-content: space-between;
+  padding-top: 33px;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.copyright {
+  color: #ffffff;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0;
+  opacity: 0.7;
+}
+
+.bottomLinks {
+  display: flex;
+  gap: 32px;
+}
+
+.bottomLink {
+  color: #ffffff;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  opacity: 0.7;
+  text-decoration: none;
+}
+
+@media (max-width: 1100px) {
+  .footer {
+    min-width: 0;
+  }
+
+  .inner {
+    gap: 40px;
+    min-height: auto;
+    padding: 48px 18px;
+    width: 100%;
+  }
+
+  .top {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    grid-template-columns: none;
+  }
+
+  .brandColumn,
+  .description,
+  .contactsColumn {
+    width: 100%;
+  }
+
+  .bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+    height: auto;
+  }
+
+  .bottomLinks {
+    flex-direction: column;
+    gap: 12px;
+  }
+}

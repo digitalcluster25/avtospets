@@ -1,0 +1,723 @@
+.page {
+  background: #ffffff;
+  min-height: 100vh;
+}
+
+.main {
+  min-height: 0;
+}
+
+.hero {
+  background: linear-gradient(180deg, #ebedee 68.393%, #d1d5db 100%);
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.heroInner {
+  display: flex;
+  gap: 44px;
+  height: 702px;
+  margin: 0 auto;
+  padding: 0 48px;
+  width: 1440px;
+}
+
+.heroCopy {
+  display: flex;
+  flex-direction: column;
+  padding-top: 48px;
+  width: 650px;
+}
+
+.breadcrumbs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 48px;
+}
+
+.breadcrumbMuted,
+.breadcrumbCurrent {
+  font-family: var(--font-ui), sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.breadcrumbMuted {
+  color: #666666;
+}
+
+.breadcrumbCurrent {
+  color: #0f0f0f;
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 650px;
+}
+
+.heroTitle {
+  color: #0e131c;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+  width: 650px;
+}
+
+.heroTextBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.heroLead {
+  color: #374151;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 26px;
+  margin: 0;
+  width: 650px;
+}
+
+.heroServicesGrid {
+  column-gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(2, 317px);
+  row-gap: 16px;
+  width: 650px;
+}
+
+.heroServiceRowCompact,
+.heroServiceRowTall {
+  align-items: center;
+  background: #ffffff;
+  border-radius: 12px;
+  display: flex;
+  gap: 12px;
+  padding: 0 12px;
+  position: relative;
+}
+
+.heroServiceRowCompact {
+  height: 58px;
+}
+
+.heroServiceRowTall {
+  height: 60px;
+}
+
+.heroServiceIcon {
+  display: block;
+  flex: 0 0 auto;
+  height: 24px;
+  position: relative;
+  width: 24px;
+}
+
+.heroServiceIconAsset {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.heroServiceText {
+  color: #0f0f0f;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
+  margin: 0;
+  width: 257px;
+}
+
+.heroButton {
+  align-items: center;
+  background: linear-gradient(90deg, #dc1f2e 0%, #ff4757 100%);
+  border: 0;
+  border-radius: 10px;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  height: 54px;
+  justify-content: center;
+  margin-top: 32px;
+  overflow: hidden;
+  padding: 0 24px;
+  position: relative;
+  transition:
+    box-shadow 500ms ease,
+    color 500ms ease,
+    opacity 500ms ease,
+    filter 500ms ease;
+  width: 211px;
+}
+
+.heroButtonLabel {
+  position: relative;
+  z-index: 1;
+}
+
+.heroButton::before {
+  background: linear-gradient(90deg, #fd3626 0%, #fd3626 100%);
+  border-radius: inherit;
+  content: "";
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transition: opacity 500ms ease;
+}
+
+.heroButton:hover,
+.heroButton:focus-visible {
+  color: #ffffff;
+}
+
+.heroButton:hover::before,
+.heroButton:focus-visible::before {
+  opacity: 1;
+}
+
+.heroButton:focus-visible {
+  outline: 2px solid rgba(228, 35, 19, 0.9);
+  outline-offset: 2px;
+}
+
+.heroImageCard {
+  border-radius: 16px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  height: 520px;
+  margin-top: 91px;
+  overflow: hidden;
+  position: relative;
+  width: 650px;
+}
+
+.heroImage {
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+.heroGlow {
+  background: rgba(241, 64, 78, 0.1);
+  border-radius: 18641400px;
+  bottom: -702px;
+  filter: blur(150px);
+  height: 800px;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  width: 1440px;
+}
+
+.centersSection {
+  align-items: center;
+  background: #0e131c;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  overflow: clip;
+  padding: 100px 64px;
+  position: relative;
+  width: 100%;
+}
+
+.sectionGlowRight,
+.sectionGlowLeft {
+  background: rgba(220, 31, 46, 0.1);
+  border-radius: 18641400px;
+  filter: blur(150px);
+  height: 580px;
+  position: absolute;
+  width: 580px;
+}
+
+.sectionGlowRight {
+  left: calc(50% + 445px);
+  top: calc(50% - 169px);
+  transform: translate(-50%, -50%);
+}
+
+.sectionGlowLeft {
+  left: calc(50% - 427px);
+  top: calc(50% + 245px);
+  transform: translate(-50%, -50%);
+}
+
+.centersHeader {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  text-align: center;
+  width: 1312px;
+  z-index: 1;
+}
+
+.centersTitle {
+  color: #ffffff;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+  width: 1312px;
+}
+
+.centersDescription {
+  color: #aaaaaa;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 30px;
+  margin: 0;
+  width: 792px;
+}
+
+.centersContent {
+  display: flex;
+  gap: 32px;
+  position: relative;
+  width: 1312px;
+  z-index: 1;
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 380px;
+}
+
+.regionInputWrap {
+  position: relative;
+  width: 380px;
+}
+
+.regionInput {
+  align-items: center;
+  background: #1f1f1f;
+  border: 1px solid #333333;
+  border-radius: 12px;
+  display: flex;
+  gap: 12px;
+  height: 48px;
+  padding: 0 14px;
+  width: 380px;
+}
+
+.regionInputIcon,
+.regionInputChevron {
+  display: block;
+  flex: 0 0 auto;
+  height: 20px;
+  position: relative;
+  width: 20px;
+}
+
+.regionInputField {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: #ffffff;
+  flex: 1 0 0;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: normal;
+  min-width: 0;
+  outline: none;
+  padding: 0;
+}
+
+.regionInputField::placeholder {
+  color: #ffffff;
+  opacity: 1;
+}
+
+.regionAutocomplete {
+  background: #181818;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+  left: 0;
+  margin-top: 8px;
+  max-height: 240px;
+  overflow-y: auto;
+  position: absolute;
+  top: 48px;
+  width: 380px;
+  z-index: 3;
+}
+
+.regionAutocompleteOption {
+  background: transparent;
+  border: 0;
+  color: #ffffff;
+  cursor: pointer;
+  display: block;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
+  padding: 12px 16px;
+  text-align: left;
+  width: 100%;
+}
+
+.regionAutocompleteOption + .regionAutocompleteOption {
+  border-top: 1px solid #2a2a2a;
+}
+
+.regionAutocompleteOption:hover,
+.regionAutocompleteOption:focus-visible {
+  background: rgba(253, 54, 38, 0.16);
+  outline: none;
+}
+
+.regionChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 380px;
+}
+
+.regionChip {
+  align-items: center;
+  background: rgba(253, 54, 38, 0.16);
+  border: 1px solid rgba(253, 54, 38, 0.35);
+  border-radius: 999px;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 8px;
+  max-width: 100%;
+  padding: 8px 12px;
+}
+
+.regionChipLabel,
+.regionChipClose {
+  color: #ffffff;
+  font-family: var(--font-ui), sans-serif;
+  line-height: 20px;
+}
+
+.regionChipLabel {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.regionChipClose {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.centersList {
+  background: #181818;
+  border: 1px solid #2a2a2a;
+  border-radius: 16px;
+  height: 606px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+  width: 380px;
+  scrollbar-color: #333333 #0d0d0d;
+  scrollbar-width: thin;
+}
+
+.centersList::-webkit-scrollbar {
+  width: 12px;
+}
+
+.centersList::-webkit-scrollbar-track {
+  background: #0d0d0d;
+  border-radius: 999px;
+}
+
+.centersList::-webkit-scrollbar-thumb {
+  background: #333333;
+  border: 3px solid #0d0d0d;
+  border-radius: 999px;
+}
+
+.centerItem,
+.centerItemActive {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+  text-align: left;
+  width: 380px;
+}
+
+.centerItem + .centerItem,
+.centerItemActive + .centerItem,
+.centerItem + .centerItemActive,
+.centerItemActive + .centerItemActive {
+  border-top: 1px solid #2a2a2a;
+}
+
+.centerItemActive {
+  background: linear-gradient(90deg, #dc1f2e 0%, #ff4757 100%);
+}
+
+.centerItem:hover,
+.centerItem:focus-visible {
+  background: rgba(253, 54, 38, 0.12);
+  outline: none;
+}
+
+.centerCity,
+.centerCityActive {
+  font-family: var(--font-ui), sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.24px;
+  line-height: normal;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.centerCity {
+  color: #9ca3af;
+}
+
+.centerCityActive {
+  color: #ffffff;
+}
+
+.centerName,
+.centerMeta {
+  color: #ffffff;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 16px;
+  line-height: normal;
+  margin: 0;
+}
+
+.centerName {
+  font-weight: 700;
+}
+
+.centerMeta {
+  font-weight: 500;
+}
+
+.mapColumn {
+  width: 900px;
+}
+
+.mapCard {
+  border: 1px solid #2a2a2a;
+  border-radius: 16px;
+  height: 670px;
+  overflow: hidden;
+  position: relative;
+  width: 900px;
+}
+
+.mapCanvas {
+  height: 100%;
+  width: 100%;
+}
+
+.mapCanvas :global(.mapboxgl-map),
+.mapCanvas :global(.mapboxgl-canvas) {
+  border-radius: 16px;
+}
+
+.mapCanvas :global(.mapboxgl-ctrl-top-right) {
+  right: 12px;
+  top: 12px;
+}
+
+.mapCanvas :global(.mapboxgl-ctrl-group) {
+  background: rgba(24, 24, 24, 0.9);
+  border: 1px solid #2a2a2a;
+  box-shadow: none;
+}
+
+.mapCanvas :global(.mapboxgl-ctrl-group button) {
+  background: transparent;
+}
+
+.mapCanvas :global(.mapboxgl-ctrl-group button span) {
+  filter: invert(1);
+}
+
+.mapCanvas :global(.mapboxgl-ctrl-attrib) {
+  background: rgba(24, 24, 24, 0.9);
+  border-radius: 8px 0 0 0;
+  color: #9ca3af;
+}
+
+.mapCanvas :global(.mapboxgl-ctrl-attrib a) {
+  color: #ffffff;
+}
+
+.mapMarker {
+  background: #fd3626;
+  border: 2px solid #ffffff;
+  border-radius: 999px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  height: 18px;
+  transition:
+    background-color 200ms ease,
+    box-shadow 200ms ease;
+  width: 18px;
+}
+
+.mapMarkerActive {
+  background: #ffffff;
+  border-color: #fd3626;
+  box-shadow: 0 10px 24px rgba(253, 54, 38, 0.45);
+  height: 28px;
+  width: 28px;
+}
+
+.medicalSection {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  overflow: clip;
+  padding: 94px 48px;
+  width: 100%;
+}
+
+.medicalInner {
+  display: flex;
+  gap: 44px;
+  width: 1344px;
+}
+
+.medicalImageCard {
+  border-radius: 16px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  height: 468px;
+  overflow: hidden;
+  position: relative;
+  width: 650px;
+}
+
+.medicalImage {
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+.medicalCopy {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  gap: 44px;
+  justify-content: center;
+  min-width: 0;
+}
+
+.medicalTextBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.medicalTitle {
+  color: #0e131c;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+}
+
+.medicalDescription {
+  color: #374151;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  gap: 20px;
+  line-height: 30px;
+}
+
+.medicalDescription p {
+  margin: 0;
+}
+
+.medicalButton {
+  align-items: center;
+  background: linear-gradient(90deg, #dc1f2e 0%, #ff4757 100%);
+  border: 0;
+  border-radius: 10px;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 8px;
+  overflow: hidden;
+  min-width: 150px;
+  padding: 16px 32px;
+  position: relative;
+  transition:
+    box-shadow 500ms ease,
+    color 500ms ease,
+    opacity 500ms ease,
+    filter 500ms ease;
+}
+
+.medicalButton::before {
+  background: linear-gradient(90deg, #fd3626 0%, #fd3626 100%);
+  border-radius: inherit;
+  content: "";
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transition: opacity 500ms ease;
+}
+
+.medicalButton:hover::before,
+.medicalButton:focus-visible::before {
+  opacity: 1;
+}
+
+.medicalButton:focus-visible {
+  outline: 2px solid rgba(228, 35, 19, 0.9);
+  outline-offset: 2px;
+}
+
+.medicalButtonIcon {
+  display: block;
+  flex: 0 0 auto;
+  height: 20px;
+  position: relative;
+  width: 20px;
+  z-index: 1;
+}
+
+.medicalButtonText {
+  color: #ffffff;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.32px;
+  line-height: 22px;
+  position: relative;
+  white-space: nowrap;
+  z-index: 1;
+}

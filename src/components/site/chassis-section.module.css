@@ -1,0 +1,156 @@
+.section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+  margin: 0 auto;
+  overflow: clip;
+  padding: 94px 48px;
+  position: relative;
+  width: 1440px;
+}
+
+.glow {
+  background: rgba(220, 31, 46, 0.1);
+  border-radius: 18641400px;
+  filter: blur(150px);
+  height: 800px;
+  left: 50%;
+  position: absolute;
+  top: calc(50% + 0.5px);
+  transform: translate(-50%, -50%);
+  width: 800px;
+}
+
+.header {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  text-align: center;
+  width: 100%;
+  z-index: 1;
+}
+
+.title {
+  color: #ffffff;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+  width: 100%;
+}
+
+.body,
+.note {
+  color: #e5e7eb;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 30px;
+  margin: 0;
+  text-align: center;
+  width: 702px;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.card {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  display: flex;
+  height: 160px;
+  justify-content: center;
+  padding: 32px;
+  position: relative;
+  width: 266px;
+}
+
+.frame {
+  border-radius: 10px;
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+  width: 180px;
+}
+
+.brandItemPeugeot,
+.brandItemCitroen,
+.brandItemFord,
+.brandItemMercedes {
+  position: absolute;
+}
+
+.brandItemPeugeot {
+  aspect-ratio: 1280 / 1406;
+  left: 24.44%;
+  right: 24.44%;
+  top: calc(50% - 0.5px);
+  transform: translateY(-50%);
+}
+
+.brandItemCitroen {
+  inset: 7.5% 7.22% 6.5% 7.22%;
+}
+
+.brandItemFord {
+  height: 65px;
+  left: calc(50% - 0.5px);
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 181px;
+}
+
+.brandItemMercedes {
+  inset: -6.5% 0 -5.5% 0;
+}
+
+.brandImagePeugeot,
+.brandImageCitroen,
+.brandImageFord,
+.brandImageMercedes {
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  width: 100%;
+}
+
+@media (max-width: 1439px) {
+  .section {
+    padding-left: 24px;
+    padding-right: 24px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .section {
+    gap: 32px;
+    padding: 64px 16px;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+
+  .body,
+  .note {
+    font-size: 16px;
+    line-height: 26px;
+    width: 100%;
+  }
+
+  .grid {
+    justify-content: center;
+  }
+}

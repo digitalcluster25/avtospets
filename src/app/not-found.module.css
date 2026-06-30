@@ -1,0 +1,35 @@
+.page {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+}
+
+.inner {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 42rem;
+  text-align: center;
+}
+
+.inner h1 {
+  font-family: var(--font-heading), sans-serif;
+  font-size: clamp(2.4rem, 7vw, 5rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.inner p {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.link {
+  align-items: center;
+  background: var(--accent);
+  border-radius: 999px;
+  display: inline-flex;
+  justify-content: center;
+  margin: 0 auto;
+  min-height: 52px;
+  padding: 0 1.5rem;
+}
