@@ -394,7 +394,6 @@
 
 .socialIconLink:hover {
   opacity: 0.82;
-  transform: translateY(-1px);
 }
 
 .socialIcon {

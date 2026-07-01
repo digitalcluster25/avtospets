@@ -103,7 +103,7 @@ export function ProductionPage({ page }: ProductionPageProps) {
     () => [...initialGalleryCards, ...extraGalleryCards],
     [],
   );
-  const [visibleGalleryCount, setVisibleGalleryCount] = useState(
+  const [visibleGalleryCount, setVisibleGalleryCount] = useState<number>(
     DESKTOP_INITIAL_GALLERY_COUNT,
   );
   const visibleGalleryCards = allGalleryCards.slice(0, visibleGalleryCount);

@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client";
+import sanitizeHtml from "sanitize-html";
 import { getClient } from "@/lib/apollo/client";
 import { pages } from "@/lib/site/page-data";
 import type { SitePage, WordPressNodeResponse } from "@/lib/site/types";
@@ -18,6 +19,33 @@ const PAGE_BY_URI_QUERY = gql`
     }
   }
 `;
+
+const CMS_HTML_SANITIZE_OPTIONS: sanitizeHtml.IOptions = {
+  allowedTags: [
+    "a",
+    "blockquote",
+    "br",
+    "em",
+    "h2",
+    "h3",
+    "h4",
+    "li",
+    "ol",
+    "p",
+    "strong",
+    "ul",
+  ],
+  allowedAttributes: {
+    a: ["href", "rel", "target", "title"],
+  },
+  allowedSchemes: ["http", "https", "mailto", "tel"],
+  transformTags: {
+    a: sanitizeHtml.simpleTransform("a", {
+      rel: "noopener noreferrer",
+      target: "_blank",
+    }),
+  },
+};
 
 function normalizeUri(input: string) {
   if (!input || input === "/") {
@@ -97,7 +125,7 @@ export async function getPageByUri(uri: string) {
       title: "Контент из CMS",
       description:
         "Этот блок уже рендерится из WPGraphQL и может заменить локальные демо-данные по мере настройки схемы.",
-      html: node.content,
+      html: sanitizeHtml(node.content, CMS_HTML_SANITIZE_OPTIONS),
     });
   }
 

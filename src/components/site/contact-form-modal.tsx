@@ -235,12 +235,12 @@ export function ContactFormModal({
 
                 {isDropdownOpen ? (
                   <div className={styles.dropdownMenu}>
-                    {contactOptions.map((option, index) => (
+                    {contactOptions.map((option) => (
                       <button
                         key={option}
                         type="button"
                         className={
-                          index === 0
+                          selectedContactMethod === option
                             ? styles.dropdownOptionActive
                             : styles.dropdownOption
                         }
@@ -271,10 +271,9 @@ export function ContactFormModal({
               <div className={styles.socialSection}>
                 <p className={styles.socialTitle}>Ми в соціальних мережах</p>
                 <div className={styles.socialIcons}>
-                  <a
-                    href="#"
+                  <span
                     className={styles.socialIconLink}
-                    aria-label="Instagram"
+                    title="Instagram"
                   >
                     <span className={styles.socialIcon}>
                       <span className={styles.instagramInset}>
@@ -286,11 +285,10 @@ export function ContactFormModal({
                         />
                       </span>
                     </span>
-                  </a>
-                  <a
-                    href="#"
+                  </span>
+                  <span
                     className={styles.socialIconLink}
-                    aria-label="Facebook"
+                    title="Facebook"
                   >
                     <span className={styles.socialIcon}>
                       <span className={styles.facebookInset}>
@@ -302,11 +300,10 @@ export function ContactFormModal({
                         />
                       </span>
                     </span>
-                  </a>
-                  <a
-                    href="#"
+                  </span>
+                  <span
                     className={styles.socialIconLink}
-                    aria-label="LinkedIn"
+                    title="LinkedIn"
                   >
                     <span className={styles.socialIcon}>
                       <span className={styles.linkedinInset}>
@@ -318,7 +315,7 @@ export function ContactFormModal({
                         />
                       </span>
                     </span>
-                  </a>
+                  </span>
                 </div>
               </div>
             </form>

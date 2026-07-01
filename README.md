@@ -24,6 +24,7 @@ npm run dev
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 WORDPRESS_GRAPHQL_ENDPOINT=https://example.com/graphql
 WORDPRESS_REVALIDATE_SECRET=change-me
+CONTACT_WEBHOOK_URL=https://example.com/contact-webhook
 ```
 
 ## Что уже готово

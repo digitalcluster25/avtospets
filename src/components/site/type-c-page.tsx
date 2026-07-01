@@ -30,6 +30,7 @@ const chassisTabs = [
     asset: "/figma/type-c/chassis-peugeot.png",
     assetClassName: styles.peugeotLogoImage,
     className: styles.tabPeugeot,
+    isWideLogo: false,
   },
   {
     id: "citroen",
@@ -38,6 +39,7 @@ const chassisTabs = [
     asset: "/figma/type-c/chassis-citroen.png",
     assetClassName: styles.citroenLogoImage,
     className: styles.tabCitroen,
+    isWideLogo: false,
   },
   {
     id: "ford",
@@ -55,6 +57,7 @@ const chassisTabs = [
     asset: "/figma/type-c/chassis-mercedes.png",
     assetClassName: styles.mercedesLogoImage,
     className: styles.tabMercedes,
+    isWideLogo: false,
   },
 ] as const;
 
@@ -109,6 +112,7 @@ const specCards = [
       bottom: "12.96%",
       left: "12.51%",
     },
+    wide: false,
     descriptionClassName: styles.specBodyCenter,
   },
   {
@@ -121,6 +125,7 @@ const specCards = [
       bottom: "15.07%",
       left: "16.19%",
     },
+    wide: false,
     descriptionClassName: styles.specBodyCenter,
   },
   {
@@ -133,6 +138,7 @@ const specCards = [
       bottom: "12.96%",
       left: "18.06%",
     },
+    wide: false,
     descriptionClassName: styles.specBodyCenter,
   },
   {
@@ -145,6 +151,7 @@ const specCards = [
       bottom: "7.41%",
       left: "22.79%",
     },
+    wide: false,
     descriptionClassName: styles.specBodyTop,
   },
   {
@@ -157,6 +164,7 @@ const specCards = [
       bottom: "13.62%",
       left: "18.69%",
     },
+    wide: false,
     descriptionClassName: styles.specBodyCenter,
   },
   {
@@ -169,6 +177,7 @@ const specCards = [
       bottom: "17.53%",
       left: "12.44%",
     },
+    wide: false,
     descriptionClassName: styles.specBodyCenter,
   },
 ] as const;

@@ -3,11 +3,13 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import mapboxgl, {
+  type ExpressionSpecification,
   type GeoJSONSource,
   type LngLatBoundsLike,
   type Map as MapboxMap,
 } from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import { useContactForm } from "@/components/site/contact-form-provider";
 import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
 import type { SitePage } from "@/lib/site/types";
@@ -27,6 +29,14 @@ type ServiceCenter = {
   active?: boolean;
 };
 
+type RenderedPointFeature = {
+  geometry: {
+    coordinates: unknown;
+    type: string;
+  };
+  properties?: Record<string, unknown>;
+};
+
 const heroServices = [
   { title: "Складний ремонт автотехніки", compact: true },
   { title: "Монтаж додаткового обладнання", compact: false },
@@ -42,23 +52,18 @@ const MAP_CLUSTER_COUNT_ID = "service-centers-cluster-count";
 const MAP_POINT_SYMBOL_ID = "service-centers-points";
 const MAP_MARKER_IMAGE_ID = "service-centers-marker";
 const MAP_MARKER_ACTIVE_IMAGE_ID = "service-centers-marker-active";
-const MAP_DEFAULT_BOUNDS: [[number, number], [number, number]] = [
-  [22.05, 44.25],
-  [40.25, 52.45],
-];
-const MAP_DEFAULT_BOUNDS_PADDING = 64;
 const MAP_DEFAULT_CENTER: [number, number] = [30.14335, 49.059410074170074];
 const MAP_DEFAULT_ZOOM = 5.464574754416704;
 const MAP_CITY_BOUNDS_PADDING = 24;
 const MAP_CITY_MAX_ZOOM = 10.2;
 
-const UKRAINIAN_LABEL_FIELD = [
+const UKRAINIAN_LABEL_FIELD: ExpressionSpecification = [
   "coalesce",
   ["get", "name_uk"],
   ["get", "name:uk"],
   ["get", "name"],
   ["get", "name_en"],
-] as const;
+];
 
 const serviceCenters: ServiceCenter[] = [
   {
@@ -332,6 +337,7 @@ function HeroServiceGrid() {
 }
 
 export function ServicePage({ page }: ServicePageProps) {
+  const { openContactForm } = useContactForm();
   const [regionQuery, setRegionQuery] = useState("");
   const [isAutocompleteOpen, setIsAutocompleteOpen] = useState(false);
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
@@ -433,11 +439,11 @@ export function ServicePage({ page }: ServicePageProps) {
     map.on("click", MAP_CLUSTER_CIRCLE_ID, (event) => {
       const feature = map.queryRenderedFeatures(event.point, {
         layers: [MAP_CLUSTER_CIRCLE_ID],
-      })[0];
+      })[0] as unknown as RenderedPointFeature | undefined;
       const clusterId = feature?.properties?.cluster_id;
       const source = map.getSource(MAP_SOURCE_ID) as GeoJSONSource | undefined;
 
-      if (clusterId === undefined || !source) {
+      if (typeof clusterId !== "number" || !source) {
         return;
       }
 
@@ -448,13 +454,16 @@ export function ServicePage({ page }: ServicePageProps) {
 
         map.easeTo({
           center: feature.geometry.coordinates as [number, number],
-          zoom,
+          zoom: zoom ?? undefined,
           duration: 800,
         });
       });
     });
     map.on("click", MAP_POINT_SYMBOL_ID, (event) => {
-      const pointId = event.features?.[0]?.properties?.id;
+      const pointFeature = event.features?.[0] as
+        | { properties?: Record<string, unknown> }
+        | undefined;
+      const pointId = pointFeature?.properties?.id;
 
       if (typeof pointId === "string") {
         setActiveCenterKey(pointId);
@@ -693,29 +702,20 @@ export function ServicePage({ page }: ServicePageProps) {
               }}
               type="button"
               className={isActive ? styles.centerItemActive : styles.centerItem}
-              onClick={() => setActiveCenterKey(itemKey)}
+              onClick={() => {
+                if (isActive) {
+                  handleActiveCenterReset();
+                  return;
+                }
+
+                setActiveCenterKey(itemKey);
+              }}
             >
               <p className={isActive ? styles.centerCityActive : styles.centerCity}>
                 {item.city}
               </p>
               {isActive ? (
-                <span
-                  role="button"
-                  tabIndex={0}
-                  className={styles.centerClose}
-                  aria-label="Зняти вибір адреси"
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    handleActiveCenterReset();
-                  }}
-                  onKeyDown={(event) => {
-                    if (event.key === "Enter" || event.key === " ") {
-                      event.preventDefault();
-                      event.stopPropagation();
-                      handleActiveCenterReset();
-                    }
-                  }}
-                >
+                <span className={styles.centerClose} aria-hidden="true">
                   ×
                 </span>
               ) : null}
@@ -755,7 +755,11 @@ export function ServicePage({ page }: ServicePageProps) {
                 </div>
               </div>
 
-              <button type="button" className={styles.heroButton}>
+              <button
+                type="button"
+                className={styles.heroButton}
+                onClick={openContactForm}
+              >
                 <span className={styles.heroButtonLabel}>Зв&apos;язатися з нами</span>
               </button>
             </div>

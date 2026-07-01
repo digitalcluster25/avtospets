@@ -69,24 +69,24 @@ export function Footer() {
             />
             <p className={styles.description}>{copy.description}</p>
           <div className={styles.socials}>
-            <a href="#" className={styles.socialButton} aria-label="Instagram">
+            <span className={styles.socialButton} title="Instagram">
               <span
                 className={`${styles.socialIcon} ${styles.socialIconInstagram}`}
                 aria-hidden="true"
               />
-            </a>
-            <a href="#" className={styles.socialButton} aria-label="Facebook">
+            </span>
+            <span className={styles.socialButton} title="Facebook">
               <span
                 className={`${styles.socialIcon} ${styles.socialIconFacebook}`}
                 aria-hidden="true"
               />
-            </a>
-            <a href="#" className={styles.socialButton} aria-label="LinkedIn">
+            </span>
+            <span className={styles.socialButton} title="LinkedIn">
               <span
                 className={`${styles.socialIcon} ${styles.socialIconLinkedin}`}
                 aria-hidden="true"
               />
-            </a>
+            </span>
           </div>
           </div>
 
@@ -136,12 +136,12 @@ export function Footer() {
         <div className={styles.bottom}>
           <p className={styles.copyright}>{copy.copyright}</p>
           <div className={styles.bottomLinks}>
-            <a href="#" className={styles.bottomLink}>
+            <span className={styles.bottomLink}>
               {copy.privacy}
-            </a>
-            <a href="#" className={styles.bottomLink}>
+            </span>
+            <span className={styles.bottomLink}>
               {copy.terms}
-            </a>
+            </span>
           </div>
         </div>
       </div>
