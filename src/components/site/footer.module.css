@@ -3,7 +3,7 @@
   box-sizing: border-box;
   min-width: 100%;
   min-height: 478.052px;
-  overflow: clip;
+  overflow: hidden;
   position: relative;
   width: 100%;
 }

@@ -1,6 +1,7 @@
 .page {
   background: #ffffff;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .main {
@@ -391,6 +392,7 @@
 
 .specIcon {
   display: block;
+  object-fit: contain;
 }
 
 .specBodyWide,
@@ -521,5 +523,255 @@
 
   .detailsGrid {
     grid-template-columns: minmax(360px, 538px) minmax(0, 762px);
+  }
+}
+
+@media (max-width: 1180px) {
+  .heroInner {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 24px;
+    height: auto;
+    padding: 112px 24px 56px;
+  }
+
+  .heroCopy {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: auto;
+    position: static;
+    width: 100%;
+  }
+
+  .heroBadge,
+  .breadcrumbs,
+  .heroTextBlock {
+    left: auto;
+    position: static;
+    top: auto;
+  }
+
+  .heroTextBlock {
+    width: 100%;
+  }
+
+  .heroTitle {
+    font-size: 56px;
+    line-height: 1.04;
+  }
+
+  .heroDescription {
+    font-size: 18px;
+    line-height: 28px;
+    max-width: 100%;
+  }
+
+  .heroImageWrap {
+    align-self: center;
+    height: auto;
+    max-width: 734px;
+    width: 100%;
+  }
+
+  .heroImage {
+    height: auto;
+  }
+
+  .contentSection {
+    padding: 80px 24px;
+  }
+
+  .sectionTitleWrap,
+  .tabsRow {
+    margin-bottom: 48px;
+  }
+
+  .tabsRow {
+    flex-wrap: wrap;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .tab,
+  .tabActive,
+  .tabPeugeot,
+  .tabCitroen,
+  .tabFord,
+  .tabMercedes {
+    flex: 1 1 calc(50% - 8px);
+    min-width: 0;
+    width: auto;
+  }
+
+  .detailsGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .productAside {
+    position: static;
+    top: auto;
+  }
+
+  .productCard,
+  .productImageWrap,
+  .specList {
+    width: 100%;
+  }
+
+  .productImageWrap {
+    max-width: 538px;
+  }
+
+  .productTitle {
+    font-size: 28px;
+    line-height: 1.15;
+  }
+
+  .specList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .specCard {
+    width: 100%;
+  }
+
+  .specBodyWide,
+  .specBodyCenter,
+  .specBodyTop {
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .heroInner {
+    align-items: stretch;
+    gap: 20px;
+    padding: 104px 18px 40px;
+  }
+
+  .heroBadge {
+    font-size: 42px;
+    height: 64px;
+    padding: 16px;
+    width: 64px;
+  }
+
+  .heroTitle {
+    font-size: 40px;
+  }
+
+  .heroDescription {
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .heroImageWrap {
+    max-width: 100%;
+  }
+
+  .contentSection {
+    padding: 64px 18px;
+  }
+
+  .sectionTitleWrap,
+  .tabsRow {
+    margin-bottom: 32px;
+  }
+
+  .sectionTitle {
+    font-size: 34px;
+    line-height: 1.08;
+  }
+
+  .tabsRow {
+    gap: 12px;
+  }
+
+  .tab,
+  .tabActive,
+  .tabPeugeot,
+  .tabCitroen,
+  .tabFord,
+  .tabMercedes {
+    flex: 1 1 100%;
+    padding: 14px 18px;
+  }
+
+  .tabLabel,
+  .tabLabelActive {
+    font-size: 18px;
+  }
+
+  .detailsGrid,
+  .specColumn {
+    gap: 24px;
+  }
+
+  .productImageWrap {
+    height: 300px;
+  }
+
+  .productTitle {
+    font-size: 24px;
+  }
+
+  .panel,
+  .notePanel {
+    gap: 16px;
+    padding: 14px;
+  }
+
+  .panelTitle {
+    font-size: 18px;
+  }
+
+  .specList {
+    gap: 12px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .specCard,
+  .specCardWide {
+    align-items: flex-start;
+    gap: 12px;
+    min-height: 0;
+    padding: 12px;
+  }
+
+  .specIconBox {
+    height: 56px;
+    width: 56px;
+  }
+
+  .specTitle {
+    font-size: 13px;
+  }
+
+  .specText,
+  .medicalItem,
+  .extraItem,
+  .noteText {
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .mediaImageFixed {
+    height: auto;
+  }
+
+  .medicalGroups {
+    gap: 12px;
+  }
+
+  .medicalCard {
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .medicalList,
+  .extraList {
+    gap: 10px;
+    padding-left: 20px;
   }
 }

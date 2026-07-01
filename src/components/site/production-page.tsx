@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { SiteButton } from "@/components/site/button";
 import { ChassisSection } from "@/components/site/chassis-section";
 import { useContactForm } from "@/components/site/contact-form-provider";
@@ -91,12 +91,46 @@ const extraGalleryCards = [
   { src: "/figma/production-page/gallery-03.png" },
 ] as const;
 
+const MOBILE_BREAKPOINT = 900;
+const DESKTOP_INITIAL_GALLERY_COUNT = initialGalleryCards.length;
+const MOBILE_INITIAL_GALLERY_COUNT = 4;
+const MOBILE_GALLERY_INCREMENT = 2;
+
 export function ProductionPage({ page }: ProductionPageProps) {
   const { openContactForm } = useContactForm();
-  const [visibleGalleryCards, setVisibleGalleryCards] = useState(
-    initialGalleryCards,
+  const [isMobileGallery, setIsMobileGallery] = useState(false);
+  const allGalleryCards = useMemo(
+    () => [...initialGalleryCards, ...extraGalleryCards],
+    [],
   );
-  const hasMoreGalleryPhotos = visibleGalleryCards.length < initialGalleryCards.length + extraGalleryCards.length;
+  const [visibleGalleryCount, setVisibleGalleryCount] = useState(
+    DESKTOP_INITIAL_GALLERY_COUNT,
+  );
+  const visibleGalleryCards = allGalleryCards.slice(0, visibleGalleryCount);
+  const hasMoreGalleryPhotos = visibleGalleryCount < allGalleryCards.length;
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
+
+    function syncGalleryMode(event?: MediaQueryList | MediaQueryListEvent) {
+      const matches = event ? event.matches : mediaQuery.matches;
+
+      setIsMobileGallery(matches);
+      setVisibleGalleryCount((current) =>
+        Math.max(
+          matches ? MOBILE_INITIAL_GALLERY_COUNT : DESKTOP_INITIAL_GALLERY_COUNT,
+          Math.min(current, allGalleryCards.length),
+        ),
+      );
+    }
+
+    syncGalleryMode();
+    mediaQuery.addEventListener("change", syncGalleryMode);
+
+    return () => {
+      mediaQuery.removeEventListener("change", syncGalleryMode);
+    };
+  }, [allGalleryCards.length]);
 
   return (
     <div className={styles.page}>
@@ -261,10 +295,15 @@ export function ProductionPage({ page }: ProductionPageProps) {
                 return;
               }
 
-              setVisibleGalleryCards([
-                ...initialGalleryCards,
-                ...extraGalleryCards,
-              ]);
+              setVisibleGalleryCount((current) =>
+                Math.min(
+                  current +
+                    (isMobileGallery
+                      ? MOBILE_GALLERY_INCREMENT
+                      : extraGalleryCards.length),
+                  allGalleryCards.length,
+                ),
+              );
             }}
             variant="tertiary"
             size="m"

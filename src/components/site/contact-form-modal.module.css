@@ -17,10 +17,11 @@
   flex-direction: column;
   gap: 24px;
   margin: 0 auto;
+  max-width: calc(100vw - 32px);
   overflow: hidden;
   padding: 64px;
   position: relative;
-  width: 670px;
+  width: min(670px, calc(100vw - 32px));
 }
 
 .successDialog {
@@ -31,10 +32,11 @@
   flex-direction: column;
   gap: 44px;
   margin: 0 auto;
+  max-width: calc(100vw - 32px);
   overflow: hidden;
   padding: 64px;
   position: relative;
-  width: 670px;
+  width: min(670px, calc(100vw - 32px));
 }
 
 .successContent {
@@ -42,7 +44,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  width: 542px;
+  width: 100%;
 }
 
 .successIcon {
@@ -58,7 +60,7 @@
   flex-direction: column;
   gap: 8px;
   text-align: center;
-  width: 542px;
+  width: 100%;
 }
 
 .successTitle {
@@ -93,7 +95,7 @@
   justify-content: center;
   min-width: 150px;
   padding: 16px 32px;
-  width: 542px;
+  width: 100%;
 }
 
 .successButtonLabel {
@@ -110,7 +112,7 @@
   flex-direction: column;
   gap: 8px;
   text-align: center;
-  width: 542px;
+  width: 100%;
 }
 
 .title {
@@ -139,14 +141,14 @@
   margin: 0;
   padding: 0;
   position: relative;
-  width: 542px;
+  width: 100%;
 }
 
 .contactPromptRow {
   align-items: center;
   display: flex;
   gap: 16px;
-  width: 542px;
+  width: 100%;
 }
 
 .contactPrompt {
@@ -218,7 +220,7 @@
   height: 54px;
   line-height: 30px;
   padding: 0 16px;
-  width: 546px;
+  width: 100%;
 }
 
 .input::placeholder {
@@ -228,13 +230,13 @@
 
 .dropdownWrap {
   position: relative;
-  width: 546px;
+  width: 100%;
 }
 
 .dropdownField {
   cursor: pointer;
   gap: 10px;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .dropdownValue {
@@ -261,7 +263,7 @@
   overflow: hidden;
   padding: 4px;
   position: absolute;
-  width: 546px;
+  width: 100%;
   z-index: 2;
 }
 
@@ -282,7 +284,7 @@
   line-height: normal;
   padding: 10px;
   text-align: left;
-  width: 538px;
+  width: 100%;
 }
 
 .dropdownOptionActive {
@@ -308,7 +310,7 @@
     color 500ms ease,
     opacity 500ms ease,
     filter 500ms ease;
-  width: 546px;
+  width: 100%;
 }
 
 .submitButton::before {
@@ -351,7 +353,7 @@
   line-height: 20px;
   margin: -4px 0 0;
   text-align: center;
-  width: 546px;
+  width: 100%;
 }
 
 .socialSection {
@@ -359,7 +361,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: 546px;
+  width: 100%;
 }
 
 .socialTitle {
@@ -370,7 +372,7 @@
   line-height: 28px;
   margin: 0;
   text-align: center;
-  width: 542px;
+  width: 100%;
 }
 
 .socialIcons {
@@ -438,35 +440,31 @@
   width: 24px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1439px) {
   .overlay {
-    align-items: flex-start;
+    align-items: center;
     padding: 24px 16px;
   }
 
   .dialog {
     padding: 48px 20px 20px;
-    width: 100%;
   }
 
   .successDialog {
     gap: 32px;
     padding: 48px 20px 20px;
-    width: 100%;
   }
 
-  .header,
-  .content,
-  .successContent,
-  .successHeader,
-  .contactPromptRow,
-  .input,
-  .dropdownWrap,
-  .dropdownMenu,
-  .submitButton,
-  .successButton,
-  .socialSection,
-  .socialTitle {
+  .closeButton {
+    left: auto;
+    right: 20px;
+    top: 15px;
+  }
+}
+
+@media (max-width: 767px) {
+  .dialog,
+  .successDialog {
     width: 100%;
   }
 
@@ -482,10 +480,5 @@
   .dropdownOption,
   .dropdownOptionActive {
     width: 100%;
-  }
-
-  .closeButton {
-    left: auto;
-    right: 20px;
   }
 }

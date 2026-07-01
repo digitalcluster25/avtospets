@@ -1,6 +1,7 @@
 .page {
   background: #ffffff;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .main {
@@ -321,8 +322,14 @@
   display: block;
   flex: 0 0 auto;
   height: 20px;
+  overflow: hidden;
   position: relative;
   width: 20px;
+}
+
+.regionInputIcon :global(img),
+.regionInputChevron :global(img) {
+  object-fit: contain;
 }
 
 .regionInputField {
@@ -459,6 +466,7 @@
   flex-direction: column;
   gap: 6px;
   padding: 16px;
+  position: relative;
   text-align: left;
   width: 380px;
 }
@@ -478,6 +486,18 @@
 .centerItem:focus-visible {
   background: rgba(253, 54, 38, 0.12);
   outline: none;
+}
+
+.centerClose {
+  color: #ffffff;
+  cursor: pointer;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 20px;
+  position: absolute;
+  right: 16px;
+  top: 16px;
 }
 
 .centerCity,
@@ -527,6 +547,11 @@
   overflow: hidden;
   position: relative;
   width: 900px;
+}
+
+.mobileCentersOverlay,
+.mobileCentersActions {
+  display: none;
 }
 
 .mapCanvas {
@@ -718,6 +743,387 @@
   letter-spacing: 0.32px;
   line-height: 22px;
   position: relative;
-  white-space: nowrap;
+  white-space: normal;
   z-index: 1;
+}
+
+@media (max-width: 1439px) {
+  .heroInner,
+  .centersHeader,
+  .centersContent,
+  .medicalInner {
+    width: 100%;
+  }
+
+  .heroInner,
+  .medicalSection {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .heroCopy,
+  .heroContent,
+  .heroTitle,
+  .heroLead,
+  .heroServicesGrid,
+  .medicalTextBlock,
+  .medicalDescription {
+    width: 100%;
+  }
+
+  .heroServicesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .heroServiceText {
+    width: auto;
+  }
+
+  .heroImageCard {
+    width: min(100%, 650px);
+  }
+
+  .mapColumn,
+  .mapCard {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .leftColumn {
+    display: none;
+  }
+
+  .mobileCentersActions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+  }
+
+  .mobileCentersToggle,
+  .mobileCentersClose {
+    align-items: center;
+    background: linear-gradient(90deg, #dc1f2e 0%, #ff4757 100%);
+    border: 0;
+    border-radius: 10px;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: var(--font-ui), sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 20px;
+    text-align: center;
+    transition:
+      box-shadow 500ms ease,
+      opacity 500ms ease,
+      filter 500ms ease;
+  }
+
+  .mobileCentersToggle:hover,
+  .mobileCentersToggle:focus-visible,
+  .mobileCentersClose:hover,
+  .mobileCentersClose:focus-visible {
+    filter: brightness(1.03);
+    outline: none;
+  }
+
+  .mobileCentersOverlay {
+    background: rgba(14, 19, 28, 0.94);
+    display: flex;
+    flex-direction: column;
+    inset: 0;
+    padding: 16px;
+    position: absolute;
+    z-index: 4;
+  }
+
+  .mobileCentersOverlayHeader {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 12px;
+  }
+
+  .mobileCentersPanel {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 0;
+  }
+
+  .mobileCentersPanel .regionInputWrap,
+  .mobileCentersPanel .regionInput,
+  .mobileCentersPanel .regionAutocomplete,
+  .mobileCentersPanel .regionChips,
+  .mobileCentersPanel .centersList {
+    width: 100%;
+  }
+
+  .mobileCentersPanel .centersList,
+  .mobileCentersPanel .centerItem,
+  .mobileCentersPanel .centerItemActive {
+    width: 100%;
+  }
+
+  .mobileCentersPanel .centersList {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 0;
+  }
+
+  .medicalImageCard {
+    width: min(100%, 650px);
+  }
+}
+
+@media (max-width: 1180px) {
+  .heroInner {
+    align-items: flex-start;
+    gap: 24px;
+    height: auto;
+    padding-top: 48px;
+    padding-bottom: 64px;
+  }
+
+  .heroTitle,
+  .centersTitle,
+  .medicalTitle {
+    font-size: 48px;
+    line-height: 1.06;
+  }
+
+  .heroLead,
+  .centersDescription,
+  .medicalDescription {
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .heroCopy {
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
+  }
+
+  .heroImageCard {
+    flex: 0 0 42%;
+    height: 420px;
+    margin-top: 0;
+    min-width: 320px;
+  }
+
+  .centersSection {
+    padding: 80px 24px;
+  }
+
+  .centersHeader {
+    width: 100%;
+  }
+
+  .centersTitle,
+  .centersDescription {
+    width: 100%;
+  }
+
+  .centersContent,
+  .medicalInner {
+    gap: 24px;
+  }
+
+  .leftColumn {
+    flex: 0 0 340px;
+    width: 340px;
+  }
+
+  .regionInputWrap,
+  .regionInput,
+  .regionAutocomplete,
+  .regionChips,
+  .centersList {
+    width: 100%;
+  }
+
+  .centerItem,
+  .centerItemActive {
+    width: 100%;
+  }
+
+  .mapCard {
+    height: 620px;
+  }
+
+  .medicalInner {
+    align-items: flex-start;
+  }
+
+  .medicalImageCard {
+    flex: 0 0 46%;
+    height: 380px;
+    min-width: 320px;
+  }
+}
+
+@media (max-width: 900px) {
+  .heroInner {
+    flex-direction: column;
+    gap: 28px;
+    padding: 40px 18px 64px;
+  }
+
+  .heroCopy {
+    padding-top: 0;
+  }
+
+  .breadcrumbs {
+    margin-bottom: 32px;
+  }
+
+  .heroContent {
+    gap: 24px;
+  }
+
+  .heroTitle,
+  .centersTitle,
+  .medicalTitle {
+    font-size: 32px;
+    line-height: 1.06;
+  }
+
+  .heroServicesGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .heroServiceRowCompact,
+  .heroServiceRowTall {
+    height: auto;
+    min-height: 58px;
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .heroButton,
+  .medicalButton {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .heroLead,
+  .centersDescription,
+  .medicalDescription {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .heroServiceText {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .heroImageCard {
+    flex: none;
+    height: 260px;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .centersSection {
+    gap: 24px;
+    padding: 64px 18px;
+  }
+
+  .centersContent,
+  .medicalInner {
+    flex-direction: column;
+  }
+
+  .leftColumn,
+  .mapColumn,
+  .medicalCopy {
+    width: 100%;
+  }
+
+  .regionInputWrap,
+  .regionInput,
+  .regionAutocomplete,
+  .regionChips,
+  .centersList,
+  .mapCard {
+    width: 100%;
+  }
+
+  .regionInput {
+    gap: 10px;
+    padding: 0 16px;
+  }
+
+  .regionInputIcon,
+  .regionInputChevron {
+    height: 18px;
+    width: 18px;
+  }
+
+  .regionInputField {
+    font-size: 14px;
+  }
+
+  .centersList {
+    height: 420px;
+  }
+
+  .mapCard {
+    height: 360px;
+  }
+
+  .mobileCentersActions {
+    margin-top: 12px;
+  }
+
+  .mobileCentersToggle,
+  .mobileCentersClose {
+    font-size: 15px;
+    min-height: 44px;
+    padding: 0 16px;
+  }
+
+  .mobileCentersOverlay {
+    padding: 12px;
+  }
+
+  .mapCanvas :global(.mapboxgl-ctrl-top-right) {
+    right: 8px;
+    top: 8px;
+  }
+
+  .medicalSection {
+    padding: 64px 18px;
+  }
+
+  .medicalInner {
+    gap: 24px;
+  }
+
+  .medicalImageCard {
+    flex: none;
+    height: 260px;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .medicalButton {
+    align-items: flex-start;
+    gap: 10px;
+    min-height: 0;
+    padding: 14px 16px;
+    text-align: left;
+  }
+
+  .medicalButtonText {
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    line-height: 20px;
+  }
 }

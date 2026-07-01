@@ -1,6 +1,7 @@
 .page {
   background: #f3f4f6;
   color: #0e131c;
+  overflow-x: hidden;
 }
 
 .sectionLight,
@@ -16,7 +17,7 @@
 }
 
 .sectionMuted {
-  background: #e5e7eb;
+  background: #ffffff;
 }
 
 .sectionDark {
@@ -27,6 +28,11 @@
 .sectionInner {
   margin: 0 auto;
   max-width: 1008px;
+}
+
+.metricsSectionInner {
+  margin: 0 auto;
+  max-width: 1112px;
 }
 
 .heroSection {
@@ -126,6 +132,7 @@
 .heroArrowIcon {
   display: block;
   height: 62px;
+  object-fit: contain;
   width: 62px;
 }
 
@@ -644,9 +651,6 @@
 }
 
 .vehicleImageWrapSocial {
-  align-items: center;
-  display: flex;
-  justify-content: center;
   overflow: visible;
 }
 
@@ -655,6 +659,7 @@
 .vehicleImageC,
 .vehicleImageSocial {
   max-width: none;
+  object-fit: contain;
   position: absolute;
 }
 
@@ -665,38 +670,17 @@
   width: 100%;
 }
 
+.vehicleImageSocial {
+  height: 100%;
+  inset: 0;
+  width: 100%;
+}
+
 .vehicleImageB {
   height: 99.39%;
   left: -10.92%;
   top: 9.21%;
   width: 111.03%;
-}
-
-.vehicleImageSocial {
-  height: 116.35%;
-  left: -62.31%;
-  top: -4.92%;
-  width: 169.88%;
-}
-
-.vehicleImageSocialTransform {
-  flex: none;
-  position: relative;
-  transform: rotate(180deg) scaleY(-1);
-}
-
-.vehicleImageSocialFrame {
-  height: 326px;
-  overflow: hidden;
-  position: relative;
-  width: 309px;
-}
-
-.vehicleImageSocial {
-  height: 116.35%;
-  left: -62.31%;
-  top: -4.92%;
-  width: 169.88%;
 }
 
 .vehicleButton {
@@ -1119,7 +1103,7 @@
   border-radius: 16px;
   height: 100%;
   mix-blend-mode: darken;
-  object-fit: cover;
+  object-fit: contain;
   width: 100%;
 }
 
@@ -1392,6 +1376,240 @@
   min-width: 0;
 }
 
+@media (max-width: 1439px) {
+  .heroSectionInner,
+  .vehiclesHeader,
+  .vehiclesGrid,
+  .serviceSection,
+  .partnersSection,
+  .chassisSection,
+  .faqSection,
+  .aboutManufacturingSection {
+    width: 100%;
+  }
+
+  .heroImageWrap,
+  .heroText,
+  .statsGrid,
+  .tenderGrid,
+  .tenderNote,
+  .partnersHeader,
+  .partnersGrid,
+  .faqSectionTitle,
+  .faqSectionList {
+    width: 100%;
+  }
+
+  .heroImageWrap {
+    max-width: 1162px;
+  }
+
+  .heroText {
+    max-width: 1058px;
+  }
+
+  .statsGrid,
+  .tenderGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .vehiclesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .vehicleCard {
+    min-width: 0;
+  }
+
+  .aboutManufacturingSection,
+  .partnersSection,
+  .chassisSection,
+  .faqSection {
+    max-width: 1440px;
+  }
+
+  .partnersGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 120px;
+  }
+
+  .partnerCard {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1180px) {
+  .sectionLight:not(:first-of-type),
+  .sectionMuted,
+  .sectionDark,
+  .sectionLightFaq,
+  .partnersSection,
+  .chassisSection,
+  .faqSection {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .heroSection {
+    padding: 72px 24px;
+  }
+
+  .heroImageWrap {
+    height: auto;
+    margin-bottom: 0;
+    max-width: 920px;
+    min-height: 320px;
+    width: 100%;
+  }
+
+  .heroText {
+    max-width: 840px;
+  }
+
+  .heroTitle {
+    font-size: 56px;
+    line-height: 1.04;
+  }
+
+  .heroDescription {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .vehiclesGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .vehicleCard {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0;
+    height: auto;
+    min-height: 0;
+  }
+
+  .vehicleContent {
+    gap: 14px;
+    justify-content: flex-start;
+    order: 2;
+    padding: 18px 18px 20px;
+  }
+
+  .vehicleImageWrapA,
+  .vehicleImageWrapB,
+  .vehicleImageWrapC,
+  .vehicleImageWrapSocial {
+    align-self: center;
+    display: flex;
+    height: auto;
+    justify-content: center;
+    max-width: 300px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  .vehicleImageWrapA {
+    aspect-ratio: 309 / 326;
+    max-width: 309px;
+  }
+
+  .vehicleImageWrapB {
+    aspect-ratio: 1576 / 1484;
+    max-width: 300px;
+  }
+
+  .vehicleImageWrapC {
+    aspect-ratio: 309 / 326;
+    max-width: 309px;
+  }
+
+  .vehicleImageWrapSocial {
+    aspect-ratio: 309 / 326;
+    max-width: 309px;
+  }
+
+  .vehicleImageA,
+  .vehicleImageB,
+  .vehicleImageC,
+  .vehicleImageSocial {
+    height: auto;
+    inset: auto;
+    left: auto;
+    max-height: 100%;
+    max-width: 100%;
+    position: relative;
+    top: auto;
+    width: 100%;
+  }
+
+  .vehicleTextGroup,
+  .serviceTextGroup,
+  .serviceCardText,
+  .aboutManufacturingText,
+  .partnersBody {
+    width: 100%;
+  }
+
+  .vehicleTextGroup {
+    flex: none;
+    gap: 10px;
+  }
+
+  .vehicleDescription {
+    flex: none;
+  }
+
+  .chassisLogos {
+    flex-wrap: wrap;
+    gap: 10px 12px;
+  }
+
+  .chassisLogoItem {
+    transform: scale(0.82);
+    transform-origin: left center;
+  }
+
+  .vehicleButton {
+    align-self: stretch;
+    font-size: 15px;
+    gap: 10px;
+    height: auto;
+    min-height: 52px;
+    padding: 12px 16px;
+    text-align: center;
+    white-space: normal;
+    width: 100%;
+  }
+
+  .aboutManufacturingRow,
+  .serviceRow,
+  .medicalInner {
+    gap: 24px;
+  }
+
+  .aboutManufacturingTitle,
+  .partnersTitle,
+  .serviceSectionTitle,
+  .faqSectionTitle,
+  .chassisTitle,
+  .vehiclesTitle,
+  .sectionTitle {
+    font-size: 42px;
+    line-height: 1.08;
+  }
+
+  .vehiclesDescription,
+  .chassisBody,
+  .chassisNote {
+    width: 100%;
+  }
+
+  .partnersGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 900px) {
   .sectionLight,
   .sectionMuted,
@@ -1400,37 +1618,75 @@
     padding: 64px 18px;
   }
 
+  .sectionLight:first-of-type {
+    padding: 0;
+  }
+
+  .heroSection {
+    padding: 56px 0 64px;
+  }
+
+  .heroSectionInner {
+    gap: 20px;
+    padding: 0 18px;
+  }
+
   .statsGrid,
   .tenderGrid,
   .vehiclesGrid,
-  .serviceGrid,
   .partnersGrid {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .ctaGhost,
-  .ctaLightService,
-  .ctaDark,
+  .tenderNote,
+  .vehiclesHeader,
+  .vehiclesDescription,
+  .partnersHeader,
+  .partnersBody,
+  .partnersGrid,
+  .faqSectionTitle,
+  .faqSectionList,
+  .vehicleTextGroup,
+  .serviceTextGroup,
+  .serviceCardText,
+  .chassisBody,
+  .chassisNote {
+    width: 100%;
+  }
+
+  .vehicleButton,
   .aboutButton,
-  .manufacturingButton {
+  .manufacturingButton,
+  .serviceBaseButton,
+  .serviceMedicalButton {
     width: 100%;
   }
 
   .heroImageWrap {
-    min-height: 240px;
+    aspect-ratio: 4096 / 1696;
+    margin-bottom: 0;
+    min-height: 0;
+    width: 100%;
+  }
+
+  .heroImage {
+    height: 100%;
+    inset: 0;
+    left: auto;
+    object-fit: contain;
+    top: auto;
+    width: 100%;
   }
 
   .heroTitle {
-    font-size: 38px;
+    font-size: 31px;
+    letter-spacing: -0.02em;
+    line-height: 0.98;
   }
 
   .heroDescription {
-    font-size: 15px;
-    max-width: 100%;
-  }
-
-  .heroSectionInner {
-    max-width: 100%;
+    font-size: 14px;
+    line-height: 22px;
   }
 
   .aboutManufacturingSection {
@@ -1444,12 +1700,174 @@
     padding: 48px 18px;
   }
 
+  .aboutManufacturingTitle,
+  .partnersTitle,
+  .serviceSectionTitle,
+  .faqSectionTitle,
+  .chassisTitle,
+  .vehiclesTitle,
+  .sectionTitle,
+  .priceHeading {
+    font-size: 32px;
+    line-height: 1.08;
+  }
+
+  .statCard,
+  .tenderCard {
+    height: auto;
+    min-height: 180px;
+    padding: 24px;
+  }
+
+  .statValue,
+  .tenderValue {
+    font-size: 52px;
+    line-height: 1;
+  }
+
+  .statText,
+  .tenderLabel,
+  .tenderNote,
+  .aboutManufacturingText p,
+  .serviceCardText p,
+  .vehiclesDescription,
+  .partnersBody,
+  .chassisBody,
+  .chassisNote,
+  .faqQuestionText,
+  .faqAnswer {
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .priceBlock {
+    gap: 24px;
+    margin-top: 56px;
+  }
+
+  .tenderNote {
+    height: auto;
+    min-height: 80px;
+  }
+
+  .vehicleCard {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0;
+    height: auto;
+    min-height: 0;
+  }
+
+  .vehicleContent {
+    gap: 14px;
+    justify-content: flex-start;
+    order: 2;
+    padding: 18px 18px 20px;
+  }
+
+  .vehicleImageWrapA,
+  .vehicleImageWrapB,
+  .vehicleImageWrapC,
+  .vehicleImageWrapSocial {
+    align-self: center;
+    display: flex;
+    height: auto;
+    justify-content: center;
+    max-width: 300px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  .vehicleImageWrapA {
+    aspect-ratio: 309 / 326;
+    max-width: 309px;
+  }
+
+  .vehicleImageWrapB {
+    aspect-ratio: 1576 / 1484;
+    max-width: 300px;
+  }
+
+  .vehicleImageWrapC {
+    aspect-ratio: 309 / 326;
+    max-width: 309px;
+  }
+
+  .vehicleImageWrapSocial {
+    aspect-ratio: 309 / 326;
+    max-width: 309px;
+  }
+
+  .vehicleImageA,
+  .vehicleImageB,
+  .vehicleImageC,
+  .vehicleImageSocial {
+    height: auto;
+    inset: auto;
+    left: auto;
+    max-height: 100%;
+    max-width: 100%;
+    position: relative;
+    top: auto;
+    width: 100%;
+  }
+
+  .vehicleBadge,
+  .vehicleBadgeSocial,
+  .vehicleBadgeSocialIcon {
+    height: 64px;
+    width: 64px;
+  }
+
+  .vehicleBadgeText {
+    font-size: 42px;
+  }
+
+  .vehicleTitle {
+    font-size: 18px;
+    line-height: 1.12;
+  }
+
+  .vehicleDescription {
+    flex: none;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .chassisLogos {
+    flex-wrap: wrap;
+    gap: 10px 12px;
+  }
+
+  .chassisLogoItem {
+    transform: scale(0.82);
+    transform-origin: left center;
+  }
+
+  .vehicleTextGroup {
+    flex: none;
+    gap: 10px;
+  }
+
+  .vehicleButton {
+    align-self: stretch;
+    font-size: 15px;
+    gap: 10px;
+    height: auto;
+    min-height: 52px;
+    padding: 12px 16px;
+    text-align: center;
+    white-space: normal;
+  }
+
   .manufacturingDetails {
     padding-top: 0;
   }
 
   .aboutImageCard {
     flex: none;
+    height: 260px;
     width: 100%;
   }
 
@@ -1459,17 +1877,9 @@
     width: 100%;
   }
 
-  .partnersHeader,
-  .partnersBody,
-  .partnersGrid,
-  .chassisBody,
-  .chassisNote {
-    width: 100%;
-  }
-
   .partnersGrid {
-    display: grid;
-    gap: 16px;
+    column-gap: 16px;
+    row-gap: 16px;
   }
 
   .partnerCard,
@@ -1480,5 +1890,86 @@
   .chassisGrid {
     justify-content: center;
     width: 100%;
+  }
+
+  .serviceSection {
+    gap: 32px;
+    min-height: 0;
+    width: 100%;
+  }
+
+  .serviceRow {
+    flex-direction: column;
+    gap: 24px;
+    padding: 32px 0;
+  }
+
+  .serviceRow:first-child .serviceImageCardExact {
+    order: 2;
+  }
+
+  .serviceRow:first-child .serviceBaseDetails {
+    order: 1;
+  }
+
+  .serviceBaseDetails,
+  .serviceMedicalDetails {
+    gap: 24px;
+    width: 100%;
+  }
+
+  .serviceImageCardExact {
+    flex: none;
+    height: 240px;
+    width: 100%;
+  }
+
+  .partnersGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .partnerCard {
+    height: 120px;
+  }
+
+  .chassisBrandCard {
+    height: 132px;
+    padding: 24px;
+  }
+
+  .faqButtonRow {
+    align-items: flex-start;
+    gap: 12px;
+    padding: 18px 18px 14px;
+  }
+
+  .faqAnswerWrap {
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-bottom: 18px;
+  }
+
+  .faqCardDetails {
+    max-height: 98px;
+  }
+
+  .faqCardDetails[open] {
+    max-height: 280px;
+  }
+
+  .faqQuestionText {
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .faqAnswer {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .faqSectionTitle {
+    font-size: 28px;
+    letter-spacing: 0;
+    line-height: 1.04;
   }
 }

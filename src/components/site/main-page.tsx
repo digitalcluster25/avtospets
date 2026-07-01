@@ -59,7 +59,7 @@ const pageCopy = {
         description:
           "Для транспортування пацієнтів до медичних закладів у супроводі медичного персоналу.",
         logos: ["peugeot", "citroen", "ford"],
-        image: "/figma/ambulance-cards/card-a.png",
+        image: "/figma/ambulance-cards/card-a-cropped-figma.png",
         imageAlt: "Типи A1 та A2",
         button: "Детальна інформація",
       },
@@ -81,7 +81,7 @@ const pageCopy = {
         description:
           "Реанімобіль для екстреної медичної допомоги, транспортування та моніторингу пацієнтів у тяжкому або критичному стані.",
         logos: ["peugeot", "citroen", "ford", "mercedes"],
-        image: "/figma/ambulance-cards/card-c.png",
+        image: "/figma/ambulance-cards/card-c-cropped-figma.png",
         imageAlt: "Тип С",
         button: "Детальна інформація",
       },
@@ -92,7 +92,7 @@ const pageCopy = {
         description:
           "Cпеціалізований транспорт для перевезення людей з обмеженими фізичними можливостями, мобільних амбулаторій тощо.",
         logos: ["peugeot", "citroen"],
-        image: "/figma/ambulance-cards/card-social.png",
+        image: "/figma/ambulance-cards/card-social-cropped-figma.png",
         imageAlt: "Соціальний транспорт",
         button: "Детальна інформація",
         social: true,
@@ -361,6 +361,12 @@ export function MainPage({ page }: MainPageProps) {
     c: styles.vehicleImageC,
     social: styles.vehicleImageSocial,
   } as const;
+  const vehicleImageSizeMap = {
+    a: { width: 309, height: 326 },
+    b: { width: 1576, height: 1484 },
+    c: { width: 309, height: 326 },
+    social: { width: 309, height: 326 },
+  } as const;
 
   function handleHeroArrowClick() {
     document.getElementById("key-metrics")?.scrollIntoView({
@@ -481,11 +487,17 @@ export function MainPage({ page }: MainPageProps) {
             </div>
 
             <div className={styles.vehiclesGrid}>
-              {copy.vehicles.map((vehicle) => (
-                <article
-                  key={vehicle.title}
-                  className={styles.vehicleCard}
-                >
+              {copy.vehicles.map((vehicle) => {
+                const vehicleImageSize =
+                  vehicleImageSizeMap[
+                    vehicle.variant as keyof typeof vehicleImageSizeMap
+                  ];
+
+                return (
+                  <article
+                    key={vehicle.title}
+                    className={styles.vehicleCard}
+                  >
                   <div className={styles.vehicleContent}>
                     <div
                       className={
@@ -558,36 +570,22 @@ export function MainPage({ page }: MainPageProps) {
                       ]
                     }
                   >
-                    {vehicle.social ? (
-                      <div className={styles.vehicleImageSocialTransform}>
-                        <div className={styles.vehicleImageSocialFrame}>
-                          <Image
-                            src={vehicle.image}
-                            alt={vehicle.imageAlt}
-                            width={309}
-                            height={326}
-                            unoptimized
-                            className={styles.vehicleImageSocial}
-                          />
-                        </div>
-                      </div>
-                    ) : (
-                      <Image
-                        src={vehicle.image}
-                        alt={vehicle.imageAlt}
-                        width={309}
-                        height={326}
-                        unoptimized
-                        className={
-                          vehicleImageMap[
-                            vehicle.variant as keyof typeof vehicleImageMap
-                          ]
-                        }
-                      />
-                    )}
+                    <Image
+                      src={vehicle.image}
+                      alt={vehicle.imageAlt}
+                      width={vehicleImageSize.width}
+                      height={vehicleImageSize.height}
+                      unoptimized
+                      className={
+                        vehicleImageMap[
+                          vehicle.variant as keyof typeof vehicleImageMap
+                        ]
+                      }
+                    />
                   </div>
-                </article>
-              ))}
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>

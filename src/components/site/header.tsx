@@ -70,6 +70,7 @@ export function Header({ currentPath, page, transparent = false }: HeaderProps) 
   const { language, setLanguage } = useSiteLanguage();
   const copy = translations[language];
   const [openMenu, setOpenMenu] = useState<"vehicles" | "language" | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const vehiclesRef = useRef<HTMLDivElement | null>(null);
   const languageRef = useRef<HTMLDivElement | null>(null);
 
@@ -101,6 +102,24 @@ export function Header({ currentPath, page, transparent = false }: HeaderProps) 
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [mobileMenuOpen]);
+
+  function closeAllMenus() {
+    setOpenMenu(null);
+    setMobileMenuOpen(false);
+  }
 
   return (
     <header className={transparent ? styles.headerTransparent : styles.header}>
@@ -172,6 +191,7 @@ export function Header({ currentPath, page, transparent = false }: HeaderProps) 
                 key={item.href}
                 href={item.href}
                 className={active ? styles.navLinkActive : styles.navLink}
+                onClick={() => setOpenMenu(null)}
               >
                 <span>{item.label}</span>
               </Link>
@@ -180,6 +200,17 @@ export function Header({ currentPath, page, transparent = false }: HeaderProps) 
         </nav>
 
         <div className={styles.actions}>
+          <button
+            type="button"
+            className={styles.mobileToggle}
+            aria-expanded={mobileMenuOpen}
+            aria-label="Відкрити меню"
+            onClick={() => setMobileMenuOpen((current) => !current)}
+          >
+            <span className={styles.mobileToggleBar} />
+            <span className={styles.mobileToggleBar} />
+            <span className={styles.mobileToggleBar} />
+          </button>
           <div
             ref={languageRef}
             className={`${styles.langGroup} ${
@@ -256,6 +287,102 @@ export function Header({ currentPath, page, transparent = false }: HeaderProps) 
           </SiteButton>
         </div>
       </div>
+      {mobileMenuOpen ? (
+        <>
+          <button
+            type="button"
+            className={styles.mobileOverlay}
+            aria-label="Закрити меню"
+            onClick={closeAllMenus}
+          />
+          <div className={styles.mobilePanel}>
+            <div className={styles.mobilePanelHeader}>
+              <Image
+                src="/figma/header-logo-exact.svg"
+                alt="Автоспецпром"
+                width={213}
+                height={32}
+                className={styles.mobilePanelLogo}
+              />
+              <button
+                type="button"
+                className={styles.mobileClose}
+                aria-label="Закрити меню"
+                onClick={closeAllMenus}
+              >
+                ×
+              </button>
+            </div>
+
+            <div className={styles.mobileSection}>
+              <p className={styles.mobileLabel}>{copy.vehicles}</p>
+              <div className={styles.mobileLinks}>
+                {copy.dropdownItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={
+                      currentPath === item.href ? styles.mobileLinkActive : styles.mobileLink
+                    }
+                    onClick={closeAllMenus}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className={styles.mobileSection}>
+              <div className={styles.mobileLinks}>
+                {copy.headerItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={
+                      currentPath === item.href ? styles.mobileLinkActive : styles.mobileLink
+                    }
+                    onClick={closeAllMenus}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className={styles.mobileFooter}>
+              <div className={styles.mobileLangs}>
+                <button
+                  type="button"
+                  className={language === "ua" ? styles.mobileLangActive : styles.mobileLang}
+                  onClick={() => setLanguage("ua")}
+                >
+                  UA
+                </button>
+                <button
+                  type="button"
+                  className={language === "en" ? styles.mobileLangActive : styles.mobileLang}
+                  onClick={() => setLanguage("en")}
+                >
+                  EN
+                </button>
+              </div>
+              <SiteButton
+                href={page.ctaHref ?? "/contacts"}
+                onClick={(event) => {
+                  event.preventDefault();
+                  closeAllMenus();
+                  openContactForm();
+                }}
+                variant="primary"
+                size="l"
+                className={styles.mobileCta}
+              >
+                {copy.contact}
+              </SiteButton>
+            </div>
+          </div>
+        </>
+      ) : null}
     </header>
   );
 }

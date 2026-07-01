@@ -1,3 +1,5 @@
+Любое действие в этом проекте обязательно выполнять с использованием трех инструментов: `codebase-memory-mcp`, `rtk` и `caveman`.
+
 <!-- BEGIN:nextjs-agent-rules -->
 # This is NOT the Next.js you know
 

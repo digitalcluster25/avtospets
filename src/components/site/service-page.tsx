@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import mapboxgl, {
   type GeoJSONSource,
@@ -39,7 +39,18 @@ const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
 const MAP_SOURCE_ID = "service-centers";
 const MAP_CLUSTER_CIRCLE_ID = "service-centers-clusters";
 const MAP_CLUSTER_COUNT_ID = "service-centers-cluster-count";
-const MAP_POINT_CIRCLE_ID = "service-centers-points";
+const MAP_POINT_SYMBOL_ID = "service-centers-points";
+const MAP_MARKER_IMAGE_ID = "service-centers-marker";
+const MAP_MARKER_ACTIVE_IMAGE_ID = "service-centers-marker-active";
+const MAP_DEFAULT_BOUNDS: [[number, number], [number, number]] = [
+  [22.05, 44.25],
+  [40.25, 52.45],
+];
+const MAP_DEFAULT_BOUNDS_PADDING = 64;
+const MAP_DEFAULT_CENTER: [number, number] = [30.14335, 49.059410074170074];
+const MAP_DEFAULT_ZOOM = 5.464574754416704;
+const MAP_CITY_BOUNDS_PADDING = 24;
+const MAP_CITY_MAX_ZOOM = 10.2;
 
 const UKRAINIAN_LABEL_FIELD = [
   "coalesce",
@@ -163,9 +174,14 @@ function getCenterKey(item: ServiceCenter) {
 
 function localizeMapLabels(map: MapboxMap) {
   const style = map.getStyle();
+  const excludedLayerIds = new Set([MAP_CLUSTER_COUNT_ID]);
 
   style.layers?.forEach((layer) => {
     if (layer.type !== "symbol" || !layer.layout || !("text-field" in layer.layout)) {
+      return;
+    }
+
+    if (excludedLayerIds.has(layer.id)) {
       return;
     }
 
@@ -177,7 +193,10 @@ function localizeMapLabels(map: MapboxMap) {
   });
 }
 
-function buildServiceCentersGeoJson(points: ServiceCenter[]) {
+function buildServiceCentersGeoJson(
+  points: ServiceCenter[],
+  activeCenterKey: string | null = null,
+) {
   return {
     type: "FeatureCollection" as const,
     features: points.map((point) => ({
@@ -192,12 +211,37 @@ function buildServiceCentersGeoJson(points: ServiceCenter[]) {
         name: point.name,
         address: point.address,
         phone: point.phone,
+        isActive: point.id === activeCenterKey,
       },
     })),
   };
 }
 
 function ensureServiceCenterLayers(map: MapboxMap) {
+  if (!map.hasImage(MAP_MARKER_IMAGE_ID)) {
+    map.loadImage("/mapbox/marker-kyiv.png", (error, image) => {
+      if (error || !image || map.hasImage(MAP_MARKER_IMAGE_ID)) {
+        return;
+      }
+
+      map.addImage(MAP_MARKER_IMAGE_ID, image);
+      ensureServiceCenterLayers(map);
+    });
+    return;
+  }
+
+  if (!map.hasImage(MAP_MARKER_ACTIVE_IMAGE_ID)) {
+    map.loadImage("/mapbox/marker-kyiv-active.png", (error, image) => {
+      if (error || !image || map.hasImage(MAP_MARKER_ACTIVE_IMAGE_ID)) {
+        return;
+      }
+
+      map.addImage(MAP_MARKER_ACTIVE_IMAGE_ID, image);
+      ensureServiceCenterLayers(map);
+    });
+    return;
+  }
+
   if (!map.getSource(MAP_SOURCE_ID)) {
     map.addSource(MAP_SOURCE_ID, {
       type: "geojson",
@@ -240,17 +284,22 @@ function ensureServiceCenterLayers(map: MapboxMap) {
     });
   }
 
-  if (!map.getLayer(MAP_POINT_CIRCLE_ID)) {
+  if (!map.getLayer(MAP_POINT_SYMBOL_ID)) {
     map.addLayer({
-      id: MAP_POINT_CIRCLE_ID,
-      type: "circle",
+      id: MAP_POINT_SYMBOL_ID,
+      type: "symbol",
       source: MAP_SOURCE_ID,
       filter: ["!", ["has", "point_count"]],
-      paint: {
-        "circle-color": "#FD3626",
-        "circle-radius": 9,
-        "circle-stroke-color": "#FFFFFF",
-        "circle-stroke-width": 2,
+      layout: {
+        "icon-image": [
+          "case",
+          ["boolean", ["get", "isActive"], false],
+          MAP_MARKER_ACTIVE_IMAGE_ID,
+          MAP_MARKER_IMAGE_ID,
+        ],
+        "icon-size": 1,
+        "icon-allow-overlap": true,
+        "icon-anchor": "center",
       },
     });
   }
@@ -287,36 +336,47 @@ export function ServicePage({ page }: ServicePageProps) {
   const [isAutocompleteOpen, setIsAutocompleteOpen] = useState(false);
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
   const [activeCenterKey, setActiveCenterKey] = useState<string | null>(null);
+  const [isMobileCentersPanelOpen, setIsMobileCentersPanelOpen] = useState(false);
   const autocompleteRef = useRef<HTMLDivElement | null>(null);
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MapboxMap | null>(null);
   const centerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const normalizedQuery = regionQuery.trim().toLocaleLowerCase("uk-UA");
-  const cityOptions = Array.from(new Set(serviceCenters.map((item) => item.city)));
-  const autocompleteOptions = cityOptions.filter((city) =>
-    city.toLocaleLowerCase("uk-UA").includes(normalizedQuery) &&
-    !selectedCities.includes(city),
+  const cityOptions = useMemo(
+    () => Array.from(new Set(serviceCenters.map((item) => item.city))),
+    [],
   );
-  const filteredCenters = serviceCenters.filter((item) => {
-    if (!normalizedQuery && selectedCities.length === 0) {
-      return true;
-    }
+  const autocompleteOptions = useMemo(
+    () => cityOptions.filter((city) => !selectedCities.includes(city)),
+    [cityOptions, selectedCities],
+  );
+  const filteredCenters = useMemo(
+    () =>
+      serviceCenters.filter((item) => {
+        if (!normalizedQuery && selectedCities.length === 0) {
+          return true;
+        }
 
-    const normalizedCity = item.city.toLocaleLowerCase("uk-UA");
+        const normalizedCity = item.city.toLocaleLowerCase("uk-UA");
 
-    if (selectedCities.length > 0) {
-      const normalizedSelectedCities = selectedCities.map((city) =>
-        city.toLocaleLowerCase("uk-UA"),
-      );
+        if (selectedCities.length > 0) {
+          const normalizedSelectedCities = selectedCities.map((city) =>
+            city.toLocaleLowerCase("uk-UA"),
+          );
 
-      return normalizedSelectedCities.some(
-        (selectedCity) => normalizedCity === selectedCity,
-      );
-    }
+          return normalizedSelectedCities.some(
+            (selectedCity) => normalizedCity === selectedCity,
+          );
+        }
 
-    return normalizedCity === normalizedQuery;
-  });
-  const visibleCenterKeys = filteredCenters.map((item) => getCenterKey(item));
+        return normalizedCity === normalizedQuery;
+      }),
+    [normalizedQuery, selectedCities],
+  );
+  const visibleCenterKeys = useMemo(
+    () => filteredCenters.map((item) => getCenterKey(item)),
+    [filteredCenters],
+  );
   const effectiveActiveCenterKey =
     activeCenterKey && (visibleCenterKeys.includes(activeCenterKey) || visibleCenterKeys.length === 0)
       ? activeCenterKey
@@ -346,8 +406,9 @@ export function ServicePage({ page }: ServicePageProps) {
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: MAPBOX_STYLE,
-      center: [31.2304, 49.1500],
-      zoom: 5.5,
+      center: MAP_DEFAULT_CENTER,
+      zoom: MAP_DEFAULT_ZOOM,
+      minZoom: MAP_DEFAULT_ZOOM,
       pitch: 0,
       bearing: 0,
       attributionControl: true,
@@ -392,7 +453,7 @@ export function ServicePage({ page }: ServicePageProps) {
         });
       });
     });
-    map.on("click", MAP_POINT_CIRCLE_ID, (event) => {
+    map.on("click", MAP_POINT_SYMBOL_ID, (event) => {
       const pointId = event.features?.[0]?.properties?.id;
 
       if (typeof pointId === "string") {
@@ -405,10 +466,10 @@ export function ServicePage({ page }: ServicePageProps) {
     map.on("mouseleave", MAP_CLUSTER_CIRCLE_ID, () => {
       map.getCanvas().style.cursor = "";
     });
-    map.on("mouseenter", MAP_POINT_CIRCLE_ID, () => {
+    map.on("mouseenter", MAP_POINT_SYMBOL_ID, () => {
       map.getCanvas().style.cursor = "pointer";
     });
-    map.on("mouseleave", MAP_POINT_CIRCLE_ID, () => {
+    map.on("mouseleave", MAP_POINT_SYMBOL_ID, () => {
       map.getCanvas().style.cursor = "";
     });
 
@@ -439,28 +500,7 @@ export function ServicePage({ page }: ServicePageProps) {
       return;
     }
 
-    source.setData(buildServiceCentersGeoJson(filteredCenters));
-
-    if (map.getLayer(MAP_POINT_CIRCLE_ID)) {
-      map.setPaintProperty(MAP_POINT_CIRCLE_ID, "circle-color", [
-        "case",
-        ["==", ["get", "id"], effectiveActiveCenterKey ?? ""],
-        "#FFFFFF",
-        "#FD3626",
-      ]);
-      map.setPaintProperty(MAP_POINT_CIRCLE_ID, "circle-radius", [
-        "case",
-        ["==", ["get", "id"], effectiveActiveCenterKey ?? ""],
-        14,
-        9,
-      ]);
-      map.setPaintProperty(MAP_POINT_CIRCLE_ID, "circle-stroke-color", [
-        "case",
-        ["==", ["get", "id"], effectiveActiveCenterKey ?? ""],
-        "#FD3626",
-        "#FFFFFF",
-      ]);
-    }
+    source.setData(buildServiceCentersGeoJson(filteredCenters, effectiveActiveCenterKey));
   }, [effectiveActiveCenterKey, filteredCenters]);
 
   useEffect(() => {
@@ -475,7 +515,7 @@ export function ServicePage({ page }: ServicePageProps) {
 
     map.flyTo({
       center: activeCenter.coordinates,
-      zoom: 8.8,
+      zoom: 14.5,
       speed: 1.1,
       essential: true,
     });
@@ -515,8 +555,8 @@ export function ServicePage({ page }: ServicePageProps) {
     );
 
     map.fitBounds(bounds as LngLatBoundsLike, {
-      padding: 64,
-      maxZoom: 8.4,
+      padding: MAP_CITY_BOUNDS_PADDING,
+      maxZoom: MAP_CITY_MAX_ZOOM,
       duration: 900,
     });
   }, [filteredCenters]);
@@ -541,6 +581,153 @@ export function ServicePage({ page }: ServicePageProps) {
   function handleChipRemove(city: string) {
     setSelectedCities((current) => current.filter((item) => item !== city));
   }
+
+  function handleActiveCenterReset() {
+    setActiveCenterKey(null);
+    const map = mapRef.current;
+
+    if (!map) {
+      return;
+    }
+
+    if (filteredCenters.length > 1) {
+      const bounds = filteredCenters.reduce(
+        (accumulator, center) => {
+          accumulator.extend(center.coordinates);
+          return accumulator;
+        },
+        new mapboxgl.LngLatBounds(
+          filteredCenters[0].coordinates,
+          filteredCenters[0].coordinates,
+        ),
+      );
+
+      map.fitBounds(bounds as LngLatBoundsLike, {
+        padding: MAP_CITY_BOUNDS_PADDING,
+        maxZoom: MAP_CITY_MAX_ZOOM,
+        duration: 900,
+      });
+      return;
+    }
+
+    map.easeTo({
+      center: MAP_DEFAULT_CENTER,
+      zoom: MAP_DEFAULT_ZOOM,
+      duration: 900,
+    });
+  }
+
+  const centersPanel = (
+    <>
+      <div className={styles.regionInputWrap} ref={autocompleteRef}>
+        <div className={styles.regionInput}>
+          <span className={styles.regionInputIcon}>
+            <Image
+              src="/figma/services-page/search.svg"
+              alt=""
+              fill
+              unoptimized
+            />
+          </span>
+          <input
+            type="text"
+            value={regionQuery}
+            placeholder="Всі регіони"
+            className={styles.regionInputField}
+            onFocus={() => setIsAutocompleteOpen(true)}
+            onChange={(event) => handleRegionChange(event.target.value)}
+          />
+        </div>
+
+        {isAutocompleteOpen ? (
+          <div className={styles.regionAutocomplete}>
+            <button
+              type="button"
+              className={styles.regionAutocompleteOption}
+              onClick={handleRegionReset}
+            >
+              Всі регіони
+            </button>
+            {autocompleteOptions.map((city) => (
+              <button
+                key={city}
+                type="button"
+                className={styles.regionAutocompleteOption}
+                onClick={() => handleRegionSelect(city)}
+              >
+                {city}
+              </button>
+            ))}
+          </div>
+        ) : null}
+      </div>
+
+      {selectedCities.length > 0 ? (
+        <div className={styles.regionChips}>
+          {selectedCities.map((city) => (
+            <button
+              key={city}
+              type="button"
+              className={styles.regionChip}
+              onClick={() => handleChipRemove(city)}
+            >
+              <span className={styles.regionChipLabel}>{city}</span>
+              <span className={styles.regionChipClose} aria-hidden="true">
+                ×
+              </span>
+            </button>
+          ))}
+        </div>
+      ) : null}
+
+      <div className={styles.centersList}>
+        {filteredCenters.map((item) => {
+          const itemKey = getCenterKey(item);
+          const isActive = itemKey === effectiveActiveCenterKey;
+
+          return (
+            <button
+              key={itemKey}
+              ref={(node) => {
+                centerRefs.current[itemKey] = node;
+              }}
+              type="button"
+              className={isActive ? styles.centerItemActive : styles.centerItem}
+              onClick={() => setActiveCenterKey(itemKey)}
+            >
+              <p className={isActive ? styles.centerCityActive : styles.centerCity}>
+                {item.city}
+              </p>
+              {isActive ? (
+                <span
+                  role="button"
+                  tabIndex={0}
+                  className={styles.centerClose}
+                  aria-label="Зняти вибір адреси"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    handleActiveCenterReset();
+                  }}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      handleActiveCenterReset();
+                    }
+                  }}
+                >
+                  ×
+                </span>
+              ) : null}
+              <p className={styles.centerName}>{item.name}</p>
+              <p className={styles.centerMeta}>{item.address}</p>
+              <p className={styles.centerMeta}>{item.phone}</p>
+            </button>
+          );
+        })}
+      </div>
+    </>
+  );
 
   return (
     <div className={styles.page}>
@@ -604,101 +791,37 @@ export function ServicePage({ page }: ServicePageProps) {
           </div>
 
           <div className={styles.centersContent}>
-            <div className={styles.leftColumn}>
-              <div className={styles.regionInputWrap} ref={autocompleteRef}>
-                <div className={styles.regionInput}>
-                  <span className={styles.regionInputIcon}>
-                    <Image
-                      src="/figma/services-page/search.svg"
-                      alt=""
-                      fill
-                      unoptimized
-                    />
-                  </span>
-                  <input
-                    type="text"
-                    value={regionQuery}
-                    placeholder="Всі регіони"
-                    className={styles.regionInputField}
-                    onFocus={() => setIsAutocompleteOpen(true)}
-                    onChange={(event) => handleRegionChange(event.target.value)}
-                  />
-                </div>
-
-                {isAutocompleteOpen ? (
-                  <div className={styles.regionAutocomplete}>
-                    <button
-                      type="button"
-                      className={styles.regionAutocompleteOption}
-                      onClick={handleRegionReset}
-                    >
-                      Всі регіони
-                    </button>
-                    {autocompleteOptions.map((city) => (
-                      <button
-                        key={city}
-                        type="button"
-                        className={styles.regionAutocompleteOption}
-                        onClick={() => handleRegionSelect(city)}
-                      >
-                        {city}
-                      </button>
-                    ))}
-                  </div>
-                ) : null}
-              </div>
-
-              {selectedCities.length > 0 ? (
-                <div className={styles.regionChips}>
-                  {selectedCities.map((city) => (
-                    <button
-                      key={city}
-                      type="button"
-                      className={styles.regionChip}
-                      onClick={() => handleChipRemove(city)}
-                    >
-                      <span className={styles.regionChipLabel}>{city}</span>
-                      <span className={styles.regionChipClose} aria-hidden="true">
-                        ×
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              ) : null}
-
-              <div className={styles.centersList}>
-                {filteredCenters.map((item) => {
-                  const itemKey = getCenterKey(item);
-                  const isActive = itemKey === effectiveActiveCenterKey;
-
-                  return (
-                    <button
-                      key={itemKey}
-                      ref={(node) => {
-                        centerRefs.current[itemKey] = node;
-                      }}
-                      type="button"
-                      className={isActive ? styles.centerItemActive : styles.centerItem}
-                      onClick={() => setActiveCenterKey(itemKey)}
-                    >
-                      <p
-                        className={isActive ? styles.centerCityActive : styles.centerCity}
-                      >
-                        {item.city}
-                      </p>
-                      <p className={styles.centerName}>{item.name}</p>
-                      <p className={styles.centerMeta}>{item.address}</p>
-                      <p className={styles.centerMeta}>{item.phone}</p>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+            <div className={styles.leftColumn}>{centersPanel}</div>
 
             <div className={styles.mapColumn}>
               <div className={styles.mapCard}>
                 <div ref={mapContainerRef} className={styles.mapCanvas} />
+                {isMobileCentersPanelOpen ? (
+                  <div className={styles.mobileCentersOverlay}>
+                    <div className={styles.mobileCentersOverlayHeader}>
+                      <button
+                        type="button"
+                        className={styles.mobileCentersClose}
+                        onClick={() => setIsMobileCentersPanelOpen(false)}
+                      >
+                        Закрити список
+                      </button>
+                    </div>
+                    <div className={styles.mobileCentersPanel}>{centersPanel}</div>
+                  </div>
+                ) : null}
               </div>
+              {!isMobileCentersPanelOpen ? (
+                <div className={styles.mobileCentersActions}>
+                  <button
+                    type="button"
+                    className={styles.mobileCentersToggle}
+                    onClick={() => setIsMobileCentersPanelOpen(true)}
+                  >
+                    Показати список представництв
+                  </button>
+                </div>
+              ) : null}
             </div>
           </div>
         </section>

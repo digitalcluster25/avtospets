@@ -1,6 +1,7 @@
 .page {
   background: #ffffff;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .main {
@@ -321,7 +322,7 @@
   border-radius: 16px;
   height: 100%;
   mix-blend-mode: darken;
-  object-fit: cover;
+  object-fit: contain;
   width: 100%;
 }
 
