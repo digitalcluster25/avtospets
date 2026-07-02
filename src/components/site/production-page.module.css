@@ -589,16 +589,36 @@
     --construction-side-padding: 24px;
   }
 
+  .constructionInner {
+    gap: 36px;
+    min-height: auto;
+  }
+
   .constructionGrid {
+    align-items: stretch;
+    gap: 20px;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: none;
+    margin: 0 auto;
+    max-width: 920px;
   }
 
   .constructionCard,
   .constructionCardTall,
   .constructionCardShort {
     height: auto;
+    min-height: 100%;
+    padding: 28px;
     width: 100%;
+  }
+
+  .constructionTitle {
+    font-size: 22px;
+  }
+
+  .constructionBody {
+    font-size: 15px;
+    line-height: 22px;
   }
 
   .medicalGrid {
