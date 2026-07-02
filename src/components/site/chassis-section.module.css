@@ -167,4 +167,9 @@
     height: 84px;
     width: min(100%, 160px);
   }
+
+  .brandItemFord {
+    height: auto;
+    width: min(100%, 150px);
+  }
 }
