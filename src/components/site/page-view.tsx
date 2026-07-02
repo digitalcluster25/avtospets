@@ -1,8 +1,13 @@
-import { Footer } from "@/components/site/footer";
+import { cookies } from "next/headers";
+import { FooterStatic } from "@/components/site/footer-static";
 import { Header } from "@/components/site/header";
 import { ContactFormProvider } from "@/components/site/contact-form-provider";
 import { OpenContactFormButton } from "@/components/site/open-contact-form-button";
 import { SiteButton } from "@/components/site/button";
+import {
+  SITE_LANGUAGE_COOKIE_KEY,
+  type SiteLanguage,
+} from "@/components/site/site-language";
 import type {
   CardSection,
   ContactSection,
@@ -230,6 +235,10 @@ function renderSections(page: SitePage) {
 }
 
 export async function PageView({ page }: PageViewProps) {
+  const cookieStore = await cookies();
+  const language: SiteLanguage =
+    cookieStore.get(SITE_LANGUAGE_COOKIE_KEY)?.value === "en" ? "en" : "ua";
+
   if (page.uri === "/") {
     const { MainPage } = await import("@/components/site/main-page");
     return <MainPage page={page} />;
@@ -237,14 +246,14 @@ export async function PageView({ page }: PageViewProps) {
 
   if (page.uri === "/avtomobili-type-c" || page.uri.startsWith("/avtomobili-type-c/")) {
     const { TypeCPage } = await import("@/components/site/type-c-page");
-    return <TypeCPage page={page} />;
+    return <TypeCPage language={language} page={page} />;
   }
 
   if (page.uri === "/production") {
     const { ProductionPage } = await import("@/components/site/production-page");
     return (
       <ContactFormProvider>
-        <ProductionPage page={page} />
+        <ProductionPage language={language} page={page} />
       </ContactFormProvider>
     );
   }
@@ -253,7 +262,7 @@ export async function PageView({ page }: PageViewProps) {
     const { ContactPage } = await import("@/components/site/contact-page");
     return (
       <ContactFormProvider>
-        <ContactPage page={page} />
+        <ContactPage language={language} page={page} />
       </ContactFormProvider>
     );
   }
@@ -262,30 +271,30 @@ export async function PageView({ page }: PageViewProps) {
     const { ServicePage } = await import("@/components/site/service-page");
     return (
       <ContactFormProvider>
-        <ServicePage page={page} />
+        <ServicePage language={language} page={page} />
       </ContactFormProvider>
     );
   }
 
   if (page.uri === "/aboutus") {
     const { AboutPage } = await import("@/components/site/about-page");
-    return <AboutPage page={page} />;
+    return <AboutPage language={language} page={page} />;
   }
 
   if (page.uri === "/testimonials") {
     const { TestimonialsPage } = await import("@/components/site/testimonials-page");
-    return <TestimonialsPage page={page} />;
+    return <TestimonialsPage language={language} page={page} />;
   }
 
   if (page.uri === "/sertifications") {
     const { CertificationsPage } = await import("@/components/site/certifications-page");
-    return <CertificationsPage page={page} />;
+    return <CertificationsPage language={language} page={page} />;
   }
 
   return (
     <ContactFormProvider>
       <div className={styles.shell}>
-        <Header currentPath={page.uri} page={page} />
+        <Header currentPath={page.uri} initialLanguage={language} page={page} />
         <main>
           <section className={styles.hero}>
             <div className="container">
@@ -331,7 +340,7 @@ export async function PageView({ page }: PageViewProps) {
           <div id="content">{renderSections(page)}</div>
           <div className={styles.footerSpace} />
         </main>
-        <Footer />
+        <FooterStatic language={language} />
       </div>
     </ContactFormProvider>
   );

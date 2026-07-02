@@ -1,16 +1,14 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { footerCopyByLanguage } from "@/components/site/footer-copy";
 import type { SiteLanguage } from "@/components/site/site-language";
 import styles from "./footer.module.css";
 
-type FooterProps = {
+type FooterStaticProps = {
   language: SiteLanguage;
 };
 
-export function Footer({ language }: FooterProps) {
+export function FooterStatic({ language }: FooterStaticProps) {
   const copy = footerCopyByLanguage[language];
 
   return (
@@ -29,26 +27,26 @@ export function Footer({ language }: FooterProps) {
               className={styles.logo}
             />
             <p className={styles.description}>{copy.description}</p>
-          <div className={styles.socials}>
-            <span className={styles.socialButton} title="Instagram">
-              <span
-                className={`${styles.socialIcon} ${styles.socialIconInstagram}`}
-                aria-hidden="true"
-              />
-            </span>
-            <span className={styles.socialButton} title="Facebook">
-              <span
-                className={`${styles.socialIcon} ${styles.socialIconFacebook}`}
-                aria-hidden="true"
-              />
-            </span>
-            <span className={styles.socialButton} title="LinkedIn">
-              <span
-                className={`${styles.socialIcon} ${styles.socialIconLinkedin}`}
-                aria-hidden="true"
-              />
-            </span>
-          </div>
+            <div className={styles.socials}>
+              <span className={styles.socialButton} title="Instagram">
+                <span
+                  className={`${styles.socialIcon} ${styles.socialIconInstagram}`}
+                  aria-hidden="true"
+                />
+              </span>
+              <span className={styles.socialButton} title="Facebook">
+                <span
+                  className={`${styles.socialIcon} ${styles.socialIconFacebook}`}
+                  aria-hidden="true"
+                />
+              </span>
+              <span className={styles.socialButton} title="LinkedIn">
+                <span
+                  className={`${styles.socialIcon} ${styles.socialIconLinkedin}`}
+                  aria-hidden="true"
+                />
+              </span>
+            </div>
           </div>
 
           <div className={styles.navColumn}>
@@ -97,12 +95,8 @@ export function Footer({ language }: FooterProps) {
         <div className={styles.bottom}>
           <p className={styles.copyright}>{copy.copyright}</p>
           <div className={styles.bottomLinks}>
-            <span className={styles.bottomLink}>
-              {copy.privacy}
-            </span>
-            <span className={styles.bottomLink}>
-              {copy.terms}
-            </span>
+            <span className={styles.bottomLink}>{copy.privacy}</span>
+            <span className={styles.bottomLink}>{copy.terms}</span>
           </div>
         </div>
       </div>

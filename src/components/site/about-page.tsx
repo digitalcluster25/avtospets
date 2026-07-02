@@ -1,10 +1,12 @@
 import Image from "next/image";
-import { Footer } from "@/components/site/footer";
+import { FooterStatic } from "@/components/site/footer-static";
 import { Header } from "@/components/site/header";
+import type { SiteLanguage } from "@/components/site/site-language";
 import type { SitePage } from "@/lib/site/types";
 import styles from "./about-page.module.css";
 
 type AboutPageProps = {
+  language: SiteLanguage;
   page: SitePage;
 };
 
@@ -31,10 +33,10 @@ const partnerLogos = Array.from({ length: 23 }, (_, index) => ({
   alt: `Партнер ${index + 1}`,
 }));
 
-export function AboutPage({ page }: AboutPageProps) {
+export function AboutPage({ language, page }: AboutPageProps) {
   return (
     <div className={styles.page}>
-      <Header currentPath={page.uri} page={page} />
+      <Header currentPath={page.uri} initialLanguage={language} page={page} />
 
       <main className={styles.main}>
         <section className={styles.hero}>
@@ -169,7 +171,7 @@ export function AboutPage({ page }: AboutPageProps) {
         </section>
       </main>
 
-      <Footer />
+      <FooterStatic language={language} />
     </div>
   );
 }

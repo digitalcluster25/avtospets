@@ -7,10 +7,12 @@ import { ChassisSection } from "@/components/site/chassis-section";
 import { useContactForm } from "@/components/site/contact-form-provider";
 import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
+import type { SiteLanguage } from "@/components/site/site-language";
 import type { SitePage } from "@/lib/site/types";
 import styles from "./production-page.module.css";
 
 type ProductionPageProps = {
+  language: SiteLanguage;
   page: SitePage;
 };
 
@@ -96,7 +98,7 @@ const DESKTOP_INITIAL_GALLERY_COUNT = initialGalleryCards.length;
 const MOBILE_INITIAL_GALLERY_COUNT = 4;
 const MOBILE_GALLERY_INCREMENT = 2;
 
-export function ProductionPage({ page }: ProductionPageProps) {
+export function ProductionPage({ language, page }: ProductionPageProps) {
   const { openContactForm } = useContactForm();
   const [isMobileGallery, setIsMobileGallery] = useState(false);
   const allGalleryCards = useMemo(
@@ -134,7 +136,7 @@ export function ProductionPage({ page }: ProductionPageProps) {
 
   return (
     <div className={styles.page}>
-      <Header currentPath={page.uri} page={page} />
+      <Header currentPath={page.uri} initialLanguage={language} page={page} />
 
       <main className={styles.main}>
         <section className={styles.hero}>
@@ -311,7 +313,7 @@ export function ProductionPage({ page }: ProductionPageProps) {
         </section>
       </main>
 
-      <Footer />
+      <Footer language={language} />
     </div>
   );
 }

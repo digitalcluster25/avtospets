@@ -11,10 +11,12 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { useContactForm } from "@/components/site/contact-form-provider";
 import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
+import type { SiteLanguage } from "@/components/site/site-language";
 import type { SitePage } from "@/lib/site/types";
 import styles from "./service-page.module.css";
 
 type ServicePageProps = {
+  language: SiteLanguage;
   page: SitePage;
 };
 
@@ -335,7 +337,7 @@ function HeroServiceGrid() {
   );
 }
 
-export function ServicePage({ page }: ServicePageProps) {
+export function ServicePage({ language, page }: ServicePageProps) {
   const { openContactForm } = useContactForm();
   const [regionQuery, setRegionQuery] = useState("");
   const [isAutocompleteOpen, setIsAutocompleteOpen] = useState(false);
@@ -743,7 +745,7 @@ export function ServicePage({ page }: ServicePageProps) {
 
   return (
     <div className={styles.page}>
-      <Header currentPath={page.uri} page={page} />
+      <Header currentPath={page.uri} initialLanguage={language} page={page} />
 
       <main className={styles.main}>
         <section className={styles.hero}>
@@ -890,7 +892,7 @@ export function ServicePage({ page }: ServicePageProps) {
         </section>
       </main>
 
-      <Footer />
+      <Footer language={language} />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { Inter, Oswald, Rubik } from "next/font/google";
-import { LanguageProvider } from "@/components/site/language-provider";
+import { SITE_LANGUAGE_COOKIE_KEY } from "@/components/site/site-language";
 import "./globals.css";
 
 const headingFont = Oswald({
@@ -37,7 +37,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const cookieStore = await cookies();
-  const savedLanguage = cookieStore.get("avtospets-language")?.value;
+  const savedLanguage = cookieStore.get(SITE_LANGUAGE_COOKIE_KEY)?.value;
   const initialLanguage = savedLanguage === "en" ? "en" : "ua";
   const documentLanguage = initialLanguage === "en" ? "en" : "uk";
 
@@ -47,9 +47,7 @@ export default async function RootLayout({
       className={`${headingFont.variable} ${bodyFont.variable} ${uiFont.variable}`}
     >
       <body>
-        <LanguageProvider initialLanguage={initialLanguage}>
-          {children}
-        </LanguageProvider>
+        {children}
       </body>
     </html>
   );

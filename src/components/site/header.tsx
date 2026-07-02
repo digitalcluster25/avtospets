@@ -5,9 +5,10 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { SiteButton } from "@/components/site/button";
 import {
-  useSiteLanguage,
+  SITE_LANGUAGE_COOKIE_KEY,
+  SITE_LANGUAGE_STORAGE_KEY,
   type SiteLanguage,
-} from "@/components/site/language-provider";
+} from "@/components/site/site-language";
 import type { SitePage } from "@/lib/site/types";
 import styles from "./header.module.css";
 
@@ -60,17 +61,27 @@ const translations = {
 
 type HeaderProps = {
   currentPath: string;
+  initialLanguage: SiteLanguage;
   page: SitePage;
   transparent?: boolean;
 };
 
-export function Header({ currentPath, page, transparent = false }: HeaderProps) {
-  const { language, setLanguage } = useSiteLanguage();
+export function Header({
+  currentPath,
+  initialLanguage,
+  page,
+  transparent = false,
+}: HeaderProps) {
+  const [language, setLanguage] = useState<SiteLanguage>(initialLanguage);
   const copy = translations[language];
   const [openMenu, setOpenMenu] = useState<"vehicles" | "language" | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const vehiclesRef = useRef<HTMLDivElement | null>(null);
   const languageRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    setLanguage(initialLanguage);
+  }, [initialLanguage]);
 
   useEffect(() => {
     function handlePointerDown(event: MouseEvent) {
@@ -113,6 +124,12 @@ export function Header({ currentPath, page, transparent = false }: HeaderProps) 
       document.body.style.overflow = previousOverflow;
     };
   }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    document.documentElement.lang = language === "ua" ? "uk" : "en";
+    window.localStorage.setItem(SITE_LANGUAGE_STORAGE_KEY, language);
+    document.cookie = `${SITE_LANGUAGE_COOKIE_KEY}=${language}; path=/; max-age=31536000; samesite=lax`;
+  }, [language]);
 
   function closeAllMenus() {
     setOpenMenu(null);

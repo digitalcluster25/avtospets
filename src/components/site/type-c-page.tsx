@@ -6,10 +6,12 @@ import { useEffect, type CSSProperties } from "react";
 import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
 import { SiteButton } from "@/components/site/button";
+import type { SiteLanguage } from "@/components/site/site-language";
 import type { SitePage } from "@/lib/site/types";
 import styles from "./type-c-page.module.css";
 
 type TypeCPageProps = {
+  language: SiteLanguage;
   page: SitePage;
 };
 
@@ -279,7 +281,7 @@ function DownloadArrow() {
   );
 }
 
-export function TypeCPage({ page }: TypeCPageProps) {
+export function TypeCPage({ language, page }: TypeCPageProps) {
   const brandSlug =
     chassisTabs.find((tab) => page.uri.endsWith(`/${tab.id}`))?.id ?? "peugeot";
   const activeBrand = typeCBrandContent[brandSlug];
@@ -297,7 +299,12 @@ export function TypeCPage({ page }: TypeCPageProps) {
 
   return (
     <div className={styles.page}>
-      <Header currentPath={page.uri} page={page} transparent />
+      <Header
+        currentPath={page.uri}
+        initialLanguage={language}
+        page={page}
+        transparent
+      />
 
       <main className={styles.main}>
         <section className={styles.hero}>
@@ -539,7 +546,7 @@ export function TypeCPage({ page }: TypeCPageProps) {
         </section>
       </main>
 
-      <Footer />
+      <Footer language={language} />
     </div>
   );
 }

@@ -4,10 +4,12 @@ import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
 import { SiteButton } from "@/components/site/button";
 import { useContactForm } from "@/components/site/contact-form-provider";
+import type { SiteLanguage } from "@/components/site/site-language";
 import type { SitePage } from "@/lib/site/types";
 import styles from "./contact-page.module.css";
 
 type ContactPageProps = {
+  language: SiteLanguage;
   page: SitePage;
 };
 
@@ -30,13 +32,18 @@ const contactRows = [
   },
 ] as const;
 
-export function ContactPage({ page }: ContactPageProps) {
+export function ContactPage({ language, page }: ContactPageProps) {
   const { openContactForm } = useContactForm();
 
   return (
     <div className={styles.page}>
       <div className={styles.topArea}>
-        <Header currentPath={page.uri} page={page} transparent />
+        <Header
+          currentPath={page.uri}
+          initialLanguage={language}
+          page={page}
+          transparent
+        />
 
         <main className={styles.main}>
           <section className={styles.hero}>
@@ -92,7 +99,7 @@ export function ContactPage({ page }: ContactPageProps) {
         </main>
       </div>
 
-      <Footer />
+      <Footer language={language} />
     </div>
   );
 }

@@ -1,13 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { cookies } from "next/headers";
-import { Footer } from "@/components/site/footer";
+import { FooterStatic } from "@/components/site/footer-static";
 import { Header } from "@/components/site/header";
 import { ChassisSection } from "@/components/site/chassis-section";
+import {
+  SITE_LANGUAGE_COOKIE_KEY,
+  type SiteLanguage,
+} from "@/components/site/site-language";
 import type { SitePage } from "@/lib/site/types";
 import styles from "./main-page.module.css";
-
-type SiteLanguage = "ua" | "en";
 
 const pageCopy = {
   ua: {
@@ -311,7 +313,8 @@ function FaqChevron() {
 
 export async function MainPage({ page }: MainPageProps) {
   const cookieStore = await cookies();
-  const language = cookieStore.get("avtospets-language")?.value === "en" ? "en" : "ua";
+  const language =
+    cookieStore.get(SITE_LANGUAGE_COOKIE_KEY)?.value === "en" ? "en" : "ua";
   const copy = pageCopy[language];
   const partners = Array.from({ length: 23 }, (_, index) => ({
     src: `/figma/partners-3476/partner-${String(index + 1).padStart(2, "0")}.png`,
@@ -368,7 +371,7 @@ export async function MainPage({ page }: MainPageProps) {
 
   return (
     <div className={styles.page}>
-      <Header currentPath={page.uri} page={page} />
+      <Header currentPath={page.uri} initialLanguage={language} page={page} />
       <main>
         <section className={styles.sectionLight}>
           <div className={styles.heroSection}>
@@ -820,7 +823,7 @@ export async function MainPage({ page }: MainPageProps) {
           </div>
         </section>
       </main>
-      <Footer />
+      <FooterStatic language={language} />
     </div>
   );
 }
