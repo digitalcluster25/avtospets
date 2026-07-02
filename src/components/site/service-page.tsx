@@ -766,11 +766,10 @@ export function ServicePage({ page }: ServicePageProps) {
 
             <div className={styles.heroImageCard}>
               <Image
-                src="/figma/services-page/hero-image.png"
+                src="/figma/services-page/hero-image.webp"
                 alt="Сервісне обслуговування"
                 fill
-                unoptimized
-                sizes="650px"
+                sizes="(max-width: 767px) 100vw, (max-width: 1439px) 50vw, 650px"
                 className={styles.heroImage}
                 priority
               />
@@ -834,12 +833,11 @@ export function ServicePage({ page }: ServicePageProps) {
           <div className={styles.medicalInner}>
             <div className={styles.medicalImageCard}>
               <Image
-                src="/figma/services-page/medical-service-image.png"
+                src="/figma/services-page/medical-service-image.webp"
                 alt="Ремонт і обслуговування медичного обладнання"
                 fill
-                unoptimized
-                sizes="650px"
-                loading="eager"
+                loading="lazy"
+                sizes="(max-width: 767px) 100vw, (max-width: 1439px) 50vw, 650px"
                 className={styles.medicalImage}
               />
             </div>

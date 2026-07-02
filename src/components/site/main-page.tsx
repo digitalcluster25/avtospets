@@ -70,7 +70,7 @@ const pageCopy = {
         description:
           "Для надання медичної допомоги, транспортування та моніторингу стану пацієнта на догоспітальному етапі.",
         logos: ["peugeot", "citroen", "ford", "mercedes"],
-        image: "/figma/ambulance-cards/card-b.png",
+        image: "/figma/ambulance-cards/card-b.webp",
         imageAlt: "Тип B",
         button: "Детальна інформація",
       },
@@ -206,7 +206,7 @@ const pageCopy = {
         description:
           "For providing medical care, transportation and patient monitoring at the pre-hospital stage.",
         logos: ["peugeot", "citroen", "ford", "mercedes"],
-        image: "/figma/ambulance-cards/card-b.png",
+        image: "/figma/ambulance-cards/card-b.webp",
         imageAlt: "Type B",
         button: "Detailed information",
       },
@@ -321,28 +321,28 @@ export function MainPage({ page }: MainPageProps) {
   }));
   const logoMap = {
     peugeot: {
-      src: "/figma/ambulance-cards/logo-peugeot.png",
+      src: "/figma/ambulance-cards/logo-peugeot.webp",
       width: 36,
       height: 40,
       wrapClassName: styles.chassisLogoItemPeugeot,
       imageClassName: styles.chassisLogoPeugeot,
     },
     citroen: {
-      src: "/figma/ambulance-cards/logo-citroen.png",
+      src: "/figma/ambulance-cards/logo-citroen.webp",
       width: 50,
       height: 28,
       wrapClassName: styles.chassisLogoItemCitroen,
       imageClassName: styles.chassisLogoCitroen,
     },
     ford: {
-      src: "/figma/ambulance-cards/logo-ford.png",
+      src: "/figma/ambulance-cards/logo-ford.webp",
       width: 71,
       height: 25,
       wrapClassName: styles.chassisLogoItemFord,
       imageClassName: styles.chassisLogoFord,
     },
     mercedes: {
-      src: "/figma/ambulance-cards/logo-mercedes.png",
+      src: "/figma/ambulance-cards/logo-mercedes.webp",
       width: 58,
       height: 36,
       wrapClassName: styles.chassisLogoItemMercedes,
@@ -385,12 +385,12 @@ export function MainPage({ page }: MainPageProps) {
             <div className={styles.heroSectionInner}>
             <div className={styles.heroImageWrap}>
               <Image
-                src="/figma/hero409/hero-image.png"
+                src="/figma/hero409/hero-image.webp"
                 alt={copy.heroAlt}
                 width={4096}
                 height={1696}
                 priority
-                unoptimized
+                sizes="(max-width: 767px) 100vw, (max-width: 1439px) 92vw, 1260px"
                 className={styles.heroImage}
               />
             </div>
@@ -542,7 +542,8 @@ export function MainPage({ page }: MainPageProps) {
                               alt=""
                               width={asset.width}
                               height={asset.height}
-                              unoptimized
+                              loading="lazy"
+                              sizes="72px"
                               className={asset.imageClassName}
                               aria-hidden="true"
                             />
@@ -575,7 +576,8 @@ export function MainPage({ page }: MainPageProps) {
                       alt={vehicle.imageAlt}
                       width={vehicleImageSize.width}
                       height={vehicleImageSize.height}
-                      unoptimized
+                      loading="lazy"
+                      sizes="(max-width: 767px) 82vw, (max-width: 1439px) 44vw, 309px"
                       className={
                         vehicleImageMap[
                           vehicle.variant as keyof typeof vehicleImageMap
@@ -617,11 +619,11 @@ export function MainPage({ page }: MainPageProps) {
               </div>
               <div className={styles.aboutImageCard}>
                 <Image
-                  src="/figma/about-manufacturing/company-image.png"
+                  src="/figma/about-manufacturing/company-image.webp"
                   alt={copy.companyAlt}
                   fill
-                  sizes="650px"
-                  unoptimized
+                  loading="lazy"
+                  sizes="(max-width: 767px) 100vw, (max-width: 1439px) 50vw, 650px"
                   className={styles.aboutImage}
                 />
               </div>
@@ -630,11 +632,11 @@ export function MainPage({ page }: MainPageProps) {
             <div className={styles.aboutManufacturingRow}>
               <div className={styles.aboutImageCard}>
                 <Image
-                  src="/figma/about-manufacturing/manufacturing-image.png"
+                  src="/figma/about-manufacturing/manufacturing-image.webp"
                   alt={copy.productionAlt}
                   fill
-                  sizes="650px"
-                  unoptimized
+                  loading="lazy"
+                  sizes="(max-width: 767px) 100vw, (max-width: 1439px) 50vw, 650px"
                   className={styles.aboutImage}
                 />
               </div>
@@ -707,11 +709,11 @@ export function MainPage({ page }: MainPageProps) {
                 </div>
                 <div className={styles.serviceImageCardExact}>
                   <Image
-                    src="/figma/service-2746/service-base.png"
+                    src="/figma/service-2746/service-base.webp"
                     alt={copy.serviceBaseAlt}
                     fill
-                    sizes="650px"
-                    unoptimized
+                    loading="lazy"
+                    sizes="(max-width: 767px) 100vw, (max-width: 1439px) 50vw, 650px"
                     className={styles.serviceImageExact}
                   />
                 </div>
@@ -720,11 +722,11 @@ export function MainPage({ page }: MainPageProps) {
               <div className={styles.serviceRow}>
                 <div className={styles.serviceImageCardExact}>
                   <Image
-                    src="/figma/service-2746/service-medical.png"
+                    src="/figma/service-2746/service-medical.webp"
                     alt={copy.serviceMedicalAlt}
                     fill
-                    sizes="650px"
-                    unoptimized
+                    loading="lazy"
+                    sizes="(max-width: 767px) 100vw, (max-width: 1439px) 50vw, 650px"
                     className={styles.serviceImageExact}
                   />
                 </div>
@@ -782,8 +784,8 @@ export function MainPage({ page }: MainPageProps) {
                     alt={partner.alt}
                     width={266}
                     height={160}
-                    loading="eager"
-                    unoptimized
+                    loading="lazy"
+                    sizes="(max-width: 767px) 42vw, 266px"
                     className={styles.partnerImage}
                   />
                 </div>

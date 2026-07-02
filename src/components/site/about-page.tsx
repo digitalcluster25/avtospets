@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
@@ -74,11 +72,10 @@ export function AboutPage({ page }: AboutPageProps) {
 
             <div className={styles.heroImageCard}>
               <Image
-                src="/figma/about-manufacturing/company-image.png"
+                src="/figma/about-manufacturing/company-image.webp"
                 alt="Про компанію"
                 fill
-                sizes="650px"
-                unoptimized
+                sizes="(max-width: 767px) 100vw, (max-width: 1439px) 50vw, 650px"
                 className={styles.heroImage}
                 priority
               />
@@ -136,11 +133,11 @@ export function AboutPage({ page }: AboutPageProps) {
 
           <div className={styles.teamImageCard}>
             <Image
-              src="/figma/about-manufacturing/manufacturing-image.png"
+              src="/figma/about-manufacturing/manufacturing-image.webp"
               alt="Фахівці"
               fill
-              sizes="650px"
-              unoptimized
+              loading="lazy"
+              sizes="(max-width: 767px) 100vw, (max-width: 1439px) 50vw, 650px"
               className={styles.teamImage}
             />
           </div>
@@ -162,8 +159,8 @@ export function AboutPage({ page }: AboutPageProps) {
                   src={logo.src}
                   alt={logo.alt}
                   fill
-                  sizes="266px"
-                  unoptimized
+                  loading="lazy"
+                  sizes="(max-width: 767px) 42vw, 266px"
                   className={styles.partnerLogo}
                 />
               </div>

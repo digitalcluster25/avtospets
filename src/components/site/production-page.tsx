@@ -181,11 +181,10 @@ export function ProductionPage({ page }: ProductionPageProps) {
 
             <div className={styles.heroImageCard}>
               <Image
-                src="/figma/production-page/hero-image.png"
+                src="/figma/production-page/hero-image.webp"
                 alt="Виробництво"
                 fill
-                sizes="650px"
-                unoptimized
+                sizes="(max-width: 767px) 100vw, (max-width: 1439px) 50vw, 650px"
                 className={styles.heroImage}
                 priority
               />
@@ -256,7 +255,6 @@ export function ProductionPage({ page }: ProductionPageProps) {
                   alt={`Медичне обладнання ${index + 1}`}
                   fill
                   sizes="266px"
-                  unoptimized
                   className={styles.medicalImage}
                 />
               </div>
@@ -281,7 +279,6 @@ export function ProductionPage({ page }: ProductionPageProps) {
                   alt={`Фото виробництва ${index + 1}`}
                   fill
                   sizes="426px"
-                  unoptimized
                   className={styles.galleryImage}
                 />
               </div>

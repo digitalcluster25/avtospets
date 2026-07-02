@@ -12,7 +12,7 @@ const chassisCards = [
     key: "peugeot",
     itemClassName: styles.brandItemPeugeot,
     imageClassName: styles.brandImagePeugeot,
-    src: "/figma/chassis-3475/logo-peugeot.png",
+    src: "/figma/chassis-3475/logo-peugeot.webp",
     width: 92,
     height: 100,
   },
@@ -20,7 +20,7 @@ const chassisCards = [
     key: "citroen",
     itemClassName: styles.brandItemCitroen,
     imageClassName: styles.brandImageCitroen,
-    src: "/figma/chassis-3475/logo-citroen.png",
+    src: "/figma/chassis-3475/logo-citroen.webp",
     width: 154,
     height: 86,
   },
@@ -28,7 +28,7 @@ const chassisCards = [
     key: "ford",
     itemClassName: styles.brandItemFord,
     imageClassName: styles.brandImageFord,
-    src: "/figma/chassis-3475/logo-ford.png",
+    src: "/figma/chassis-3475/logo-ford.webp",
     width: 181,
     height: 65,
   },
@@ -36,7 +36,7 @@ const chassisCards = [
     key: "mercedes",
     itemClassName: styles.brandItemMercedes,
     imageClassName: styles.brandImageMercedes,
-    src: "/figma/chassis-3475/logo-mercedes.png",
+    src: "/figma/chassis-3475/logo-mercedes.webp",
     width: 180,
     height: 112,
   },
@@ -61,7 +61,8 @@ export function ChassisSection({ body, note, title }: ChassisSectionProps) {
                   alt={item.key}
                   width={item.width}
                   height={item.height}
-                  unoptimized
+                  loading="lazy"
+                  sizes="(max-width: 768px) 40vw, 180px"
                   className={item.imageClassName}
                 />
               </div>
