@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import {
   createContext,
   useContext,
@@ -8,7 +9,12 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { ContactFormModal } from "@/components/site/contact-form-modal";
+
+const ContactFormModal = dynamic(() =>
+  import("@/components/site/contact-form-modal").then(
+    (module) => module.ContactFormModal,
+  ),
+);
 
 type ContactFormContextValue = {
   closeContactForm: () => void;

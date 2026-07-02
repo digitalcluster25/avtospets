@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { SiteButton } from "@/components/site/button";
-import { useContactForm } from "@/components/site/contact-form-provider";
 import {
   useSiteLanguage,
   type SiteLanguage,
@@ -66,7 +65,6 @@ type HeaderProps = {
 };
 
 export function Header({ currentPath, page, transparent = false }: HeaderProps) {
-  const { openContactForm } = useContactForm();
   const { language, setLanguage } = useSiteLanguage();
   const copy = translations[language];
   const [openMenu, setOpenMenu] = useState<"vehicles" | "language" | null>(null);
@@ -275,10 +273,6 @@ export function Header({ currentPath, page, transparent = false }: HeaderProps) 
           </div>
           <SiteButton
             href={page.ctaHref ?? "/contacts"}
-            onClick={(event) => {
-              event.preventDefault();
-              openContactForm();
-            }}
             variant="primary"
             size="l"
             className={styles.cta}
@@ -368,11 +362,7 @@ export function Header({ currentPath, page, transparent = false }: HeaderProps) 
               </div>
               <SiteButton
                 href={page.ctaHref ?? "/contacts"}
-                onClick={(event) => {
-                  event.preventDefault();
-                  closeAllMenus();
-                  openContactForm();
-                }}
+                onClick={closeAllMenus}
                 variant="primary"
                 size="l"
                 className={styles.mobileCta}

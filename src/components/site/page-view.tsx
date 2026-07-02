@@ -1,5 +1,6 @@
 import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
+import { ContactFormProvider } from "@/components/site/contact-form-provider";
 import { OpenContactFormButton } from "@/components/site/open-contact-form-button";
 import { SiteButton } from "@/components/site/button";
 import type {
@@ -241,17 +242,29 @@ export async function PageView({ page }: PageViewProps) {
 
   if (page.uri === "/production") {
     const { ProductionPage } = await import("@/components/site/production-page");
-    return <ProductionPage page={page} />;
+    return (
+      <ContactFormProvider>
+        <ProductionPage page={page} />
+      </ContactFormProvider>
+    );
   }
 
   if (page.uri === "/contacts") {
     const { ContactPage } = await import("@/components/site/contact-page");
-    return <ContactPage page={page} />;
+    return (
+      <ContactFormProvider>
+        <ContactPage page={page} />
+      </ContactFormProvider>
+    );
   }
 
   if (page.uri === "/services") {
     const { ServicePage } = await import("@/components/site/service-page");
-    return <ServicePage page={page} />;
+    return (
+      <ContactFormProvider>
+        <ServicePage page={page} />
+      </ContactFormProvider>
+    );
   }
 
   if (page.uri === "/aboutus") {
@@ -270,54 +283,56 @@ export async function PageView({ page }: PageViewProps) {
   }
 
   return (
-    <div className={styles.shell}>
-      <Header currentPath={page.uri} page={page} />
-      <main>
-        <section className={styles.hero}>
-          <div className="container">
-            <div className={styles.heroPanel}>
-              <div className={styles.heroGrid}>
-                <div className={styles.heroContent}>
-                  <span className="eyebrow">{page.eyebrow}</span>
-                  <h1 className={styles.heroTitle}>{page.title}</h1>
-                  <p className={styles.heroDescription}>{page.description}</p>
-                  <div className={styles.heroActions}>
-                    <OpenContactFormButton
-                      className={styles.primaryAction}
-                      href={page.ctaHref}
-                      variant="primary"
-                      size="l"
-                    >
-                      {page.ctaLabel ?? "Связаться"}
-                    </OpenContactFormButton>
-                    <SiteButton
-                      className={styles.secondaryAction}
-                      href="#content"
-                      variant="secondary"
-                      size="l"
-                    >
-                      Смотреть структуру
-                    </SiteButton>
+    <ContactFormProvider>
+      <div className={styles.shell}>
+        <Header currentPath={page.uri} page={page} />
+        <main>
+          <section className={styles.hero}>
+            <div className="container">
+              <div className={styles.heroPanel}>
+                <div className={styles.heroGrid}>
+                  <div className={styles.heroContent}>
+                    <span className="eyebrow">{page.eyebrow}</span>
+                    <h1 className={styles.heroTitle}>{page.title}</h1>
+                    <p className={styles.heroDescription}>{page.description}</p>
+                    <div className={styles.heroActions}>
+                      <OpenContactFormButton
+                        className={styles.primaryAction}
+                        href={page.ctaHref}
+                        variant="primary"
+                        size="l"
+                      >
+                        {page.ctaLabel ?? "Связаться"}
+                      </OpenContactFormButton>
+                      <SiteButton
+                        className={styles.secondaryAction}
+                        href="#content"
+                        variant="secondary"
+                        size="l"
+                      >
+                        Смотреть структуру
+                      </SiteButton>
+                    </div>
                   </div>
-                </div>
 
-                <div className={styles.heroFacts}>
-                  {page.heroFacts.map((fact) => (
-                    <article key={fact.label} className={styles.factCard}>
-                      <span className={styles.factValue}>{fact.value}</span>
-                      <span className={styles.factLabel}>{fact.label}</span>
-                    </article>
-                  ))}
+                  <div className={styles.heroFacts}>
+                    {page.heroFacts.map((fact) => (
+                      <article key={fact.label} className={styles.factCard}>
+                        <span className={styles.factValue}>{fact.value}</span>
+                        <span className={styles.factLabel}>{fact.label}</span>
+                      </article>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <div id="content">{renderSections(page)}</div>
-        <div className={styles.footerSpace} />
-      </main>
-      <Footer />
-    </div>
+          <div id="content">{renderSections(page)}</div>
+          <div className={styles.footerSpace} />
+        </main>
+        <Footer />
+      </div>
+    </ContactFormProvider>
   );
 }

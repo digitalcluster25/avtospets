@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { Inter, Oswald, Rubik } from "next/font/google";
-import { ContactFormProvider } from "@/components/site/contact-form-provider";
 import { LanguageProvider } from "@/components/site/language-provider";
 import "./globals.css";
 
@@ -49,7 +48,7 @@ export default async function RootLayout({
     >
       <body>
         <LanguageProvider initialLanguage={initialLanguage}>
-          <ContactFormProvider>{children}</ContactFormProvider>
+          {children}
         </LanguageProvider>
       </body>
     </html>
