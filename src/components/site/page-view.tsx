@@ -1,12 +1,7 @@
-import dynamic from "next/dynamic";
 import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
-import { MainPage } from "@/components/site/main-page";
 import { OpenContactFormButton } from "@/components/site/open-contact-form-button";
 import { SiteButton } from "@/components/site/button";
-import { AboutPage } from "@/components/site/about-page";
-import { CertificationsPage } from "@/components/site/certifications-page";
-import { TestimonialsPage } from "@/components/site/testimonials-page";
 import type {
   CardSection,
   ContactSection,
@@ -18,21 +13,6 @@ import type {
   TestimonialsSection,
 } from "@/lib/site/types";
 import styles from "./page-view.module.css";
-
-const ContactPage = dynamic(() =>
-  import("@/components/site/contact-page").then((module) => module.ContactPage),
-);
-const ProductionPage = dynamic(() =>
-  import("@/components/site/production-page").then(
-    (module) => module.ProductionPage,
-  ),
-);
-const ServicePage = dynamic(() =>
-  import("@/components/site/service-page").then((module) => module.ServicePage),
-);
-const TypeCPage = dynamic(() =>
-  import("@/components/site/type-c-page").then((module) => module.TypeCPage),
-);
 
 type PageViewProps = {
   page: SitePage;
@@ -248,36 +228,44 @@ function renderSections(page: SitePage) {
   });
 }
 
-export function PageView({ page }: PageViewProps) {
+export async function PageView({ page }: PageViewProps) {
   if (page.uri === "/") {
+    const { MainPage } = await import("@/components/site/main-page");
     return <MainPage page={page} />;
   }
 
   if (page.uri === "/avtomobili-type-c" || page.uri.startsWith("/avtomobili-type-c/")) {
+    const { TypeCPage } = await import("@/components/site/type-c-page");
     return <TypeCPage page={page} />;
   }
 
   if (page.uri === "/production") {
+    const { ProductionPage } = await import("@/components/site/production-page");
     return <ProductionPage page={page} />;
   }
 
   if (page.uri === "/contacts") {
+    const { ContactPage } = await import("@/components/site/contact-page");
     return <ContactPage page={page} />;
   }
 
   if (page.uri === "/services") {
+    const { ServicePage } = await import("@/components/site/service-page");
     return <ServicePage page={page} />;
   }
 
   if (page.uri === "/aboutus") {
+    const { AboutPage } = await import("@/components/site/about-page");
     return <AboutPage page={page} />;
   }
 
   if (page.uri === "/testimonials") {
+    const { TestimonialsPage } = await import("@/components/site/testimonials-page");
     return <TestimonialsPage page={page} />;
   }
 
   if (page.uri === "/sertifications") {
+    const { CertificationsPage } = await import("@/components/site/certifications-page");
     return <CertificationsPage page={page} />;
   }
 

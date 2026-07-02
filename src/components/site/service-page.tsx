@@ -2,11 +2,10 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import mapboxgl, {
-  type ExpressionSpecification,
-  type GeoJSONSource,
-  type LngLatBoundsLike,
-  type Map as MapboxMap,
+import type {
+  ExpressionSpecification,
+  GeoJSONSource,
+  Map as MapboxMap,
 } from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useContactForm } from "@/components/site/contact-form-provider";
@@ -346,6 +345,7 @@ export function ServicePage({ page }: ServicePageProps) {
   const autocompleteRef = useRef<HTMLDivElement | null>(null);
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MapboxMap | null>(null);
+  const mapboxRef = useRef<(typeof import("mapbox-gl"))["default"] | null>(null);
   const centerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const normalizedQuery = regionQuery.trim().toLocaleLowerCase("uk-UA");
   const cityOptions = useMemo(
@@ -407,92 +407,107 @@ export function ServicePage({ page }: ServicePageProps) {
       return;
     }
 
-    mapboxgl.accessToken = MAPBOX_TOKEN;
+    let isCancelled = false;
+    let map: MapboxMap | null = null;
 
-    const map = new mapboxgl.Map({
-      container: mapContainerRef.current,
-      style: MAPBOX_STYLE,
-      center: MAP_DEFAULT_CENTER,
-      zoom: MAP_DEFAULT_ZOOM,
-      minZoom: MAP_DEFAULT_ZOOM,
-      pitch: 0,
-      bearing: 0,
-      attributionControl: true,
-    });
+    void (async () => {
+      const mapboxglModule = await import("mapbox-gl");
+      const mapboxgl = mapboxglModule.default;
 
-    map.addControl(
-      new mapboxgl.NavigationControl({
-        showCompass: false,
-        visualizePitch: false,
-      }),
-      "top-right",
-    );
-
-    map.on("load", () => {
-      localizeMapLabels(map);
-      ensureServiceCenterLayers(map);
-    });
-    map.on("styledata", () => {
-      localizeMapLabels(map);
-      ensureServiceCenterLayers(map);
-    });
-    map.on("click", MAP_CLUSTER_CIRCLE_ID, (event) => {
-      const feature = map.queryRenderedFeatures(event.point, {
-        layers: [MAP_CLUSTER_CIRCLE_ID],
-      })[0] as unknown as RenderedPointFeature | undefined;
-      const clusterId = feature?.properties?.cluster_id;
-      const source = map.getSource(MAP_SOURCE_ID) as GeoJSONSource | undefined;
-
-      if (typeof clusterId !== "number" || !source) {
+      if (isCancelled || !mapContainerRef.current || mapRef.current) {
         return;
       }
 
-      source.getClusterExpansionZoom(clusterId, (error, zoom) => {
-        if (error || !feature || feature.geometry.type !== "Point") {
+      mapboxRef.current = mapboxgl;
+      mapboxgl.accessToken = MAPBOX_TOKEN;
+
+      map = new mapboxgl.Map({
+        container: mapContainerRef.current,
+        style: MAPBOX_STYLE,
+        center: MAP_DEFAULT_CENTER,
+        zoom: MAP_DEFAULT_ZOOM,
+        minZoom: MAP_DEFAULT_ZOOM,
+        pitch: 0,
+        bearing: 0,
+        attributionControl: true,
+      });
+      const stableMap = map;
+
+      stableMap.addControl(
+        new mapboxgl.NavigationControl({
+          showCompass: false,
+          visualizePitch: false,
+        }),
+        "top-right",
+      );
+
+      stableMap.on("load", () => {
+        localizeMapLabels(stableMap);
+        ensureServiceCenterLayers(stableMap);
+      });
+      stableMap.on("styledata", () => {
+        localizeMapLabels(stableMap);
+        ensureServiceCenterLayers(stableMap);
+      });
+      stableMap.on("click", MAP_CLUSTER_CIRCLE_ID, (event) => {
+        const feature = stableMap.queryRenderedFeatures(event.point, {
+          layers: [MAP_CLUSTER_CIRCLE_ID],
+        })[0] as unknown as RenderedPointFeature | undefined;
+        const clusterId = feature?.properties?.cluster_id;
+        const source = stableMap.getSource(MAP_SOURCE_ID) as GeoJSONSource | undefined;
+
+        if (typeof clusterId !== "number" || !source) {
           return;
         }
 
-        map.easeTo({
-          center: feature.geometry.coordinates as [number, number],
-          zoom: zoom ?? undefined,
-          duration: 800,
+        source.getClusterExpansionZoom(clusterId, (error, zoom) => {
+          if (error || !feature || feature.geometry.type !== "Point") {
+            return;
+          }
+
+          stableMap.easeTo({
+            center: feature.geometry.coordinates as [number, number],
+            zoom: zoom ?? undefined,
+            duration: 800,
+          });
         });
       });
-    });
-    map.on("click", MAP_POINT_SYMBOL_ID, (event) => {
-      const pointFeature = event.features?.[0] as
-        | { properties?: Record<string, unknown> }
-        | undefined;
-      const pointId = pointFeature?.properties?.id;
+      stableMap.on("click", MAP_POINT_SYMBOL_ID, (event) => {
+        const pointFeature = event.features?.[0] as
+          | { properties?: Record<string, unknown> }
+          | undefined;
+        const pointId = pointFeature?.properties?.id;
 
-      if (typeof pointId === "string") {
-        setActiveCenterKey(pointId);
+        if (typeof pointId === "string") {
+          setActiveCenterKey(pointId);
+        }
+      });
+      stableMap.on("mouseenter", MAP_CLUSTER_CIRCLE_ID, () => {
+        stableMap.getCanvas().style.cursor = "pointer";
+      });
+      stableMap.on("mouseleave", MAP_CLUSTER_CIRCLE_ID, () => {
+        stableMap.getCanvas().style.cursor = "";
+      });
+      stableMap.on("mouseenter", MAP_POINT_SYMBOL_ID, () => {
+        stableMap.getCanvas().style.cursor = "pointer";
+      });
+      stableMap.on("mouseleave", MAP_POINT_SYMBOL_ID, () => {
+        stableMap.getCanvas().style.cursor = "";
+      });
+
+      mapRef.current = stableMap;
+
+      if (process.env.NODE_ENV !== "production") {
+        (window as Window & { __serviceMap?: MapboxMap }).__serviceMap = stableMap;
       }
-    });
-    map.on("mouseenter", MAP_CLUSTER_CIRCLE_ID, () => {
-      map.getCanvas().style.cursor = "pointer";
-    });
-    map.on("mouseleave", MAP_CLUSTER_CIRCLE_ID, () => {
-      map.getCanvas().style.cursor = "";
-    });
-    map.on("mouseenter", MAP_POINT_SYMBOL_ID, () => {
-      map.getCanvas().style.cursor = "pointer";
-    });
-    map.on("mouseleave", MAP_POINT_SYMBOL_ID, () => {
-      map.getCanvas().style.cursor = "";
-    });
-
-    mapRef.current = map;
-
-    if (process.env.NODE_ENV !== "production") {
-      (window as Window & { __serviceMap?: MapboxMap }).__serviceMap = map;
-    }
+    })();
 
     return () => {
+      isCancelled = true;
       if (process.env.NODE_ENV !== "production") {
         delete (window as Window & { __serviceMap?: MapboxMap }).__serviceMap;
       }
-      map.remove();
+      map?.remove();
       mapRef.current = null;
     };
   }, []);
@@ -517,8 +532,9 @@ export function ServicePage({ page }: ServicePageProps) {
     const activeCenter = serviceCenters.find(
       (item) => item.id === effectiveActiveCenterKey,
     );
+    const mapboxgl = mapboxRef.current;
 
-    if (!map || !activeCenter || !effectiveActiveCenterKey) {
+    if (!map || !mapboxgl || !activeCenter || !effectiveActiveCenterKey) {
       return;
     }
 
@@ -537,8 +553,9 @@ export function ServicePage({ page }: ServicePageProps) {
 
   useEffect(() => {
     const map = mapRef.current;
+    const mapboxgl = mapboxRef.current;
 
-    if (!map || filteredCenters.length === 0) {
+    if (!map || !mapboxgl || filteredCenters.length === 0) {
       return;
     }
 
@@ -557,13 +574,10 @@ export function ServicePage({ page }: ServicePageProps) {
         accumulator.extend(center.coordinates);
         return accumulator;
       },
-      new mapboxgl.LngLatBounds(
-        filteredCenters[0].coordinates,
-        filteredCenters[0].coordinates,
-      ),
+      new mapboxgl.LngLatBounds(filteredCenters[0].coordinates, filteredCenters[0].coordinates),
     );
 
-    map.fitBounds(bounds as LngLatBoundsLike, {
+    map.fitBounds(bounds, {
       padding: MAP_CITY_BOUNDS_PADDING,
       maxZoom: MAP_CITY_MAX_ZOOM,
       duration: 900,
@@ -594,8 +608,9 @@ export function ServicePage({ page }: ServicePageProps) {
   function handleActiveCenterReset() {
     setActiveCenterKey(null);
     const map = mapRef.current;
+    const mapboxgl = mapboxRef.current;
 
-    if (!map) {
+    if (!map || !mapboxgl) {
       return;
     }
 
@@ -605,13 +620,10 @@ export function ServicePage({ page }: ServicePageProps) {
           accumulator.extend(center.coordinates);
           return accumulator;
         },
-        new mapboxgl.LngLatBounds(
-          filteredCenters[0].coordinates,
-          filteredCenters[0].coordinates,
-        ),
+        new mapboxgl.LngLatBounds(filteredCenters[0].coordinates, filteredCenters[0].coordinates),
       );
 
-      map.fitBounds(bounds as LngLatBoundsLike, {
+      map.fitBounds(bounds, {
         padding: MAP_CITY_BOUNDS_PADDING,
         maxZoom: MAP_CITY_MAX_ZOOM,
         duration: 900,
