@@ -114,6 +114,10 @@
   width: var(--hero-column-width);
 }
 
+.heroImageCardMobile {
+  display: none;
+}
+
 .heroImage {
   border-radius: 16px;
   height: 100%;
@@ -637,7 +641,8 @@
   }
 
   .heroInner {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 24px;
     padding: 40px 0 56px;
     width: 100%;
@@ -645,19 +650,13 @@
 
   .heroCopy,
   .heroTextGroup,
-  .heroBody {
+  .heroBody,
+  .heroImageCardMobile {
     width: 100%;
-  }
-
-  .heroCopy,
-  .heroTextGroup {
-    display: contents;
   }
 
   .heroImageCard {
-    height: 320px;
-    order: 3;
-    width: 100%;
+    display: none;
   }
 
   .breadcrumbs {
@@ -669,12 +668,17 @@
     font-size: 36px;
   }
 
-  .heroTitle {
-    order: 1;
+  .heroTextGroup {
+    gap: 20px;
   }
 
-  .heroBody {
-    order: 3;
+  .heroImageCardMobile {
+    border-radius: 16px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    display: block;
+    height: 320px;
+    overflow: hidden;
+    position: relative;
   }
 
   .heroBody p {
@@ -682,7 +686,6 @@
   }
 
   .heroButton {
-    order: 4;
     width: 100%;
   }
 

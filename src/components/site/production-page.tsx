@@ -158,6 +158,16 @@ export function ProductionPage({ language, page }: ProductionPageProps) {
 
               <div className={styles.heroTextGroup}>
                 <h1 className={styles.heroTitle}>Виробництво</h1>
+                <div className={styles.heroImageCardMobile}>
+                  <Image
+                    src="/figma/production-page/hero-image.webp"
+                    alt="Виробництво"
+                    fill
+                    sizes="100vw"
+                    className={styles.heroImage}
+                    priority
+                  />
+                </div>
                 <div className={styles.heroBody}>
                   <p>
                     ТОВ &quot;Автоспецпром&quot; виробляє автомобілі швидкої допомоги в
