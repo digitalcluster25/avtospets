@@ -262,7 +262,7 @@ export function ProductionPage({ language, page }: ProductionPageProps) {
                   src={src}
                   alt={`Медичне обладнання ${index + 1}`}
                   fill
-                  sizes="266px"
+                  sizes="(max-width: 767px) 42vw, (max-width: 1439px) 25vw, 266px"
                   className={styles.medicalImage}
                 />
               </div>
