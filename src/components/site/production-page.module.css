@@ -664,11 +664,25 @@
   }
 
   .typeCard {
-    min-height: 220px;
+    min-height: 196px;
+    padding: 24px 20px;
+  }
+
+  .typeCardContent {
+    gap: 12px;
+  }
+
+  .typeCardTitle {
+    font-size: 30px;
+  }
+
+  .typeCardBody {
+    font-size: 15px;
+    line-height: 21px;
   }
 
   .typeLetter {
-    font-size: 120px;
+    font-size: 104px;
   }
 
   .constructionGrid {
