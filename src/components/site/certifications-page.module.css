@@ -172,6 +172,10 @@
 }
 
 @media (max-width: 900px) {
+  .breadcrumbs {
+    display: none;
+  }
+
   .heroSection {
     padding: 40px 18px 64px;
   }

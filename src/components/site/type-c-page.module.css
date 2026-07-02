@@ -644,6 +644,10 @@
 }
 
 @media (max-width: 900px) {
+  .breadcrumbs {
+    display: none;
+  }
+
   .heroInner {
     align-items: stretch;
     gap: 20px;

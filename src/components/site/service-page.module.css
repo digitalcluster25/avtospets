@@ -966,6 +966,10 @@
 }
 
 @media (max-width: 900px) {
+  .breadcrumbs {
+    display: none;
+  }
+
   .heroInner {
     flex-direction: column;
     gap: 28px;
@@ -974,10 +978,6 @@
 
   .heroCopy {
     padding-top: 0;
-  }
-
-  .breadcrumbs {
-    margin-bottom: 32px;
   }
 
   .heroContent {

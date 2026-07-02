@@ -142,9 +142,21 @@
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     width: 100%;
   }
+
+  .rightPanel {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+
+  .contactValue {
+    font-size: 28px;
+    line-height: 36px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1180px) {
   .heroShell {
     grid-template-columns: 1fr;
   }
@@ -152,18 +164,42 @@
   .leftPanel,
   .rightPanel {
     min-height: auto;
+  }
+
+  .leftPanel {
+    padding-bottom: 56px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 40px;
+  }
+
+  .rightPanel {
+    padding-bottom: 56px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 40px;
+  }
+}
+
+@media (max-width: 900px) {
+  .breadcrumbs {
+    display: none;
+  }
+
+  .leftPanel,
+  .rightPanel {
     padding-left: 16px;
     padding-right: 16px;
   }
 
   .leftPanel {
     padding-bottom: 64px;
-    padding-top: 48px;
+    padding-top: 32px;
   }
 
   .rightPanel {
     padding-bottom: 64px;
-    padding-top: 64px;
+    padding-top: 32px;
   }
 
   .title {

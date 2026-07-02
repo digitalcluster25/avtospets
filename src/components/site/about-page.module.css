@@ -354,6 +354,10 @@
     flex-direction: column;
   }
 
+  .breadcrumbs {
+    display: none;
+  }
+
   .heroInner {
     gap: 32px;
     height: auto;

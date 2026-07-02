@@ -661,8 +661,7 @@
   }
 
   .breadcrumbs {
-    order: 1;
-    position: static;
+    display: none;
   }
 
   .heroTitle,
@@ -671,11 +670,11 @@
   }
 
   .heroTitle {
-    order: 2;
+    order: 1;
   }
 
   .heroBody {
-    order: 4;
+    order: 3;
   }
 
   .heroBody p {
@@ -683,7 +682,7 @@
   }
 
   .heroButton {
-    order: 5;
+    order: 4;
     width: 100%;
   }
 

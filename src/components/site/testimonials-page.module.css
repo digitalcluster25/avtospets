@@ -194,6 +194,10 @@
 }
 
 @media (max-width: 900px) {
+  .breadcrumbs {
+    display: none;
+  }
+
   .inner {
     padding: 48px 16px 64px;
   }
