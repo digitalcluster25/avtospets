@@ -18,12 +18,20 @@ type ProductionPageProps = {
 
 const typeCards = [
   {
-    kind: "copy",
+    letter: "A",
     title: "Типи А1 та А2",
     body: 'Автомобілі типів А1 та А2 призначені для транспортування пацієнтів, які, ймовірно, не є "екстреними", до медичних закладів у супроводі медичного персоналу. Різниця між двома типами — наявність додаткового крісла для медичного працівника.',
   },
-  { kind: "letter", letter: "B" },
-  { kind: "letter", letter: "С" },
+  {
+    letter: "B",
+    title: "Тип B",
+    body: "Демо текст: автомобіль екстреної допомоги для базової підтримки пацієнта під час транспортування та роботи медичної бригади.",
+  },
+  {
+    letter: "C",
+    title: "Тип C",
+    body: "Демо текст: реанімаційний автомобіль для інтенсивної терапії, розширеного оснащення та роботи спеціалізованої бригади.",
+  },
 ] as const;
 
 const constructionCards = [
@@ -199,20 +207,18 @@ export function ProductionPage({ language, page }: ProductionPageProps) {
         <section className={styles.typesSection}>
           <h2 className={styles.sectionTitle}>Типи автомобілів швидкої допомоги</h2>
           <div className={styles.typesGrid}>
-            {typeCards.map((card) =>
-              card.kind === "copy" ? (
-                <article key={card.title} className={styles.typeCard}>
-                  <div className={styles.typeCardGlow} aria-hidden="true" />
+            {typeCards.map((card) => (
+              <article key={card.letter} className={styles.typeCard} tabIndex={0}>
+                <div className={styles.typeCardGlow} aria-hidden="true" />
+                <div className={styles.typeCardLetterLayer} aria-hidden="true">
+                  <span className={styles.typeLetter}>{card.letter}</span>
+                </div>
+                <div className={styles.typeCardContent}>
                   <h3 className={styles.typeCardTitle}>{card.title}</h3>
                   <p className={styles.typeCardBody}>{card.body}</p>
-                </article>
-              ) : (
-                <article key={card.letter} className={styles.typeLetterCard}>
-                  <div className={styles.typeCardGlow} aria-hidden="true" />
-                  <span className={styles.typeLetter}>{card.letter}</span>
-                </article>
-              ),
-            )}
+                </div>
+              </article>
+            ))}
           </div>
         </section>
 

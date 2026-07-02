@@ -24,7 +24,8 @@
   gap: var(--hero-gap);
   height: 702px;
   margin: 0 auto;
-  width: var(--hero-content-width);
+  max-width: var(--hero-content-width);
+  width: 100%;
   position: relative;
   z-index: 1;
 }
@@ -136,7 +137,8 @@
 .medicalSection,
 .gallerySection {
   margin: 0 auto;
-  width: 1440px;
+  max-width: 1440px;
+  width: 100%;
 }
 
 .typesSection {
@@ -161,8 +163,7 @@
   gap: 24px;
 }
 
-.typeCard,
-.typeLetterCard {
+.typeCard {
   background:
     linear-gradient(90deg, #0e131c 0%, #0e131c 100%),
     linear-gradient(90deg, #dc1f2e 0%, #ff4757 100%),
@@ -176,20 +177,10 @@
   border: 1px solid #e5e7eb;
   display: flex;
   flex: 1 0 0;
-  flex-direction: column;
-  gap: 16px;
   justify-content: center;
   min-height: 300px;
   padding: 32px;
-}
-
-.typeLetterCard {
-  align-items: center;
-  display: flex;
-  flex: 1 0 0;
-  height: 300px;
-  justify-content: center;
-  padding: 32px;
+  isolation: isolate;
 }
 
 .typeCardGlow {
@@ -204,11 +195,23 @@
   width: 800px;
 }
 
+.typeCardLetterLayer,
+.typeCardContent,
 .typeCardTitle,
 .typeCardBody,
 .typeLetter {
   position: relative;
   z-index: 1;
+}
+
+.typeCardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.typeCardLetterLayer {
+  display: none;
 }
 
 .typeCardTitle {
@@ -238,6 +241,50 @@
   line-height: normal;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .typeCard {
+    align-items: center;
+  }
+
+  .typeCard:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.9);
+    outline-offset: -2px;
+  }
+
+  .typeCardLetterLayer {
+    align-items: center;
+    display: flex;
+    inset: 0;
+    justify-content: center;
+    position: absolute;
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+
+  .typeCardContent {
+    inset: 0;
+    justify-content: center;
+    opacity: 0;
+    padding: 32px;
+    pointer-events: none;
+    position: absolute;
+    transform: translateY(12px);
+    transition: opacity 180ms ease, transform 180ms ease;
+    z-index: 2;
+  }
+
+  .typeCard:hover .typeCardLetterLayer,
+  .typeCard:focus-visible .typeCardLetterLayer {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  .typeCard:hover .typeCardContent,
+  .typeCard:focus-visible .typeCardContent {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .constructionSection {
   --construction-columns: 3;
   --construction-column-width: 432px;
@@ -259,9 +306,10 @@
   flex-direction: column;
   gap: 44px;
   margin: 0 auto;
+  max-width: var(--construction-content-width);
   min-height: 1024px;
   padding: 94px var(--construction-side-padding);
-  width: var(--construction-content-width);
+  width: 100%;
 }
 
 .constructionGrid {
@@ -272,7 +320,8 @@
     var(--construction-column-width)
   );
   grid-template-rows: 367px 343px;
-  width: var(--construction-grid-width);
+  max-width: var(--construction-grid-width);
+  width: 100%;
 }
 
 .constructionCard {
@@ -345,7 +394,8 @@
   flex-direction: column;
   gap: 20px;
   text-align: center;
-  width: 1112px;
+  max-width: 1112px;
+  width: 100%;
 }
 
 .medicalBody {
@@ -355,7 +405,8 @@
   font-weight: 400;
   line-height: 28px;
   margin: 0;
-  width: 962px;
+  max-width: 962px;
+  width: 100%;
 }
 
 .medicalGrid {
@@ -364,7 +415,8 @@
   grid-template-columns: repeat(4, 266px);
   grid-template-rows: repeat(3, minmax(0, 1fr));
   height: 508px;
-  width: 1112px;
+  max-width: 1112px;
+  width: 100%;
 }
 
 .medicalCard {
@@ -396,7 +448,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  width: 1312px;
+  max-width: 1312px;
+  width: 100%;
 }
 
 .galleryCard {
@@ -415,7 +468,8 @@
 }
 
 .galleryButton {
-  width: 1312px;
+  max-width: 1312px;
+  width: 100%;
 }
 
 @media (max-width: 1439px) {
@@ -463,16 +517,113 @@
   }
 }
 
+@media (max-width: 1180px) {
+  .hero {
+    padding: 0 20px;
+  }
+
+  .heroInner {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 28px;
+    height: auto;
+    max-width: 920px;
+    padding: 36px 0 56px;
+  }
+
+  .heroCopy,
+  .heroTextGroup,
+  .heroBody,
+  .heroImageCard {
+    width: 100%;
+  }
+
+  .heroCopy {
+    gap: 24px;
+    height: auto;
+    justify-content: flex-start;
+  }
+
+  .heroTextGroup {
+    gap: 24px;
+    max-width: 760px;
+  }
+
+  .heroTitle {
+    font-size: 56px;
+  }
+
+  .heroBody {
+    font-size: 17px;
+    line-height: 28px;
+    max-width: 760px;
+  }
+
+  .heroBody p + p {
+    margin-top: 16px;
+  }
+
+  .heroImageCard {
+    align-self: center;
+    height: min(48vw, 420px);
+    max-width: 760px;
+  }
+
+  .breadcrumbs {
+    position: static;
+  }
+
+  .typesSection,
+  .medicalSection,
+  .gallerySection,
+  .constructionInner {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .constructionSection {
+    --construction-columns: 2;
+    --construction-column-width: minmax(0, 1fr);
+    --construction-grid-width: 100%;
+    --construction-content-width: 100%;
+    --construction-side-padding: 24px;
+  }
+
+  .constructionGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+  }
+
+  .constructionCard,
+  .constructionCardTall,
+  .constructionCardShort {
+    height: auto;
+    width: 100%;
+  }
+
+  .medicalGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+    height: auto;
+  }
+
+  .medicalCard {
+    height: 180px;
+  }
+
+  .galleryCard {
+    width: calc((100% - 16px) / 2);
+  }
+}
+
 @media (max-width: 900px) {
   .hero {
     padding: 0 16px;
   }
 
   .heroInner {
-    flex-direction: column;
-    gap: 32px;
-    height: auto;
-    padding: 48px 0 64px;
+    gap: 24px;
+    padding: 40px 0 56px;
     width: 100%;
   }
 
@@ -512,8 +663,7 @@
     flex-direction: column;
   }
 
-  .typeCard,
-  .typeLetterCard {
+  .typeCard {
     min-height: 220px;
   }
 
@@ -523,15 +673,6 @@
 
   .constructionGrid {
     grid-template-columns: 1fr;
-    grid-template-rows: none;
-    width: 100%;
-  }
-
-  .constructionCard,
-  .constructionCardTall,
-  .constructionCardShort {
-    height: auto;
-    width: 100%;
   }
 
   .medicalHeader,
