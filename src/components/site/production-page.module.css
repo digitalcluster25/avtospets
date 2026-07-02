@@ -747,8 +747,8 @@
   }
 
   .galleryCard {
-    height: 220px;
-    width: calc((100% - 16px) / 2);
+    height: 260px;
+    width: 100%;
   }
 
   .galleryButton {
