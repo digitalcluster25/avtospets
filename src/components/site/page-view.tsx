@@ -1,17 +1,12 @@
-"use client";
-
+import dynamic from "next/dynamic";
 import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
 import { MainPage } from "@/components/site/main-page";
+import { OpenContactFormButton } from "@/components/site/open-contact-form-button";
 import { SiteButton } from "@/components/site/button";
-import { useContactForm } from "@/components/site/contact-form-provider";
-import { ContactPage } from "@/components/site/contact-page";
 import { AboutPage } from "@/components/site/about-page";
 import { CertificationsPage } from "@/components/site/certifications-page";
-import { ProductionPage } from "@/components/site/production-page";
-import { ServicePage } from "@/components/site/service-page";
 import { TestimonialsPage } from "@/components/site/testimonials-page";
-import { TypeCPage } from "@/components/site/type-c-page";
 import type {
   CardSection,
   ContactSection,
@@ -23,6 +18,21 @@ import type {
   TestimonialsSection,
 } from "@/lib/site/types";
 import styles from "./page-view.module.css";
+
+const ContactPage = dynamic(() =>
+  import("@/components/site/contact-page").then((module) => module.ContactPage),
+);
+const ProductionPage = dynamic(() =>
+  import("@/components/site/production-page").then(
+    (module) => module.ProductionPage,
+  ),
+);
+const ServicePage = dynamic(() =>
+  import("@/components/site/service-page").then((module) => module.ServicePage),
+);
+const TypeCPage = dynamic(() =>
+  import("@/components/site/type-c-page").then((module) => module.TypeCPage),
+);
 
 type PageViewProps = {
   page: SitePage;
@@ -239,8 +249,6 @@ function renderSections(page: SitePage) {
 }
 
 export function PageView({ page }: PageViewProps) {
-  const { openContactForm } = useContactForm();
-
   if (page.uri === "/") {
     return <MainPage page={page} />;
   }
@@ -286,18 +294,14 @@ export function PageView({ page }: PageViewProps) {
                   <h1 className={styles.heroTitle}>{page.title}</h1>
                   <p className={styles.heroDescription}>{page.description}</p>
                   <div className={styles.heroActions}>
-                    <SiteButton
+                    <OpenContactFormButton
                       className={styles.primaryAction}
-                      href={page.ctaHref ?? "/contacts"}
-                      onClick={(event) => {
-                        event.preventDefault();
-                        openContactForm();
-                      }}
+                      href={page.ctaHref}
                       variant="primary"
                       size="l"
                     >
                       {page.ctaLabel ?? "Связаться"}
-                    </SiteButton>
+                    </OpenContactFormButton>
                     <SiteButton
                       className={styles.secondaryAction}
                       href="#content"

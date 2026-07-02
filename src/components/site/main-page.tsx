@@ -1,16 +1,13 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
+import { cookies } from "next/headers";
 import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
 import { ChassisSection } from "@/components/site/chassis-section";
-import {
-  useSiteLanguage,
-  type SiteLanguage,
-} from "@/components/site/language-provider";
 import type { SitePage } from "@/lib/site/types";
 import styles from "./main-page.module.css";
+
+type SiteLanguage = "ua" | "en";
 
 const pageCopy = {
   ua: {
@@ -312,9 +309,10 @@ function FaqChevron() {
   );
 }
 
-export function MainPage({ page }: MainPageProps) {
-  const { language } = useSiteLanguage();
-  const copy = pageCopy[language as keyof typeof pageCopy];
+export async function MainPage({ page }: MainPageProps) {
+  const cookieStore = await cookies();
+  const language = cookieStore.get("avtospets-language")?.value === "en" ? "en" : "ua";
+  const copy = pageCopy[language];
   const partners = Array.from({ length: 23 }, (_, index) => ({
     src: `/figma/partners-3476/partner-${String(index + 1).padStart(2, "0")}.png`,
     alt: `${copy.partnerAltPrefix} ${index + 1}`,
@@ -368,13 +366,6 @@ export function MainPage({ page }: MainPageProps) {
     social: { width: 309, height: 326 },
   } as const;
 
-  function handleHeroArrowClick() {
-    document.getElementById("key-metrics")?.scrollIntoView({
-      block: "start",
-      behavior: "smooth",
-    });
-  }
-
   return (
     <div className={styles.page}>
       <Header currentPath={page.uri} page={page} />
@@ -398,11 +389,10 @@ export function MainPage({ page }: MainPageProps) {
             <div className={styles.heroText}>
               <h1 className={styles.heroTitle}>{copy.heroTitle}</h1>
               <p className={styles.heroDescription}>{copy.heroDescription}</p>
-              <button
-                type="button"
+              <Link
+                href="#key-metrics"
                 className={styles.heroArrow}
                 aria-label={copy.heroArrowLabel}
-                onClick={handleHeroArrowClick}
               >
                 <Image
                   src="/figma/hero409/arrow.svg"
@@ -413,7 +403,7 @@ export function MainPage({ page }: MainPageProps) {
                   className={styles.heroArrowIcon}
                   aria-hidden="true"
                 />
-              </button>
+              </Link>
             </div>
           </div>
           </div>
