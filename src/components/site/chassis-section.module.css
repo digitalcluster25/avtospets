@@ -151,6 +151,20 @@
   }
 
   .grid {
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: stretch;
+    width: 100%;
+  }
+
+  .card {
+    height: 140px;
+    padding: 20px;
+    width: 100%;
+  }
+
+  .frame {
+    height: 84px;
+    width: min(100%, 160px);
   }
 }
