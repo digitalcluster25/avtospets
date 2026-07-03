@@ -634,53 +634,26 @@
 .vehicleImageWrapB,
 .vehicleImageWrapC,
 .vehicleImageWrapSocial {
+  align-items: flex-end;
   flex: 0 0 auto;
+  justify-content: flex-end;
   height: 326px;
+  margin-left: auto;
+  overflow: hidden;
   position: relative;
   width: 309px;
-}
-
-.vehicleImageWrapA,
-.vehicleImageWrapC {
-  overflow: visible;
-}
-
-.vehicleImageWrapB,
-.vehicleImageWrapSocial {
-  overflow: hidden;
-}
-
-.vehicleImageWrapSocial {
-  overflow: visible;
 }
 
 .vehicleImageA,
 .vehicleImageB,
 .vehicleImageC,
 .vehicleImageSocial {
-  max-width: none;
+  height: 100%;
   object-fit: contain;
+  object-position: right bottom;
   position: absolute;
-}
-
-.vehicleImageA,
-.vehicleImageC {
-  height: 100%;
   inset: 0;
   width: 100%;
-}
-
-.vehicleImageSocial {
-  height: 100%;
-  inset: 0;
-  width: 100%;
-}
-
-.vehicleImageB {
-  height: 99.39%;
-  left: -10.92%;
-  top: 9.21%;
-  width: 111.03%;
 }
 
 .vehicleButton {
@@ -1623,11 +1596,16 @@
   }
 
   .heroSection {
-    padding: 56px 0 64px;
+    align-items: center;
+    display: flex;
+    min-height: calc(100svh - 76px);
+    padding: 32px 0;
   }
 
   .heroSectionInner {
     gap: 20px;
+    justify-content: center;
+    min-height: 100%;
     padding: 0 18px;
   }
 
@@ -1769,11 +1747,12 @@
   .vehicleImageWrapB,
   .vehicleImageWrapC,
   .vehicleImageWrapSocial {
-    align-self: center;
+    align-self: flex-end;
     display: flex;
-    height: auto;
-    justify-content: center;
-    max-width: 300px;
+    height: 326px;
+    justify-content: flex-end;
+    margin-left: auto;
+    max-width: 309px;
     overflow: hidden;
     position: relative;
     width: 100%;
@@ -1781,35 +1760,31 @@
 
   .vehicleImageWrapA {
     aspect-ratio: 309 / 326;
-    max-width: 309px;
   }
 
   .vehicleImageWrapB {
-    aspect-ratio: 1576 / 1484;
-    max-width: 300px;
+    aspect-ratio: 309 / 326;
   }
 
   .vehicleImageWrapC {
     aspect-ratio: 309 / 326;
-    max-width: 309px;
   }
 
   .vehicleImageWrapSocial {
     aspect-ratio: 309 / 326;
-    max-width: 309px;
   }
 
   .vehicleImageA,
   .vehicleImageB,
   .vehicleImageC,
   .vehicleImageSocial {
-    height: auto;
-    inset: auto;
-    left: auto;
-    max-height: 100%;
-    max-width: 100%;
-    position: relative;
-    top: auto;
+    height: 100%;
+    inset: 0;
+    left: 0;
+    max-height: none;
+    max-width: none;
+    position: absolute;
+    top: 0;
     width: 100%;
   }
 

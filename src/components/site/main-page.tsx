@@ -58,7 +58,7 @@ const pageCopy = {
         description:
           "Для транспортування пацієнтів до медичних закладів у супроводі медичного персоналу.",
         logos: ["peugeot", "citroen", "ford"],
-        image: "/figma/ambulance-cards/card-a-cropped-figma.png",
+        image: "/figma/ambulance-cards/card-a-new.png",
         imageAlt: "Типи A1 та A2",
         button: "Детальна інформація",
       },
@@ -69,7 +69,7 @@ const pageCopy = {
         description:
           "Для надання медичної допомоги, транспортування та моніторингу стану пацієнта на догоспітальному етапі.",
         logos: ["peugeot", "citroen", "ford", "mercedes"],
-        image: "/figma/ambulance-cards/card-b.webp",
+        image: "/figma/ambulance-cards/card-b-new.png",
         imageAlt: "Тип B",
         button: "Детальна інформація",
       },
@@ -80,7 +80,7 @@ const pageCopy = {
         description:
           "Реанімобіль для екстреної медичної допомоги, транспортування та моніторингу пацієнтів у тяжкому або критичному стані.",
         logos: ["peugeot", "citroen", "ford", "mercedes"],
-        image: "/figma/ambulance-cards/card-c-cropped-figma.png",
+        image: "/figma/ambulance-cards/card-c-new.png",
         imageAlt: "Тип С",
         button: "Детальна інформація",
       },
@@ -91,7 +91,7 @@ const pageCopy = {
         description:
           "Cпеціалізований транспорт для перевезення людей з обмеженими фізичними можливостями, мобільних амбулаторій тощо.",
         logos: ["peugeot", "citroen"],
-        image: "/figma/ambulance-cards/card-social-cropped-figma.png",
+        image: "/figma/ambulance-cards/card-social-new.png",
         imageAlt: "Соціальний транспорт",
         button: "Детальна інформація",
         social: true,
@@ -194,7 +194,7 @@ const pageCopy = {
         description:
           "For transporting patients to medical facilities accompanied by medical staff.",
         logos: ["peugeot", "citroen", "ford"],
-        image: "/figma/ambulance-cards/card-a.png",
+        image: "/figma/ambulance-cards/card-a-new.png",
         imageAlt: "Types A1 and A2",
         button: "Detailed information",
       },
@@ -205,7 +205,7 @@ const pageCopy = {
         description:
           "For providing medical care, transportation and patient monitoring at the pre-hospital stage.",
         logos: ["peugeot", "citroen", "ford", "mercedes"],
-        image: "/figma/ambulance-cards/card-b.webp",
+        image: "/figma/ambulance-cards/card-b-new.png",
         imageAlt: "Type B",
         button: "Detailed information",
       },
@@ -216,7 +216,7 @@ const pageCopy = {
         description:
           "Resuscitation vehicle for emergency medical care, transportation and monitoring of patients in severe or critical condition.",
         logos: ["peugeot", "citroen", "ford", "mercedes"],
-        image: "/figma/ambulance-cards/card-c.png",
+        image: "/figma/ambulance-cards/card-c-new.png",
         imageAlt: "Type C",
         button: "Detailed information",
       },
@@ -227,7 +227,7 @@ const pageCopy = {
         description:
           "Specialized transport for people with limited mobility, mobile clinics and related tasks.",
         logos: ["peugeot", "citroen"],
-        image: "/figma/ambulance-cards/card-social.png",
+        image: "/figma/ambulance-cards/card-social-new.png",
         imageAlt: "Social transport",
         button: "Detailed information",
         social: true,
@@ -364,7 +364,7 @@ export async function MainPage({ page }: MainPageProps) {
   } as const;
   const vehicleImageSizeMap = {
     a: { width: 309, height: 326 },
-    b: { width: 1576, height: 1484 },
+    b: { width: 309, height: 326 },
     c: { width: 309, height: 326 },
     social: { width: 309, height: 326 },
   } as const;
