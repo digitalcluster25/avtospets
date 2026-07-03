@@ -275,46 +275,19 @@ export function ContactFormModal({
                     className={styles.socialIconLink}
                     title="Instagram"
                   >
-                    <span className={styles.socialIcon}>
-                      <span className={styles.instagramInset}>
-                        <Image
-                          src="/figma/contact-modal/instagram.svg"
-                          alt=""
-                          fill
-                          unoptimized
-                        />
-                      </span>
-                    </span>
+                    <span className={`${styles.socialIcon} ${styles.socialIconInstagram}`} />
                   </span>
                   <span
                     className={styles.socialIconLink}
                     title="Facebook"
                   >
-                    <span className={styles.socialIcon}>
-                      <span className={styles.facebookInset}>
-                        <Image
-                          src="/figma/contact-modal/facebook.svg"
-                          alt=""
-                          fill
-                          unoptimized
-                        />
-                      </span>
-                    </span>
+                    <span className={`${styles.socialIcon} ${styles.socialIconFacebook}`} />
                   </span>
                   <span
                     className={styles.socialIconLink}
                     title="LinkedIn"
                   >
-                    <span className={styles.socialIcon}>
-                      <span className={styles.linkedinInset}>
-                        <Image
-                          src="/figma/contact-modal/linkedin.svg"
-                          alt=""
-                          fill
-                          unoptimized
-                        />
-                      </span>
-                    </span>
+                    <span className={`${styles.socialIcon} ${styles.socialIconLinkedin}`} />
                   </span>
                 </div>
               </div>

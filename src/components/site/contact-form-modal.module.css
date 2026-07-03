@@ -383,39 +383,64 @@
 
 .socialIconLink {
   align-items: center;
+  border-radius: 999px;
   display: flex;
+  height: 48px;
   justify-content: center;
-  padding: 8px;
+  position: relative;
   text-decoration: none;
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease;
+  width: 48px;
 }
 
-.socialIconLink:hover {
-  opacity: 0.82;
+.socialIconLink::before {
+  background: rgba(15, 15, 15, 0.1);
+  border-radius: 999px;
+  content: "";
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transition: opacity 500ms ease;
+}
+
+.socialIconLink:hover::before,
+.socialIconLink:focus-visible::before {
+  opacity: 1;
 }
 
 .socialIcon {
+  background-color: #4b5563;
   display: block;
-  height: 32px;
+  flex: 0 0 auto;
   position: relative;
-  width: 32px;
+  transition: background-color 500ms ease;
+  z-index: 1;
 }
 
-.instagramInset {
-  inset: 12.25% 12.74% 12.75% 12.26%;
-  position: absolute;
+.socialIconLink:hover .socialIcon,
+.socialIconLink:focus-visible .socialIcon {
+  background-color: #fd3626;
 }
 
-.facebookInset {
-  inset: 8.33% 26.2% 8.33% 29.17%;
-  position: absolute;
+.socialIconInstagram {
+  height: 24px;
+  mask: url("/figma/contact-modal/instagram.svg") center / contain no-repeat;
+  -webkit-mask: url("/figma/contact-modal/instagram.svg") center / contain no-repeat;
+  width: 24px;
 }
 
-.linkedinInset {
-  inset: 8.33%;
-  position: absolute;
+.socialIconFacebook {
+  height: 24px;
+  mask: url("/figma/contact-modal/facebook.svg") center / contain no-repeat;
+  -webkit-mask: url("/figma/contact-modal/facebook.svg") center / contain no-repeat;
+  width: 14px;
+}
+
+.socialIconLinkedin {
+  height: 24px;
+  mask: url("/figma/contact-modal/linkedin.svg") center / contain no-repeat;
+  -webkit-mask: url("/figma/contact-modal/linkedin.svg") center / contain no-repeat;
+  width: 24px;
 }
 
 .closeButton {
@@ -465,6 +490,16 @@
   .dialog,
   .successDialog {
     width: 100%;
+  }
+
+  .closeButton {
+    border-radius: 6px;
+    padding: 5.5px;
+  }
+
+  .closeIcon {
+    height: 17px;
+    width: 17px;
   }
 
   .contactPromptRow {
