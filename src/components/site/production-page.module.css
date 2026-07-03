@@ -433,7 +433,7 @@
 .medicalImage {
   border-radius: 16px;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   width: 100%;
 }
 
@@ -623,11 +623,6 @@
   .constructionBody {
     font-size: 15px;
     line-height: 22px;
-  }
-
-  .medicalGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: none;
   }
 
   .galleryCard {
