@@ -71,6 +71,7 @@ export function ContactPage({ language, page }: ContactPageProps) {
                   href="/contacts"
                   variant="primary"
                   size="l"
+                  className={styles.heroButton}
                   onClick={(event) => {
                     event.preventDefault();
                     openContactForm();
