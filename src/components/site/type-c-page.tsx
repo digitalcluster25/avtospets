@@ -333,7 +333,7 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
 
             <div className={styles.heroImageWrap}>
               <Image
-                src="/figma/type-c/hero-vehicle-figma.png"
+                src="/figma/type-c/hero-vehicle-transparent.png"
                 alt="Автомобіль швидкої медичної допомоги типу C"
                 width={734}
                 height={540}

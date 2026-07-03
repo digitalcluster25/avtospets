@@ -676,6 +676,32 @@
     padding: 104px 18px 40px;
   }
 
+  .hero::before {
+    background:
+      radial-gradient(
+        95% 75% at 72% 18%,
+        rgba(220, 31, 46, 0.14) 0%,
+        rgba(220, 31, 46, 0) 58%
+      ),
+      rgba(255, 255, 255, 0.05);
+  }
+
+  .hero::after {
+    background:
+      linear-gradient(
+        145.27deg,
+        rgba(0, 0, 0, 0) 24%,
+        rgba(0, 0, 0, 0.34) 100%
+      ),
+      linear-gradient(180deg, rgba(14, 19, 28, 0) 0%, rgba(14, 19, 28, 0.12) 100%);
+  }
+
+  .heroGlow {
+    height: 920px;
+    top: 34%;
+    width: 920px;
+  }
+
   .heroBadge {
     font-size: 42px;
     height: 64px;
@@ -693,6 +719,7 @@
   }
 
   .heroImageWrap {
+    align-self: center;
     max-width: 100%;
   }
 
