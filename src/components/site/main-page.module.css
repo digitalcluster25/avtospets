@@ -154,6 +154,10 @@
   padding: 0;
 }
 
+.aboutSectionLight {
+  padding: 0;
+}
+
 .heroArrow:hover,
 .heroArrow:focus-visible {
   outline: none;
@@ -1670,6 +1674,10 @@
   .aboutManufacturingSection {
     padding: 0;
     width: 100%;
+  }
+
+  .aboutSectionLight {
+    padding: 0;
   }
 
   .aboutManufacturingRow {
