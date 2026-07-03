@@ -1675,7 +1675,7 @@
   .aboutManufacturingRow {
     align-items: stretch;
     flex-direction: column;
-    padding: 48px 18px;
+    padding: 64px 18px;
   }
 
   .aboutManufacturingTitle,
