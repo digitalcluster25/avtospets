@@ -348,10 +348,21 @@
   }
 
   .teamCopy,
-  .teamImageCard {
+  .teamImageCard,
+  .heroCopy,
+  .heroImageCard {
     flex: 1 1 0;
     min-width: 0;
     width: auto;
+  }
+
+  .heroBody {
+    width: 100%;
+  }
+
+  .dealerTitleBlock {
+    max-width: 800px;
+    width: 100%;
   }
 }
 
@@ -406,7 +417,9 @@
   }
 
   .teamCopy,
-  .teamImageCard {
+  .teamImageCard,
+  .heroCopy,
+  .heroImageCard {
     flex: 0 0 auto;
   }
 
