@@ -1254,14 +1254,8 @@
 .faqCardDetails {
   background: #f3f4f6;
   border-radius: 12px;
-  max-height: 70px;
   overflow: hidden;
-  transition: max-height 0.22s ease;
   width: 100%;
-}
-
-.faqCardDetails[open] {
-  max-height: 154px;
 }
 
 .faqButtonRow {
@@ -1321,24 +1315,19 @@
 }
 
 .faqAnswerWrap {
-  max-height: 0;
   opacity: 0;
   padding: 0 24px 24px;
-  transition:
-    max-height 0.22s ease,
-    opacity 0.18s ease,
-    padding-top 0.22s ease;
+  transition: opacity 0.18s ease, padding-top 0.22s ease;
   width: 100%;
 }
 
 .faqCardDetails[open] .faqAnswerWrap {
-  max-height: 84px;
   opacity: 1;
   padding-top: 8px;
 }
 
 .faqAnswerInner {
-  overflow: hidden;
+  overflow: visible;
 }
 
 .faqAnswer {
@@ -1986,14 +1975,6 @@
     padding-left: 18px;
     padding-right: 18px;
     padding-bottom: 18px;
-  }
-
-  .faqCardDetails {
-    max-height: 98px;
-  }
-
-  .faqCardDetails[open] {
-    max-height: 280px;
   }
 
   .faqQuestionText {

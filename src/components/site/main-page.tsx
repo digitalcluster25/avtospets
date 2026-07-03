@@ -140,7 +140,6 @@ const pageCopy = {
         question: "Які типи автомобілів швидкої допомоги ви виробляєте?",
         answer:
           "Ми виробляємо автомобілі швидкої допомоги типів А1, А2, В та С, а також спеціалізований медичний транспорт. Кожен тип відповідає конкретним вимогам та призначений для різних медичних завдань.",
-        open: true,
       },
       { question: "Чи надаєте ви гарантію на автомобілі?" },
       { question: "Як довго займає виробництво одного автомобіля?" },
@@ -276,7 +275,6 @@ const pageCopy = {
         question: "What types of ambulances do you manufacture?",
         answer:
           "We manufacture ambulances of types A1, A2, B and C, as well as specialized medical transport. Each type meets specific requirements and is designed for different medical tasks.",
-        open: true,
       },
       { question: "Do you provide a warranty for the vehicles?" },
       { question: "How long does it take to manufacture one vehicle?" },
@@ -803,7 +801,6 @@ export async function MainPage({ page }: MainPageProps) {
                 <details
                   key={item.question}
                   name="faq-main"
-                  open={item.open}
                   className={styles.faqCardDetails}
                 >
                   <summary className={styles.faqButtonRow}>
