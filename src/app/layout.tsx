@@ -44,6 +44,7 @@ export default async function RootLayout({
   return (
     <html
       lang={documentLanguage}
+      data-scroll-behavior="smooth"
       className={`${headingFont.variable} ${bodyFont.variable} ${uiFont.variable}`}
     >
       <body>

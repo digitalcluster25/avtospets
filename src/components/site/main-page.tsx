@@ -390,7 +390,7 @@ export async function MainPage({ page }: MainPageProps) {
             <div className={styles.heroText}>
               <h1 className={styles.heroTitle}>{copy.heroTitle}</h1>
               <p className={styles.heroDescription}>{copy.heroDescription}</p>
-              <Link
+              <a
                 href="#key-metrics"
                 className={styles.heroArrow}
                 aria-label={copy.heroArrowLabel}
@@ -404,7 +404,7 @@ export async function MainPage({ page }: MainPageProps) {
                   className={styles.heroArrowIcon}
                   aria-hidden="true"
                 />
-              </Link>
+              </a>
             </div>
           </div>
           </div>
