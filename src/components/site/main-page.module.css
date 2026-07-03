@@ -1669,6 +1669,10 @@
     padding: 0;
   }
 
+  .partnersSectionLight {
+    padding: 0;
+  }
+
   .aboutManufacturingRow {
     align-items: stretch;
     flex-direction: column;

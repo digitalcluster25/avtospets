@@ -761,7 +761,7 @@ export async function MainPage({ page }: MainPageProps) {
           </div>
         </section>
 
-        <section className={styles.sectionLight}>
+        <section className={`${styles.sectionLight} ${styles.partnersSectionLight}`}>
           <div className={styles.partnersSection}>
             <div className={styles.partnersHeader}>
               <h2 className={styles.partnersTitle}>{copy.partnersTitle}</h2>
