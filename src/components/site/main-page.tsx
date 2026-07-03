@@ -116,7 +116,7 @@ const pageCopy = {
       "Технічне обслуговування базових автомобілів відбувається в регіональних сервісних центрах по всій країні.",
       "Окрім регламентного ТО сервісні центри компанії надають широкий перелік послуг і виконують усі види робіт, в т. ч. складний ремонт автотехніки, монтаж додаткового обладнання, гарантійний та постгарантійний ремонт.",
     ],
-    serviceBaseCta: "Знайти сервісний центр в вашому регіоні",
+    serviceBaseCta: "Знайти сервісний центр",
     serviceBaseAlt: "Базові автомобілі",
     serviceMedicalTitle: "Медичне обладнання",
     serviceMedicalBody: [
@@ -252,7 +252,7 @@ const pageCopy = {
       "Maintenance of base vehicles is carried out in regional service centers throughout the country.",
       "In addition to scheduled maintenance, service centers provide a wide range of services, including major repairs, installation of additional equipment, and warranty or post-warranty repairs.",
     ],
-    serviceBaseCta: "Find a service center in your region",
+    serviceBaseCta: "Find a service center",
     serviceBaseAlt: "Base vehicles",
     serviceMedicalTitle: "Medical equipment",
     serviceMedicalBody: [

@@ -1888,6 +1888,11 @@
     width: 100%;
   }
 
+  .partnersSection {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
   .partnersGrid {
     column-gap: 16px;
     row-gap: 16px;
@@ -1916,11 +1921,32 @@
   }
 
   .serviceRow:first-child .serviceImageCardExact {
-    order: 2;
+    order: 3;
   }
 
   .serviceRow:first-child .serviceBaseDetails {
+    display: contents;
     order: 1;
+  }
+
+  .serviceRow:first-child .serviceBaseDetails .serviceBaseIconWrap {
+    order: 1;
+  }
+
+  .serviceRow:first-child .serviceBaseDetails .serviceTextGroup {
+    display: contents;
+  }
+
+  .serviceRow:first-child .serviceBaseDetails .serviceCardTitle {
+    order: 2;
+  }
+
+  .serviceRow:first-child .serviceBaseDetails .serviceCardText {
+    order: 4;
+  }
+
+  .serviceRow:first-child .serviceBaseDetails .serviceBaseButton {
+    order: 5;
   }
 
   .serviceBaseDetails,
