@@ -346,6 +346,13 @@
   .partnersGrid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
+
+  .teamCopy,
+  .teamImageCard {
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
+  }
 }
 
 @media (max-width: 900px) {
@@ -396,6 +403,11 @@
 
   .teamSection {
     padding: 64px 16px;
+  }
+
+  .teamCopy,
+  .teamImageCard {
+    flex: 0 0 auto;
   }
 
   .teamImageCard {
