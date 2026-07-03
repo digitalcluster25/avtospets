@@ -1683,7 +1683,31 @@
   .aboutManufacturingRow {
     align-items: stretch;
     flex-direction: column;
-    padding: 64px 18px;
+    padding: 64px 16px;
+  }
+
+  .aboutManufacturingRow:first-child {
+    gap: 20px;
+  }
+
+  .aboutManufacturingRow:first-child .aboutDetails {
+    display: contents;
+  }
+
+  .aboutManufacturingRow:first-child .aboutManufacturingTitle {
+    order: 1;
+  }
+
+  .aboutManufacturingRow:first-child .aboutImageCard {
+    order: 2;
+  }
+
+  .aboutManufacturingRow:first-child .aboutManufacturingText {
+    order: 3;
+  }
+
+  .aboutManufacturingRow:first-child .aboutButton {
+    order: 4;
   }
 
   .aboutManufacturingTitle,
@@ -1852,6 +1876,10 @@
     flex: none;
     height: 260px;
     width: 100%;
+  }
+
+  .serviceSectionTitle {
+    text-align: left;
   }
 
   .partnersSection,
