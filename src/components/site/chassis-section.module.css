@@ -133,6 +133,32 @@
   }
 }
 
+@media (min-width: 901px) and (max-width: 1255px) {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    max-width: 1112px;
+    width: 100%;
+  }
+
+  .card {
+    height: clamp(132px, 12.8vw, 160px);
+    min-width: 0;
+    padding: clamp(18px, 2.5vw, 32px);
+    width: 100%;
+  }
+
+  .frame {
+    height: clamp(78px, 8vw, 100px);
+    width: min(100%, 180px);
+  }
+
+  .brandItemFord {
+    height: auto;
+    width: min(100%, 181px);
+  }
+}
+
 @media (max-width: 900px) {
   .section {
     gap: 32px;
