@@ -298,15 +298,22 @@ export function Header({
           </SiteButton>
         </div>
       </div>
-      {mobileMenuOpen ? (
-        <>
-          <button
-            type="button"
-            className={styles.mobileOverlay}
-            aria-label="Закрити меню"
-            onClick={closeAllMenus}
-          />
-          <div className={styles.mobilePanel}>
+      <button
+        type="button"
+        className={`${styles.mobileOverlay} ${
+          mobileMenuOpen ? styles.mobileOverlayOpen : ""
+        }`}
+        aria-label="Закрити меню"
+        tabIndex={mobileMenuOpen ? 0 : -1}
+        aria-hidden={!mobileMenuOpen}
+        onClick={closeAllMenus}
+      />
+      <div
+        className={`${styles.mobilePanel} ${
+          mobileMenuOpen ? styles.mobilePanelOpen : ""
+        }`}
+        inert={!mobileMenuOpen}
+      >
             <div className={styles.mobilePanelHeader}>
               <Link href="/" className={styles.mobilePanelBrand} onClick={closeAllMenus}>
                 <Image
@@ -392,8 +399,6 @@ export function Header({
               </div>
             </div>
           </div>
-        </>
-      ) : null}
     </header>
   );
 }
