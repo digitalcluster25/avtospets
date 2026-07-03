@@ -28,7 +28,7 @@ const dealerCards = [
   },
 ] as const;
 
-const partnerLogos = Array.from({ length: 23 }, (_, index) => ({
+const partnerLogos = Array.from({ length: 24 }, (_, index) => ({
   src: `/figma/partners/partner-${String(index + 1).padStart(2, "0")}.png`,
   alt: `Партнер ${index + 1}`,
 }));

@@ -68,25 +68,25 @@ const typeCBrandContent = {
     productImage: "/figma/type-c/product-vehicle.png",
     productImageAlt: "Peugeot Boxer",
     productTitle:
-      "Автомобіль швидкої медичної допомоги броньований на базі шасі Peugeot Boxer",
+      "Автомобіль швидкої медичної допомоги на базі шасі Peugeot Boxer",
   },
   citroen: {
     productImage: "/figma/type-c/product-vehicle.png",
     productImageAlt: "Peugeot Boxer",
     productTitle:
-      "Автомобіль швидкої медичної допомоги броньований на базі шасі Peugeot Boxer",
+      "Автомобіль швидкої медичної допомоги на базі шасі Peugeot Boxer",
   },
   ford: {
     productImage: "/figma/type-c/product-vehicle.png",
     productImageAlt: "Peugeot Boxer",
     productTitle:
-      "Автомобіль швидкої медичної допомоги броньований на базі шасі Peugeot Boxer",
+      "Автомобіль швидкої медичної допомоги на базі шасі Peugeot Boxer",
   },
   mercedes: {
     productImage: "/figma/type-c/product-vehicle.png",
     productImageAlt: "Peugeot Boxer",
     productTitle:
-      "Автомобіль швидкої медичної допомоги броньований на базі шасі Peugeot Boxer",
+      "Автомобіль швидкої медичної допомоги на базі шасі Peugeot Boxer",
   },
 } as const;
 
