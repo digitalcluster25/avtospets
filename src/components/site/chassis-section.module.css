@@ -1,12 +1,5 @@
 .section {
   align-items: center;
-  background:
-    radial-gradient(
-      72.5% 124.5% at 50% 50%,
-      rgba(220, 31, 46, 0.08) 0%,
-      rgba(220, 31, 46, 0) 62%
-    ),
-    #0e131c;
   display: flex;
   flex-direction: column;
   gap: 44px;
