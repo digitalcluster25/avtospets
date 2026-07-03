@@ -200,6 +200,7 @@ export function ContactFormModal({
               <input
                 type="tel"
                 className={styles.input}
+                aria-label="Номер телефону"
                 placeholder="+38 044 233 67 40"
                 value={phone}
                 onChange={(event) =>
@@ -209,6 +210,7 @@ export function ContactFormModal({
               <input
                 type="text"
                 className={styles.input}
+                aria-label="Імʼя"
                 placeholder="Імʼя"
                 value={name}
                 onChange={(event) => setName(event.target.value)}
@@ -218,6 +220,9 @@ export function ContactFormModal({
                 <button
                   type="button"
                   className={styles.dropdownField}
+                  aria-expanded={isDropdownOpen}
+                  aria-haspopup="listbox"
+                  aria-label="Спосіб звʼязку"
                   onClick={() => setIsDropdownOpen((current) => !current)}
                 >
                   <span className={styles.dropdownValue}>
@@ -234,11 +239,13 @@ export function ContactFormModal({
                 </button>
 
                 {isDropdownOpen ? (
-                  <div className={styles.dropdownMenu}>
+                  <div className={styles.dropdownMenu} role="listbox">
                     {contactOptions.map((option) => (
                       <button
                         key={option}
                         type="button"
+                        role="option"
+                        aria-selected={selectedContactMethod === option}
                         className={
                           selectedContactMethod === option
                             ? styles.dropdownOptionActive

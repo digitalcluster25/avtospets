@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client";
+import { cache } from "react";
 import sanitizeHtml from "sanitize-html";
 import { getClient } from "@/lib/apollo/client";
 import { pages } from "@/lib/site/page-data";
@@ -101,7 +102,7 @@ async function loadWordPressNode(uri: string) {
   }
 }
 
-export async function getPageByUri(uri: string) {
+export const getPageByUri = cache(async function getPageByUri(uri: string) {
   const normalizedUri = normalizeUri(uri);
   const fallback = findExtendedFallbackPage(normalizedUri);
 
@@ -134,7 +135,7 @@ export async function getPageByUri(uri: string) {
   }
 
   return page;
-}
+});
 
 export async function getPageBySegments(segments: string[]) {
   const uri = segments.length ? `/${segments.join("/")}` : "/";

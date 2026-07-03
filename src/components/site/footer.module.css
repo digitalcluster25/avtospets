@@ -14,10 +14,11 @@
   flex-direction: column;
   gap: 48px;
   margin: 0 auto;
+  max-width: 1440px;
   min-height: 478.052px;
   padding: 64px 48px;
   position: relative;
-  width: 1440px;
+  width: min(1440px, 100%);
   z-index: 1;
 }
 
@@ -45,8 +46,8 @@
 
 .top {
   display: grid;
-  gap: 203px;
-  grid-template-columns: 489px 108px 341px;
+  gap: clamp(48px, 10vw, 203px);
+  grid-template-columns: minmax(0, 489px) minmax(108px, 1fr) minmax(280px, 341px);
   position: relative;
   width: 100%;
   z-index: 1;
@@ -56,7 +57,8 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
-  width: 489px;
+  min-width: 0;
+  width: 100%;
 }
 
 .logo {
@@ -73,7 +75,8 @@
   line-height: 24px;
   margin: 0;
   opacity: 0.7;
-  width: 489px;
+  max-width: 489px;
+  width: 100%;
 }
 
 .socials {
@@ -187,7 +190,8 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 108px;
+  min-width: 0;
+  width: 100%;
 }
 
 .columnLabel {
@@ -312,6 +316,7 @@
   align-items: center;
   border-top: 1px solid #1c1c1c;
   display: flex;
+  gap: 24px;
   height: 52.552px;
   justify-content: space-between;
   padding-top: 33px;
