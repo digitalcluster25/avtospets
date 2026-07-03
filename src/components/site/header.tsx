@@ -308,13 +308,15 @@ export function Header({
           />
           <div className={styles.mobilePanel}>
             <div className={styles.mobilePanelHeader}>
-              <Image
-                src="/figma/header-logo-exact.svg"
-                alt="Автоспецпром"
-                width={213}
-                height={32}
-                className={styles.mobilePanelLogo}
-              />
+              <Link href="/" className={styles.mobilePanelBrand} onClick={closeAllMenus}>
+                <Image
+                  src="/figma/header-logo-exact.svg"
+                  alt="Автоспецпром"
+                  width={213}
+                  height={32}
+                  className={styles.mobilePanelLogo}
+                />
+              </Link>
               <button
                 type="button"
                 className={styles.mobileClose}
@@ -325,67 +327,69 @@ export function Header({
               </button>
             </div>
 
-            <div className={styles.mobileSection}>
-              <p className={styles.mobileLabel}>{copy.vehicles}</p>
-              <div className={styles.mobileLinks}>
-                {copy.dropdownItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={
-                      currentPath === item.href ? styles.mobileLinkActive : styles.mobileLink
-                    }
-                    onClick={closeAllMenus}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+            <div className={styles.mobilePanelBody}>
+              <div className={styles.mobileSection}>
+                <p className={styles.mobileLabel}>{copy.vehicles}</p>
+                <div className={styles.mobileLinks}>
+                  {copy.dropdownItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={
+                        currentPath === item.href ? styles.mobileLinkActive : styles.mobileLink
+                      }
+                      onClick={closeAllMenus}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            <div className={styles.mobileSection}>
-              <div className={styles.mobileLinks}>
-                {copy.headerItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={
-                      currentPath === item.href ? styles.mobileLinkActive : styles.mobileLink
-                    }
-                    onClick={closeAllMenus}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+              <div className={styles.mobileSection}>
+                <div className={styles.mobileLinks}>
+                  {copy.headerItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={
+                        currentPath === item.href ? styles.mobileLinkActive : styles.mobileLink
+                      }
+                      onClick={closeAllMenus}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            <div className={styles.mobileFooter}>
-              <div className={styles.mobileLangs}>
-                <button
-                  type="button"
-                  className={language === "ua" ? styles.mobileLangActive : styles.mobileLang}
-                  onClick={() => setLanguage("ua")}
+              <div className={styles.mobileFooter}>
+                <div className={styles.mobileLangs}>
+                  <button
+                    type="button"
+                    className={language === "ua" ? styles.mobileLangActive : styles.mobileLang}
+                    onClick={() => setLanguage("ua")}
+                  >
+                    UA
+                  </button>
+                  <button
+                    type="button"
+                    className={language === "en" ? styles.mobileLangActive : styles.mobileLang}
+                    onClick={() => setLanguage("en")}
+                  >
+                    EN
+                  </button>
+                </div>
+                <SiteButton
+                  href={page.ctaHref ?? "/contacts"}
+                  onClick={closeAllMenus}
+                  variant="primary"
+                  size="l"
+                  className={styles.mobileCta}
                 >
-                  UA
-                </button>
-                <button
-                  type="button"
-                  className={language === "en" ? styles.mobileLangActive : styles.mobileLang}
-                  onClick={() => setLanguage("en")}
-                >
-                  EN
-                </button>
+                  {copy.contact}
+                </SiteButton>
               </div>
-              <SiteButton
-                href={page.ctaHref ?? "/contacts"}
-                onClick={closeAllMenus}
-                variant="primary"
-                size="l"
-                className={styles.mobileCta}
-              >
-                {copy.contact}
-              </SiteButton>
             </div>
           </div>
         </>
