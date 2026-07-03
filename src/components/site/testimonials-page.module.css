@@ -216,4 +216,8 @@
   .cardShort {
     height: auto;
   }
+
+  .card {
+    padding: 16px;
+  }
 }
