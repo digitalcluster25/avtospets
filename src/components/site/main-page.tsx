@@ -785,7 +785,7 @@ export async function MainPage({ page }: MainPageProps) {
           </div>
         </section>
 
-        <section className={styles.sectionDark}>
+        <section className={`${styles.sectionDark} ${styles.chassisSectionShell}`}>
           <ChassisSection
             title={copy.chassisTitle}
             body={copy.chassisBody}

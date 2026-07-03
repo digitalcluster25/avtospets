@@ -25,6 +25,11 @@
   color: #f3f4f6;
 }
 
+.chassisSectionShell,
+.sectionLightFaq {
+  padding: 0;
+}
+
 .sectionInner {
   margin: 0 auto;
   max-width: 1008px;
@@ -154,6 +159,8 @@
   padding: 0;
 }
 
+.sectionLight.aboutSectionLight,
+.sectionLight.partnersSectionLight,
 .aboutSectionLight {
   padding: 0;
 }
@@ -1581,7 +1588,7 @@
   .sectionMuted,
   .sectionDark,
   .sectionLightFaq {
-    padding: 64px 18px;
+    padding: 64px 16px;
   }
 
   .sectionLight:first-of-type {
@@ -1665,11 +1672,18 @@
     width: 100%;
   }
 
+  .sectionLight.aboutSectionLight,
+  .sectionLight.partnersSectionLight,
   .aboutSectionLight {
     padding: 0;
   }
 
   .partnersSectionLight {
+    padding: 0;
+  }
+
+  .chassisSectionShell,
+  .sectionLightFaq {
     padding: 0;
   }
 
@@ -1877,7 +1891,7 @@
 
   .partnersSection,
   .chassisSection {
-    padding: 64px 18px;
+    padding: 64px 16px;
     width: 100%;
   }
 
@@ -1913,6 +1927,10 @@
     flex-direction: column;
     gap: 24px;
     padding: 32px 0;
+  }
+
+  .serviceRow:last-child {
+    padding-bottom: 0;
   }
 
   .serviceRow:first-child .serviceImageCardExact {
@@ -1989,6 +2007,11 @@
   .faqAnswer {
     font-size: 14px;
     line-height: 22px;
+  }
+
+  .faqSection {
+    padding: 64px 16px;
+    width: 100%;
   }
 
   .faqSectionTitle {
