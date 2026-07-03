@@ -452,7 +452,7 @@
     flex-direction: column;
     gap: 24px;
     overflow-y: auto;
-    padding: 0 18px 28px;
+    padding: 16px 18px 28px;
   }
 
   .mobilePanelLogo {
