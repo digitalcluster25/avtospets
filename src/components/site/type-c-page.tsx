@@ -33,6 +33,7 @@ const chassisTabs = [
     assetClassName: styles.peugeotLogoImage,
     className: styles.tabPeugeot,
     isWideLogo: false,
+    isAvailable: true,
   },
   {
     id: "citroen",
@@ -42,6 +43,7 @@ const chassisTabs = [
     assetClassName: styles.citroenLogoImage,
     className: styles.tabCitroen,
     isWideLogo: false,
+    isAvailable: false,
   },
   {
     id: "ford",
@@ -51,6 +53,7 @@ const chassisTabs = [
     assetClassName: styles.fordLogoImage,
     isWideLogo: true,
     className: styles.tabFord,
+    isAvailable: false,
   },
   {
     id: "mercedes",
@@ -60,6 +63,7 @@ const chassisTabs = [
     assetClassName: styles.mercedesLogoImage,
     className: styles.tabMercedes,
     isWideLogo: false,
+    isAvailable: false,
   },
 ] as const;
 
@@ -449,41 +453,68 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
           </div>
 
           <div className={styles.tabsRow}>
-            {chassisTabs.map((tab) => (
-              <Link
-                key={tab.id}
-                href={tab.href}
-                scroll={false}
-                className={`${brandSlug === tab.id ? styles.tabActive : styles.tab} ${tab.className}`}
-                onClick={() => {
-                  window.sessionStorage.setItem(
-                    TYPE_C_BRAND_SCROLL_KEY,
-                    String(window.scrollY),
-                  );
-                }}
-              >
-                <span
-                  className={
-                    tab.isWideLogo ? styles.tabWideLogoBox : styles.tabLogoBox
-                  }
+            {chassisTabs.map((tab) => {
+              const isActive = brandSlug === tab.id;
+
+              const tabInner = (
+                <>
+                  <span
+                    className={
+                      tab.isWideLogo ? styles.tabWideLogoBox : styles.tabLogoBox
+                    }
+                  >
+                    <Image
+                      src={tab.asset}
+                      alt=""
+                      width={tab.isWideLogo ? 62 : 40}
+                      height={40}
+                      className={tab.assetClassName}
+                    />
+                  </span>
+                  <span className={styles.tabTextBlock}>
+                    <span
+                      className={
+                        isActive ? styles.tabLabelActive : styles.tabLabel
+                      }
+                    >
+                      {tab.label}
+                    </span>
+                    {!tab.isAvailable ? (
+                      <span className={styles.tabChip}>В разработке</span>
+                    ) : null}
+                  </span>
+                </>
+              );
+
+              if (!tab.isAvailable) {
+                return (
+                  <span
+                    key={tab.id}
+                    className={`${styles.tabDisabled} ${tab.className}`}
+                    aria-disabled="true"
+                  >
+                    {tabInner}
+                  </span>
+                );
+              }
+
+              return (
+                <Link
+                  key={tab.id}
+                  href={tab.href}
+                  scroll={false}
+                  className={`${isActive ? styles.tabActive : styles.tab} ${tab.className}`}
+                  onClick={() => {
+                    window.sessionStorage.setItem(
+                      TYPE_C_BRAND_SCROLL_KEY,
+                      String(window.scrollY),
+                    );
+                  }}
                 >
-                  <Image
-                    src={tab.asset}
-                    alt=""
-                    width={tab.isWideLogo ? 62 : 40}
-                    height={40}
-                    className={tab.assetClassName}
-                  />
-                </span>
-                <span
-                  className={
-                    brandSlug === tab.id ? styles.tabLabelActive : styles.tabLabel
-                  }
-                >
-                  {tab.label}
-                </span>
-              </Link>
-            ))}
+                  {tabInner}
+                </Link>
+              );
+            })}
           </div>
 
           <div ref={detailsGridRef} className={styles.detailsGrid}>
