@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, type CSSProperties } from "react";
+import { useEffect, useRef, type CSSProperties } from "react";
 import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
 import { SiteButton } from "@/components/site/button";
@@ -282,6 +282,9 @@ function DownloadArrow() {
 }
 
 export function TypeCPage({ language, page }: TypeCPageProps) {
+  const detailsGridRef = useRef<HTMLDivElement | null>(null);
+  const productAsideRef = useRef<HTMLDivElement | null>(null);
+  const productCardRef = useRef<HTMLDivElement | null>(null);
   const brandSlug =
     chassisTabs.find((tab) => page.uri.endsWith(`/${tab.id}`))?.id ?? "peugeot";
   const activeBrand = typeCBrandContent[brandSlug];
@@ -295,6 +298,102 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
 
     window.scrollTo(0, Number(savedScroll));
     window.sessionStorage.removeItem(TYPE_C_BRAND_SCROLL_KEY);
+  }, [page.uri]);
+
+  useEffect(() => {
+    const detailsGrid = detailsGridRef.current;
+    const productAside = productAsideRef.current;
+    const productCard = productCardRef.current;
+
+    if (!detailsGrid || !productAside || !productCard) {
+      return;
+    }
+
+    const desktopBreakpoint = 1180;
+    const stickyTop = 24;
+    let frameId = 0;
+
+    const resetCard = () => {
+      productAside.style.height = "";
+      productCard.style.position = "";
+      productCard.style.top = "";
+      productCard.style.left = "";
+      productCard.style.width = "";
+      productCard.style.zIndex = "";
+    };
+
+    const updateCardPosition = () => {
+      frameId = 0;
+
+      if (window.innerWidth <= desktopBreakpoint) {
+        resetCard();
+        return;
+      }
+
+      const gridRect = detailsGrid.getBoundingClientRect();
+      const asideRect = productAside.getBoundingClientRect();
+      const gridTop = window.scrollY + gridRect.top;
+      const gridHeight = detailsGrid.offsetHeight;
+      const cardHeight = productCard.offsetHeight;
+      const asideWidth = productAside.offsetWidth;
+      const asideLeft = asideRect.left;
+      const stickyStart = gridTop - stickyTop;
+      const stickyEnd = gridTop + gridHeight - cardHeight - stickyTop;
+
+      productAside.style.height = `${gridHeight}px`;
+
+      if (window.scrollY <= stickyStart) {
+        productCard.style.position = "absolute";
+        productCard.style.top = "0";
+        productCard.style.left = "0";
+        productCard.style.width = "100%";
+        productCard.style.zIndex = "1";
+        return;
+      }
+
+      if (window.scrollY < stickyEnd) {
+        productCard.style.position = "fixed";
+        productCard.style.top = `${stickyTop}px`;
+        productCard.style.left = `${asideLeft}px`;
+        productCard.style.width = `${asideWidth}px`;
+        productCard.style.zIndex = "10";
+        return;
+      }
+
+      productCard.style.position = "absolute";
+      productCard.style.top = `${gridHeight - cardHeight}px`;
+      productCard.style.left = "0";
+      productCard.style.width = "100%";
+      productCard.style.zIndex = "1";
+    };
+
+    const requestUpdate = () => {
+      if (frameId !== 0) {
+        return;
+      }
+
+      frameId = window.requestAnimationFrame(updateCardPosition);
+    };
+
+    const resizeObserver = new ResizeObserver(requestUpdate);
+    resizeObserver.observe(detailsGrid);
+    resizeObserver.observe(productAside);
+    resizeObserver.observe(productCard);
+
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    updateCardPosition();
+
+    return () => {
+      if (frameId !== 0) {
+        window.cancelAnimationFrame(frameId);
+      }
+
+      resizeObserver.disconnect();
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+      resetCard();
+    };
   }, [page.uri]);
 
   return (
@@ -387,9 +486,9 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
             ))}
           </div>
 
-          <div className={styles.detailsGrid}>
-            <div className={styles.productAside}>
-              <div className={styles.productCard}>
+          <div ref={detailsGridRef} className={styles.detailsGrid}>
+            <div ref={productAsideRef} className={styles.productAside}>
+              <div ref={productCardRef} className={styles.productCard}>
                 <div className={styles.productImageWrap}>
                   <div className={styles.productImageFrame}>
                     <Image
