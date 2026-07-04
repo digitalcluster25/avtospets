@@ -16,10 +16,14 @@ const translations = {
   ua: {
     vehicles: "Наші авто",
     dropdownItems: [
-      { href: "/avtomobili-type-a", label: "Тип А" },
-      { href: "/avtomobili-type-b", label: "Тип В" },
-      { href: "/avtomobili-type-c", label: "Тип С" },
-      { href: "/avtomobili-type-social", label: "Соціальний" },
+      { href: "/avtomobili-type-a", label: "Тип А", isAvailable: false },
+      { href: "/avtomobili-type-b", label: "Тип В", isAvailable: false },
+      { href: "/avtomobili-type-c", label: "Тип С", isAvailable: true },
+      {
+        href: "/avtomobili-type-social",
+        label: "Соціальний",
+        isAvailable: false,
+      },
     ],
     headerItems: [
       { href: "/production", label: "Виробництво" },
@@ -34,10 +38,14 @@ const translations = {
   en: {
     vehicles: "Vehicles",
     dropdownItems: [
-      { href: "/avtomobili-type-a", label: "Type A" },
-      { href: "/avtomobili-type-b", label: "Type B" },
-      { href: "/avtomobili-type-c", label: "Type C" },
-      { href: "/avtomobili-type-social", label: "Social" },
+      { href: "/avtomobili-type-a", label: "Type A", isAvailable: false },
+      { href: "/avtomobili-type-b", label: "Type B", isAvailable: false },
+      { href: "/avtomobili-type-c", label: "Type C", isAvailable: true },
+      {
+        href: "/avtomobili-type-social",
+        label: "Social",
+        isAvailable: false,
+      },
     ],
     headerItems: [
       { href: "/production", label: "Production" },
@@ -53,7 +61,7 @@ const translations = {
   SiteLanguage,
   {
     vehicles: string;
-    dropdownItems: Array<{ href: string; label: string }>;
+    dropdownItems: Array<{ href: string; isAvailable: boolean; label: string }>;
     headerItems: Array<{ href: string; label: string }>;
     contact: string;
   }
@@ -338,18 +346,31 @@ export function Header({
               <div className={styles.mobileSection}>
                 <p className={styles.mobileLabel}>{copy.vehicles}</p>
                 <div className={styles.mobileLinks}>
-                  {copy.dropdownItems.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className={
-                        currentPath === item.href ? styles.mobileLinkActive : styles.mobileLink
-                      }
-                      onClick={closeAllMenus}
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
+                  {copy.dropdownItems.map((item) =>
+                    item.isAvailable ? (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={
+                          currentPath === item.href
+                            ? styles.mobileLinkActive
+                            : styles.mobileLink
+                        }
+                        onClick={closeAllMenus}
+                      >
+                        {item.label}
+                      </Link>
+                    ) : (
+                      <span
+                        key={item.href}
+                        className={styles.mobileLinkDisabled}
+                        aria-disabled="true"
+                      >
+                        <span className={styles.mobileLinkText}>{item.label}</span>
+                        <span className={styles.mobileLinkChip}>В разработке</span>
+                      </span>
+                    ),
+                  )}
                 </div>
               </div>
 
