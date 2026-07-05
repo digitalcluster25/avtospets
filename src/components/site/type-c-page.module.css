@@ -587,6 +587,25 @@
     max-width: 100%;
   }
 
+  .heroInner {
+    gap: 24px;
+    padding: 0 24px;
+  }
+
+  .heroTextBlock {
+    max-width: min(100%, 440px);
+    width: min(100%, 440px);
+  }
+
+  .heroDescription {
+    max-width: 100%;
+  }
+
+  .heroImageWrap {
+    flex: 0 1 clamp(520px, 54vw, 680px);
+    width: clamp(520px, 54vw, 680px);
+  }
+
   .detailsGrid {
     grid-template-columns: minmax(360px, 538px) minmax(0, 762px);
   }
