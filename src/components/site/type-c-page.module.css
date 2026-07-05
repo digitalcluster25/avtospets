@@ -209,6 +209,7 @@
 .tabDisabled {
   background: #e5e7eb;
   cursor: default;
+  position: relative;
 }
 
 .tab:hover,
@@ -293,6 +294,13 @@
   line-height: 1;
   padding: 5px 8px;
   text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.tabDisabled .tabChip {
+  bottom: 10px;
+  position: absolute;
+  right: 12px;
 }
 
 .peugeotLogoImage,

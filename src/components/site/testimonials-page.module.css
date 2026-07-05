@@ -81,6 +81,7 @@
   background: #f3f4f6;
   border-left: 4px solid #e42313;
   border-radius: 16px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -147,11 +148,14 @@
   background: #f5f6f8;
   border: 1.5px solid #99a5b4;
   border-radius: 10px;
+  box-sizing: border-box;
   color: #0f0f0f;
   cursor: pointer;
   display: flex;
+  flex-shrink: 0;
   gap: 8px;
   justify-content: center;
+  margin-top: auto;
   min-width: 150px;
   padding: 16px;
   transition:
