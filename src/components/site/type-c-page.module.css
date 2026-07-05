@@ -606,6 +606,16 @@
     width: clamp(520px, 54vw, 680px);
   }
 
+  .specList {
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+  }
+
+  .specCard,
+  .specCardWide {
+    width: 100%;
+  }
+
   .detailsGrid {
     grid-template-columns: minmax(360px, 538px) minmax(0, 762px);
   }
