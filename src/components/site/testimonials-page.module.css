@@ -90,15 +90,15 @@
 }
 
 .cardTall {
-  height: 461px;
+  min-height: 461px;
 }
 
 .cardMedium {
-  height: 433px;
+  min-height: 433px;
 }
 
 .cardShort {
-  height: 349px;
+  min-height: 349px;
 }
 
 .cardHeader {
