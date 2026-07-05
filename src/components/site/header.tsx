@@ -192,16 +192,27 @@ export function Header({
 
             <div className={styles.dropdownMenu}>
               <div className={styles.dropdownMenuInner}>
-                {copy.dropdownItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={styles.dropdownItem}
-                    onClick={() => setOpenMenu(null)}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+                {copy.dropdownItems.map((item) =>
+                  item.isAvailable ? (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={styles.dropdownItem}
+                      onClick={() => setOpenMenu(null)}
+                    >
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <span
+                      key={item.href}
+                      className={styles.dropdownItemDisabled}
+                      aria-disabled="true"
+                    >
+                      <span className={styles.dropdownItemText}>{item.label}</span>
+                      <span className={styles.dropdownItemChip}>В разработке</span>
+                    </span>
+                  ),
+                )}
               </div>
             </div>
           </div>

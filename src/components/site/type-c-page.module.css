@@ -283,9 +283,7 @@
 }
 
 .tabChip {
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.42);
+  background: rgba(241, 245, 249, 0.92);
   border: 1px solid rgba(148, 163, 184, 0.28);
   border-radius: 999px;
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
@@ -297,8 +295,21 @@
   letter-spacing: 0.04em;
   line-height: 1;
   padding: 7px 10px;
+  position: relative;
   text-transform: uppercase;
   white-space: nowrap;
+}
+
+.tabChip::before {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: inherit;
+  content: "";
+  inset: -6px;
+  position: absolute;
+  z-index: -1;
 }
 
 .tabDisabled .tabChip {
