@@ -479,9 +479,6 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
                     >
                       {tab.label}
                     </span>
-                    {!tab.isAvailable ? (
-                      <span className={styles.tabChip}>В разработке</span>
-                    ) : null}
                   </span>
                 </>
               );

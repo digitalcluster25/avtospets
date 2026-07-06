@@ -84,6 +84,7 @@ const medicalCards = [
   "/figma/production-page/med-08.png",
   "/figma/production-page/med-09.png",
   "/figma/production-page/med-10.png",
+  "/figma/partners/partner-24.png",
 ] as const;
 
 const initialGalleryCards = [
