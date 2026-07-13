@@ -212,6 +212,24 @@
   position: relative;
 }
 
+.tabDisabled::before {
+  color: #475569;
+  content: "В разработке";
+  font-family: var(--font-ui), sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  left: 50%;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  pointer-events: none;
+  position: absolute;
+  text-transform: uppercase;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  z-index: 2;
+}
+
 .tabDisabled::after {
   background: rgba(248, 250, 252, 0.56);
   border-radius: inherit;
@@ -219,6 +237,7 @@
   inset: 0;
   pointer-events: none;
   position: absolute;
+  z-index: 1;
 }
 
 .tab:hover,

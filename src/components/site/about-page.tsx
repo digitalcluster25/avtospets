@@ -91,9 +91,8 @@ export function AboutPage({ language, page }: AboutPageProps) {
           <div className={styles.dealerTitleBlock}>
             <h2 className={styles.sectionTitle}>Офіційний дилер</h2>
             <p className={styles.dealerBody}>
-              ТОВ «Автоспецпром» є офіційним дилером корпорації Stellantis —
-              другого за величиною виробника автомобілів в Європі, власника
-              брендів Peugeot, Citroen, Opel, Vauxhall та DS Automobiles.
+              ТОВ «Автоспецпром» є офіційним дилером торгівельних марок
+              Peugeot, Citroen, Ford
             </p>
           </div>
 

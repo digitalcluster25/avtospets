@@ -37,12 +37,6 @@ const typeCards = [
 const constructionCards = [
   {
     rowClassName: styles.constructionCardTall,
-    emoji: "🔧",
-    title: "Ходова частина",
-    body: `Обрані для виробництва "швидких" автомобілі відповідають вимогам до плавності ходу завдяки м'якій підвісці, яка дозволяє створити максимально комфортні умови для пацієнта, а також необхідні умови для проведення лікувальних заходів і медичних маніпуляцій.`,
-  },
-  {
-    rowClassName: styles.constructionCardTall,
     emoji: "⚙️",
     title: "Двигун",
     body: "На автомобілях установлено потужні двигуни, які забезпечують швидкість на дорогах і прохідність у сільській місцевості або під час снігових заносів.",
@@ -283,7 +277,7 @@ export function ProductionPage({ language, page }: ProductionPageProps) {
 
         <section className={styles.chassisShell}>
           <ChassisSection
-            title="Шасі"
+            title="Базові автомобілі"
             body={'Зазначені типи "швидких" виробляються на базових шасі Citroën, Peugeot, Ford, Mercedes-Benz'}
             note="Прямі договори з виробником базових автомобілів дозволяють нам забезпечувати найкращі ціни на продукцію"
           />
