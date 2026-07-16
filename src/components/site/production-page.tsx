@@ -279,7 +279,7 @@ export function ProductionPage({ language, page }: ProductionPageProps) {
         <section className={styles.chassisShell}>
           <ChassisSection
             title="Базові автомобілі"
-            body={'Зазначені типи "швидких" виробляються на базових шасі Citroën, Peugeot, Ford, Mercedes-Benz'}
+            body={'Зазначені типи "швидких" виробляються на базі автомобілів Citroën, Peugeot, Ford, Mercedes-Benz'}
             note="Прямі договори з виробником базових автомобілів дозволяють нам забезпечувати найкращі ціни на продукцію"
           />
         </section>
