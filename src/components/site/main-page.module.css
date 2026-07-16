@@ -113,7 +113,8 @@
 
 .heroCard {
   align-items: center;
-  background: transparent;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
   border-radius: 18px;
   display: flex;
   flex-direction: column;
@@ -196,12 +197,12 @@
 }
 
 .heroLead {
-  align-items: flex-start;
+  align-items: center;
   display: flex;
   flex-direction: column;
   gap: 10px;
   max-width: 1080px;
-  text-align: left;
+  text-align: center;
 }
 
 .heroLeadTitle {
