@@ -68,6 +68,7 @@ const constructionCards = [
 ] as const;
 
 const medicalCards = [
+  "/figma/partners/partner-12.png",
   "/figma/production-page/med-01.png",
   "/figma/production-page/med-02.png",
   "/figma/production-page/med-03.png",

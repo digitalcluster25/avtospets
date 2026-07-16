@@ -28,9 +28,16 @@ const dealerCards = [
   },
 ] as const;
 
-const partnerLogos = Array.from({ length: 24 }, (_, index) => ({
-  src: `/figma/partners/partner-${String(index + 1).padStart(2, "0")}.png`,
-  alt: `Партнер ${index + 1}`,
+const partnerLogosOrder = [
+  12,
+  ...Array.from({ length: 24 }, (_, index) => index + 1).filter(
+    (index) => index !== 12,
+  ),
+] as const;
+
+const partnerLogos = partnerLogosOrder.map((index) => ({
+  src: `/figma/partners/partner-${String(index).padStart(2, "0")}.png`,
+  alt: `Партнер ${index}`,
 }));
 
 export function AboutPage({ language, page }: AboutPageProps) {

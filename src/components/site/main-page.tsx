@@ -314,9 +314,15 @@ export async function MainPage({ page }: MainPageProps) {
   const language =
     cookieStore.get(SITE_LANGUAGE_COOKIE_KEY)?.value === "en" ? "en" : "ua";
   const copy = pageCopy[language];
-  const partners = Array.from({ length: 24 }, (_, index) => ({
-    src: `/figma/partners-3476/partner-${String(index + 1).padStart(2, "0")}.png`,
-    alt: `${copy.partnerAltPrefix} ${index + 1}`,
+  const partnerOrder = [
+    12,
+    ...Array.from({ length: 24 }, (_, index) => index + 1).filter(
+      (index) => index !== 12,
+    ),
+  ];
+  const partners = partnerOrder.map((index) => ({
+    src: `/figma/partners-3476/partner-${String(index).padStart(2, "0")}.png`,
+    alt: `${copy.partnerAltPrefix} ${index}`,
   }));
   const logoMap = {
     peugeot: {
