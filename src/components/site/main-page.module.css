@@ -49,11 +49,11 @@
 }
 
 .heroSection {
-  background: linear-gradient(180deg, #ebedee 68.393%, #d1d5db 100%);
+  background: #ffffff;
   border-bottom: 1px solid #e5e7eb;
   border-top: 1px solid #e5e7eb;
   overflow: hidden;
-  padding: 94px 0;
+  padding: 46px 48px 56px;
   position: relative;
 }
 
@@ -61,6 +61,7 @@
   align-items: center;
   display: flex;
   flex-direction: column;
+  gap: 28px;
   margin: 0 auto;
   max-width: 1344px;
   position: relative;
@@ -68,85 +69,15 @@
 }
 
 .heroGlow {
-  background: rgba(241, 64, 78, 0.1);
+  background: rgba(241, 64, 78, 0.05);
   border-radius: 18641400px;
-  bottom: -655px;
+  bottom: -420px;
   filter: blur(150px);
-  height: 800px;
+  height: 520px;
   left: 50%;
   position: absolute;
   transform: translateX(-50%);
-  width: 1440px;
-}
-
-.heroImageWrap {
-  height: 402px;
-  margin-bottom: -54px;
-  overflow: hidden;
-  position: relative;
-  width: 1162px;
-  z-index: 0;
-}
-
-.heroImage {
-  height: 119.69%;
-  left: -0.02%;
-  max-width: none;
-  position: absolute;
-  top: -19.69%;
-  width: 100.04%;
-}
-
-.heroText {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  font-family: var(--font-ui), sans-serif;
-  gap: 32px;
-  justify-content: center;
-  margin: 0 auto;
-  position: relative;
-  text-align: center;
-  width: 1058px;
-  z-index: 1;
-}
-
-.heroTitle {
-  color: #111827;
-  font-size: 64px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 68px;
-  margin: 0;
-  width: 100%;
-}
-
-.heroDescription {
-  color: #374151;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 30px;
-  margin: 0;
-  width: 100%;
-}
-
-.heroArrow {
-  align-items: center;
-  background: transparent;
-  border: 0;
-  cursor: pointer;
-  display: inline-flex;
-  height: 62px;
-  justify-content: center;
-  padding: 0;
-  width: 62px;
-}
-
-.heroArrowIcon {
-  display: block;
-  height: 62px;
-  object-fit: contain;
-  width: 62px;
+  width: 1080px;
 }
 
 .sectionLight {
@@ -173,9 +104,125 @@
   padding: 0;
 }
 
-.heroArrow:hover,
-.heroArrow:focus-visible {
+.heroCardsGrid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+}
+
+.heroCard {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  min-height: 544px;
+  padding: 24px 24px 26px;
+  text-align: center;
+}
+
+.heroCardTitle {
+  color: #111111;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.14;
+  margin: 0;
+  max-width: 560px;
+  text-transform: uppercase;
+}
+
+.heroCardImageWrap {
+  align-items: center;
+  display: flex;
+  flex: 1 0 auto;
+  justify-content: center;
+  min-height: 248px;
+  width: 100%;
+}
+
+.heroCardImageLeft,
+.heroCardImageRight {
+  height: auto;
+  width: 100%;
+}
+
+.heroCardImageLeft {
+  max-width: 492px;
+}
+
+.heroCardImageRight {
+  max-width: 520px;
+}
+
+.heroCardDescription {
+  color: #202939;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.35;
+  margin: 8px 0 0;
+  max-width: 560px;
+  min-height: 66px;
+}
+
+.heroCardButton {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #bfc5cf;
+  border-radius: 14px;
+  color: #111827;
+  display: inline-flex;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  height: 48px;
+  justify-content: center;
+  margin-top: 18px;
+  padding: 0 24px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.heroCardButton:hover,
+.heroCardButton:focus-visible {
+  background: #f9fafb;
+  border-color: #9ca3af;
   outline: none;
+}
+
+.heroLead {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 1080px;
+  text-align: center;
+}
+
+.heroLeadTitle {
+  color: #111111;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.14;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.heroLeadDescription {
+  color: #202939;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.4;
+  margin: 0;
 }
 
 .sectionTitle {
@@ -1369,28 +1416,28 @@
     width: 100%;
   }
 
-  .heroImageWrap,
-  .heroText,
+  .heroCardsGrid,
   .statsGrid,
   .tenderGrid,
   .tenderNote,
   .partnersHeader,
   .partnersGrid,
   .faqSectionTitle,
-  .faqSectionList {
+  .faqSectionList,
+  .heroLead {
     width: 100%;
   }
 
-  .heroImageWrap {
-    max-width: 1162px;
-  }
-
-  .heroText {
-    max-width: 1058px;
+  .heroCard {
+    min-width: 0;
   }
 
   .statsGrid,
   .tenderGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .heroCardsGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1449,29 +1496,19 @@
   }
 
   .heroSection {
-    padding: 72px 24px;
+    padding: 40px 24px 48px;
   }
 
-  .heroImageWrap {
-    height: auto;
-    margin-bottom: 0;
-    max-width: 920px;
-    min-height: 320px;
-    width: 100%;
+  .heroCardsGrid {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .heroText {
-    max-width: 840px;
+  .heroCard {
+    min-height: 0;
   }
 
-  .heroTitle {
-    font-size: 56px;
-    line-height: 1.04;
-  }
-
-  .heroDescription {
-    font-size: 18px;
-    line-height: 28px;
+  .heroCardImageWrap {
+    min-height: 220px;
   }
 
   .vehiclesGrid {
@@ -1592,11 +1629,13 @@
   .faqSectionTitle,
   .chassisTitle,
   .vehiclesTitle,
+  .heroLeadTitle,
   .sectionTitle {
     font-size: 42px;
     line-height: 1.08;
   }
 
+  .heroLeadDescription,
   .vehiclesDescription,
   .chassisBody,
   .chassisNote {
@@ -1617,21 +1656,17 @@
   }
 
   .heroSection {
-    align-items: center;
-    display: flex;
-    min-height: calc(100svh - 76px);
-    padding: 32px 0;
+    padding: 24px 16px 40px;
   }
 
   .heroSectionInner {
     gap: 20px;
-    justify-content: center;
-    min-height: 100%;
-    padding: 0 18px;
+    padding: 0;
   }
 
   .statsGrid,
   .tenderGrid,
+  .heroCardsGrid,
   .vehiclesGrid {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -1646,6 +1681,7 @@
   }
 
   .tenderNote,
+  .heroLead,
   .vehiclesHeader,
   .vehiclesDescription,
   .partnersHeader,
@@ -1669,31 +1705,31 @@
     width: 100%;
   }
 
-  .heroImageWrap {
-    aspect-ratio: 4096 / 1696;
-    margin-bottom: 0;
+  .heroCard {
     min-height: 0;
-    width: 100%;
+    padding: 20px 18px 18px;
   }
 
-  .heroImage {
-    height: 100%;
-    inset: 0;
-    left: auto;
-    object-fit: contain;
-    top: auto;
-    width: 100%;
+  .heroCardTitle {
+    font-size: 21px;
   }
 
-  .heroTitle {
-    font-size: 31px;
-    letter-spacing: -0.02em;
-    line-height: 0.98;
+  .heroCardImageWrap {
+    min-height: 180px;
   }
 
-  .heroDescription {
+  .heroCardDescription {
     font-size: 14px;
-    line-height: 22px;
+    line-height: 20px;
+    min-height: 0;
+  }
+
+  .heroCardButton {
+    font-size: 15px;
+    height: auto;
+    min-height: 52px;
+    padding: 12px 16px;
+    white-space: normal;
   }
 
   .aboutManufacturingSection {
@@ -1752,6 +1788,7 @@
   .faqSectionTitle,
   .chassisTitle,
   .vehiclesTitle,
+  .heroLeadTitle,
   .sectionTitle,
   .priceHeading {
     font-size: 32px;
@@ -1774,6 +1811,7 @@
   .statText,
   .tenderLabel,
   .tenderNote,
+  .heroLeadDescription,
   .aboutManufacturingText p,
   .serviceCardText p,
   .vehiclesDescription,

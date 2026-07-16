@@ -14,10 +14,29 @@ import styles from "./main-page.module.css";
 const pageCopy = {
   ua: {
     heroAlt: "Виробництво автомобілів швидкої допомоги",
-    heroArrowLabel: "Перейти до ключових показників",
-    heroTitle: "Виробництво автомобілів швидкої допомоги",
-    heroDescription:
-      "Виробляємо автомобілі швидкої допомоги в типах A1, A2, B та C в стандартній та неонатальній конфігураціях. А також соціальний транспорт для перевезення людей з обмеженими фізичними можливостями, мобільних амбулаторій тощо.",
+    heroCards: [
+      {
+        title: "Виробництво автомобілів швидкої допомоги (АШМД)",
+        description:
+          "Повний цикл виробництва: типів A1, A2, B та C, стандартних та неонатальних конфігурацій. Спеціалізоване медичне обладнання.",
+        button: "Детальніше про АШМД",
+        href: "/production",
+        image: "/figma/ambulance-cards/card-a-figma.png",
+        imageAlt: "Виробництво автомобілів швидкої допомоги",
+      },
+      {
+        title: "Соціальний транспорт",
+        description:
+          "Спеціалізований транспорт для людей з обмеженими фізичними можливостями, мобільні амбулаторії, перевезення маломобільних груп населення.",
+        button: "Детальніше про соціальний транспорт",
+        href: "/production",
+        image: "/figma/ambulance-cards/social-transport-source.png",
+        imageAlt: "Соціальний транспорт",
+      },
+    ],
+    heroLeadTitle: "Ми — лідер в Україні з виробництва спеціалізованого транспорту.",
+    heroLeadDescription:
+      "Забезпечуємо високу якість, сертифікацію та повний сервіс. Ваша впевненість у кожній поїздці.",
     statsTitle: "Ключові показники",
     stats: [
       { value: "2,82 млрд", text: "Загальна сума укладених угод" },
@@ -149,10 +168,30 @@ const pageCopy = {
   },
   en: {
     heroAlt: "Production of ambulances",
-    heroArrowLabel: "Go to key metrics",
-    heroTitle: "Production of ambulances",
-    heroDescription:
-      "We manufacture ambulances in A1, A2, B and C types in standard and neonatal configurations. We also build social transport for people with limited mobility, mobile clinics and other specialized solutions.",
+    heroCards: [
+      {
+        title: "Production of ambulances",
+        description:
+          "Full production cycle for A1, A2, B and C types, including standard and neonatal configurations. Specialized medical equipment.",
+        button: "More about ambulances",
+        href: "/production",
+        image: "/figma/ambulance-cards/card-a-figma.png",
+        imageAlt: "Production of ambulances",
+      },
+      {
+        title: "Social transport",
+        description:
+          "Specialized transport for people with limited mobility, mobile outpatient units, and transportation for low-mobility groups.",
+        button: "More about social transport",
+        href: "/production",
+        image: "/figma/ambulance-cards/social-transport-source.png",
+        imageAlt: "Social transport",
+      },
+    ],
+    heroLeadTitle:
+      "We are the Ukrainian leader in specialized transport manufacturing.",
+    heroLeadDescription:
+      "We provide high quality, certification, and full service. Confidence in every trip.",
     statsTitle: "Key metrics",
     stats: [
       { value: "2,82 bn", text: "Total value of concluded contracts" },
@@ -381,38 +420,38 @@ export async function MainPage({ page }: MainPageProps) {
           <div className={styles.heroSection}>
             <div className={styles.heroGlow} aria-hidden="true" />
             <div className={styles.heroSectionInner}>
-            <div className={styles.heroImageWrap}>
-              <Image
-                src="/figma/hero409/hero-image.webp"
-                alt={copy.heroAlt}
-                width={4096}
-                height={1696}
-                priority
-                sizes="(max-width: 767px) 100vw, (max-width: 1439px) 92vw, 1260px"
-                className={styles.heroImage}
-              />
-            </div>
+              <div className={styles.heroCardsGrid}>
+                {copy.heroCards.map((card, index) => (
+                  <article key={card.title} className={styles.heroCard}>
+                    <h1 className={styles.heroCardTitle}>{card.title}</h1>
+                    <div className={styles.heroCardImageWrap}>
+                      <Image
+                        src={card.image}
+                        alt={card.imageAlt}
+                        width={index === 0 ? 985 : 1672}
+                        height={index === 0 ? 662 : 941}
+                        priority={index === 0}
+                        sizes="(max-width: 1180px) 100vw, 50vw"
+                        className={
+                          index === 0 ? styles.heroCardImageLeft : styles.heroCardImageRight
+                        }
+                      />
+                    </div>
+                    <p className={styles.heroCardDescription}>{card.description}</p>
+                    <Link href={card.href} className={styles.heroCardButton}>
+                      {card.button}
+                    </Link>
+                  </article>
+                ))}
+              </div>
 
-            <div className={styles.heroText}>
-              <h1 className={styles.heroTitle}>{copy.heroTitle}</h1>
-              <p className={styles.heroDescription}>{copy.heroDescription}</p>
-              <a
-                href="#key-metrics"
-                className={styles.heroArrow}
-                aria-label={copy.heroArrowLabel}
-              >
-                <Image
-                  src="/figma/hero409/arrow.svg"
-                  alt=""
-                  width={62}
-                  height={62}
-                  unoptimized
-                  className={styles.heroArrowIcon}
-                  aria-hidden="true"
-                />
-              </a>
+              <div className={styles.heroLead}>
+                <p className={styles.heroLeadTitle}>{copy.heroLeadTitle}</p>
+                <p className={styles.heroLeadDescription}>
+                  {copy.heroLeadDescription}
+                </p>
+              </div>
             </div>
-          </div>
           </div>
         </section>
 
