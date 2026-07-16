@@ -47,30 +47,56 @@ const pageCopy = {
       },
     ],
     tenderNote: "Економія ~650 000 грн на кожному автомобілі",
-    featuredVehicles: [
+    vehiclesTitle: "Автомобілі швидкої допомоги",
+    vehiclesCaption:
+      "Сучасні медичні транспортні засоби класів A, B, C з повною сертифікацією",
+    vehicles: [
       {
-        title: "Виробництво автомобілів швидкої допомоги (АШМД)",
+        index: "A",
+        title: "Типи A1 та A2",
+        variant: "a",
         description:
-          "Повний цикл виробництва: типів A1, A2, B та C, стандартних та неонатальних конфігурацій. Спеціалізоване медичне обладнання.",
-        image: "/figma/ambulance-cards/card-a-figma.png",
-        imageAlt: "Виробництво автомобілів швидкої допомоги",
-        button: "Детальніше про АШМД",
-        href: "/production",
+          "Для транспортування пацієнтів до медичних закладів у супроводі медичного персоналу.",
+        logos: ["peugeot", "citroen", "ford"],
+        image: "/figma/ambulance-cards/card-a-new.png",
+        imageAlt: "Типи A1 та A2",
+        button: "Детальна інформація",
       },
       {
-        title: "Соціальний транспорт",
+        index: "B",
+        title: "Тип B",
+        variant: "b",
         description:
-          "Спеціалізований транспорт для людей з обмеженими фізичними можливостями, мобільні амбулаторії, перевезення маломобільних груп населення.",
-        image: "/figma/ambulance-cards/social-transport-source.png",
+          "Для надання медичної допомоги, транспортування та моніторингу стану пацієнта на догоспітальному етапі.",
+        logos: ["peugeot", "citroen", "ford", "mercedes"],
+        image: "/figma/ambulance-cards/card-b-new.png",
+        imageAlt: "Тип B",
+        button: "Детальна інформація",
+      },
+      {
+        index: "B",
+        title: "Тип С",
+        variant: "c",
+        description:
+          "Реанімобіль для екстреної медичної допомоги, транспортування та моніторингу пацієнтів у тяжкому або критичному стані.",
+        logos: ["peugeot", "citroen", "ford", "mercedes"],
+        image: "/figma/ambulance-cards/card-c-new.png",
+        imageAlt: "Тип С",
+        button: "Детальна інформація",
+      },
+      {
+        index: "social",
+        title: "Cоціальний транспорт",
+        variant: "social",
+        description:
+          "Cпеціалізований транспорт для перевезення людей з обмеженими фізичними можливостями, мобільних амбулаторій тощо.",
+        logos: ["peugeot", "citroen"],
+        image: "/figma/ambulance-cards/card-social-new.png",
         imageAlt: "Соціальний транспорт",
-        button: "Детальніше про соціальний транспорт",
-        href: "/production",
+        button: "Детальна інформація",
+        social: true,
       },
     ],
-    featuredVehiclesTitle:
-      "Ми — лідер в Україні з виробництва спеціалізованого транспорту.",
-    featuredVehiclesBody:
-      "Забезпечуємо високу якість, сертифікацію та повний сервіс. Ваша впевненість у кожній поїздці.",
     aboutTitle: "Про компанію",
     aboutBody: [
       'ТОВ "Автоспецпром" — перший та найбільший в Україні виробник автомобілів швидкої (екстреної) медичної допомоги.',
@@ -156,30 +182,56 @@ const pageCopy = {
       },
     ],
     tenderNote: "Savings of ~650,000 UAH on each vehicle",
-    featuredVehicles: [
+    vehiclesTitle: "Ambulance vehicles",
+    vehiclesCaption:
+      "Modern medical transport vehicles of classes A, B and C with full certification",
+    vehicles: [
       {
-        title: "Production of ambulances",
+        index: "A",
+        title: "Types A1 and A2",
+        variant: "a",
         description:
-          "Full production cycle for A1, A2, B and C types, including standard and neonatal configurations. Specialized medical equipment.",
-        image: "/figma/ambulance-cards/card-a-figma.png",
-        imageAlt: "Production of ambulances",
-        button: "More about ambulances",
-        href: "/production",
+          "For transporting patients to medical facilities accompanied by medical staff.",
+        logos: ["peugeot", "citroen", "ford"],
+        image: "/figma/ambulance-cards/card-a-new.png",
+        imageAlt: "Types A1 and A2",
+        button: "Detailed information",
       },
       {
-        title: "Social transport",
+        index: "B",
+        title: "Type B",
+        variant: "b",
         description:
-          "Specialized transport for people with limited mobility, mobile outpatient units, and transportation for low-mobility groups.",
-        image: "/figma/ambulance-cards/social-transport-source.png",
+          "For providing medical care, transportation and patient monitoring at the pre-hospital stage.",
+        logos: ["peugeot", "citroen", "ford", "mercedes"],
+        image: "/figma/ambulance-cards/card-b-new.png",
+        imageAlt: "Type B",
+        button: "Detailed information",
+      },
+      {
+        index: "B",
+        title: "Type C",
+        variant: "c",
+        description:
+          "Resuscitation vehicle for emergency medical care, transportation and monitoring of patients in severe or critical condition.",
+        logos: ["peugeot", "citroen", "ford", "mercedes"],
+        image: "/figma/ambulance-cards/card-c-new.png",
+        imageAlt: "Type C",
+        button: "Detailed information",
+      },
+      {
+        index: "social",
+        title: "Social transport",
+        variant: "social",
+        description:
+          "Specialized transport for people with limited mobility, mobile clinics and related tasks.",
+        logos: ["peugeot", "citroen"],
+        image: "/figma/ambulance-cards/card-social-new.png",
         imageAlt: "Social transport",
-        button: "More about social transport",
-        href: "/production",
+        button: "Detailed information",
+        social: true,
       },
     ],
-    featuredVehiclesTitle:
-      "We are the Ukrainian leader in specialized transport manufacturing.",
-    featuredVehiclesBody:
-      "We provide high quality, certification, and full service. Confidence in every trip.",
     aboutTitle: "About the company",
     aboutBody: [
       "Avtospetsprom LLC is the first and largest Ukrainian manufacturer of emergency medical vehicles.",
@@ -272,6 +324,55 @@ export async function MainPage({ page }: MainPageProps) {
     src: `/figma/partners-3476/partner-${String(index).padStart(2, "0")}.png`,
     alt: `${copy.partnerAltPrefix} ${index}`,
   }));
+  const logoMap = {
+    peugeot: {
+      src: "/figma/ambulance-cards/logo-peugeot.webp",
+      width: 36,
+      height: 40,
+      wrapClassName: styles.chassisLogoItemPeugeot,
+      imageClassName: styles.chassisLogoPeugeot,
+    },
+    citroen: {
+      src: "/figma/ambulance-cards/logo-citroen.webp",
+      width: 50,
+      height: 28,
+      wrapClassName: styles.chassisLogoItemCitroen,
+      imageClassName: styles.chassisLogoCitroen,
+    },
+    ford: {
+      src: "/figma/ambulance-cards/logo-ford.webp",
+      width: 71,
+      height: 25,
+      wrapClassName: styles.chassisLogoItemFord,
+      imageClassName: styles.chassisLogoFord,
+    },
+    mercedes: {
+      src: "/figma/ambulance-cards/logo-mercedes.webp",
+      width: 58,
+      height: 36,
+      wrapClassName: styles.chassisLogoItemMercedes,
+      imageClassName: styles.chassisLogoMercedes,
+    },
+  } as const;
+  const vehicleImageWrapMap = {
+    a: styles.vehicleImageWrapA,
+    b: styles.vehicleImageWrapB,
+    c: styles.vehicleImageWrapC,
+    social: styles.vehicleImageWrapSocial,
+  } as const;
+  const vehicleImageMap = {
+    a: styles.vehicleImageA,
+    b: styles.vehicleImageB,
+    c: styles.vehicleImageC,
+    social: styles.vehicleImageSocial,
+  } as const;
+  const vehicleImageSizeMap = {
+    a: { width: 309, height: 326 },
+    b: { width: 309, height: 326 },
+    c: { width: 309, height: 326 },
+    social: { width: 309, height: 326 },
+  } as const;
+
   return (
     <div className={styles.page}>
       <Header currentPath={page.uri} initialLanguage={language} page={page} />
@@ -375,41 +476,115 @@ export async function MainPage({ page }: MainPageProps) {
         <section className={styles.sectionDark}>
           <div className={styles.vehiclesSection}>
             <div className={styles.vehiclesGlow} aria-hidden="true" />
-            <div className={styles.featuredVehiclesGrid}>
-              {copy.featuredVehicles.map((vehicle, index) => (
-                <article key={vehicle.title} className={styles.featuredVehicleCard}>
-                  <h2 className={styles.featuredVehicleTitle}>{vehicle.title}</h2>
-                  <div className={styles.featuredVehicleMedia}>
+            <div className={styles.vehiclesHeader}>
+              <h2 className={styles.vehiclesTitle}>{copy.vehiclesTitle}</h2>
+              <p className={styles.vehiclesDescription}>
+                {copy.vehiclesCaption}
+              </p>
+            </div>
+
+            <div className={styles.vehiclesGrid}>
+              {copy.vehicles.map((vehicle) => {
+                const vehicleImageSize =
+                  vehicleImageSizeMap[
+                    vehicle.variant as keyof typeof vehicleImageSizeMap
+                  ];
+
+                return (
+                  <article
+                    key={vehicle.title}
+                    className={styles.vehicleCard}
+                  >
+                  <div className={styles.vehicleContent}>
+                    <div
+                      className={
+                        vehicle.social
+                          ? styles.vehicleBadgeSocial
+                          : styles.vehicleBadge
+                      }
+                    >
+                      {vehicle.social ? (
+                        <Image
+                          src="/figma/ambulance-cards/social-badge.svg"
+                          alt=""
+                          width={80}
+                          height={80}
+                          unoptimized
+                          className={styles.vehicleBadgeSocialIcon}
+                          aria-hidden="true"
+                        />
+                      ) : (
+                        <span className={styles.vehicleBadgeText}>
+                          {vehicle.index}
+                        </span>
+                      )}
+                    </div>
+                    <div className={styles.vehicleTextGroup}>
+                      <h3 className={styles.vehicleTitle}>{vehicle.title}</h3>
+                      <p className={styles.vehicleDescription}>
+                        {vehicle.description}
+                      </p>
+                    </div>
+                    <div className={styles.chassisLogos}>
+                      {vehicle.logos.map((logo) => {
+                        const asset = logoMap[logo as keyof typeof logoMap];
+
+                        return (
+                          <div
+                            key={`${vehicle.title}-${logo}`}
+                            className={`${styles.chassisLogoItem} ${asset.wrapClassName}`}
+                          >
+                            <Image
+                              src={asset.src}
+                              alt=""
+                              width={asset.width}
+                              height={asset.height}
+                              loading="lazy"
+                              sizes="72px"
+                              className={asset.imageClassName}
+                              aria-hidden="true"
+                            />
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <Link href="/production" className={styles.vehicleButton}>
+                      <span>{vehicle.button}</span>
+                      <Image
+                        src="/figma/ambulance-cards/arrow-right.svg"
+                        alt=""
+                        width={20}
+                        height={20}
+                        unoptimized
+                        className={styles.vehicleButtonIcon}
+                        aria-hidden="true"
+                      />
+                    </Link>
+                  </div>
+                  <div
+                    className={
+                      vehicleImageWrapMap[
+                        vehicle.variant as keyof typeof vehicleImageWrapMap
+                      ]
+                    }
+                  >
                     <Image
                       src={vehicle.image}
                       alt={vehicle.imageAlt}
-                      width={index === 0 ? 985 : 1672}
-                      height={index === 0 ? 662 : 941}
+                      width={vehicleImageSize.width}
+                      height={vehicleImageSize.height}
                       loading="lazy"
-                      sizes="(max-width: 1180px) 100vw, 50vw"
+                      sizes="(max-width: 767px) 82vw, (max-width: 1439px) 44vw, 309px"
                       className={
-                        index === 0
-                          ? styles.featuredVehicleImageAmbulance
-                          : styles.featuredVehicleImageSocial
+                        vehicleImageMap[
+                          vehicle.variant as keyof typeof vehicleImageMap
+                        ]
                       }
                     />
                   </div>
-                  <p className={styles.featuredVehicleDescription}>
-                    {vehicle.description}
-                  </p>
-                  <Link href={vehicle.href} className={styles.featuredVehicleButton}>
-                    {vehicle.button}
-                  </Link>
-                </article>
-              ))}
-            </div>
-            <div className={styles.featuredVehiclesLead}>
-              <h2 className={styles.featuredVehiclesLeadTitle}>
-                {copy.featuredVehiclesTitle}
-              </h2>
-              <p className={styles.featuredVehiclesLeadBody}>
-                {copy.featuredVehiclesBody}
-              </p>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>

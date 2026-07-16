@@ -380,7 +380,7 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 44px;
   margin: 0 auto;
   max-width: 1344px;
   position: relative;
@@ -398,137 +398,291 @@
   width: 800px;
 }
 
-.featuredVehiclesGrid {
+.vehiclesHeader {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  text-align: center;
+  width: 1344px;
+  z-index: 1;
+}
+
+.vehiclesTitle {
+  color: #ffffff;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+  width: 100%;
+}
+
+.vehiclesDescription {
+  color: #e5e7eb;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 30px;
+  margin: 0;
+  width: 702px;
+}
+
+.vehiclesGrid {
   display: grid;
-  gap: 28px;
+  gap: 24px;
   grid-template-columns: repeat(2, 660px);
   position: relative;
   width: 1344px;
   z-index: 1;
 }
 
-.featuredVehicleCard {
+.vehicleCard {
   align-items: center;
-  background: #ffffff;
-  border: 1px solid #d1d5db;
+  background-image:
+    linear-gradient(132.969deg, rgba(0, 0, 0, 0) 30.845%, rgba(0, 0, 0, 0.3) 100%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   display: flex;
-  flex-direction: column;
-  min-height: 546px;
+  height: 440px;
+  justify-content: center;
   overflow: hidden;
-  padding: 28px 28px 24px;
   position: relative;
 }
 
-.featuredVehicleTitle {
-  color: #0f0f0f;
-  font-family: var(--font-ui), sans-serif;
-  font-size: 28px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.12;
-  margin: 0;
-  text-align: center;
-  text-transform: uppercase;
-  width: 100%;
-}
-
-.featuredVehicleMedia {
-  align-items: center;
+.vehicleContent {
   display: flex;
-  flex: 1 0 auto;
+  flex: 1 0 0;
+  flex-direction: column;
+  gap: 24px;
+  height: 100%;
   justify-content: center;
-  min-height: 252px;
+  min-width: 0;
+  padding-bottom: 32px;
+  padding-left: 32px;
+  padding-top: 32px;
+  position: relative;
+}
+
+.vehicleBadge {
+  align-items: center;
+  background: linear-gradient(
+    90deg,
+    #dc1f2e 0%,
+    #df2331 7.6923%,
+    #e12735 15.385%,
+    #e42a38 23.077%,
+    #e72d3b 30.769%,
+    #e9303e 38.462%,
+    #ec3342 46.154%,
+    #ef3645 53.846%,
+    #f13948 61.538%,
+    #f43c4b 69.231%,
+    #f73f4e 76.923%,
+    #fa4251 84.615%,
+    #fc4454 92.308%,
+    #ff4757 100%
+  );
+  border-radius: 16px;
+  display: inline-flex;
+  height: 80px;
+  justify-content: center;
+  padding: 20px;
+  width: 80px;
+}
+
+.vehicleBadgeSocial {
+  display: inline-flex;
+  height: 80px;
+  width: 80px;
+}
+
+.vehicleBadgeSocialIcon {
+  height: 80px;
+  width: 80px;
+}
+
+.vehicleBadgeText {
+  color: #ffffff;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 54px;
+  font-style: italic;
+  font-weight: 900;
+  line-height: normal;
+}
+
+.vehicleTextGroup {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 0;
+  width: 351px;
+}
+
+.vehicleTitle {
+  color: #ffffff;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
   width: 100%;
 }
 
-.featuredVehicleImageAmbulance,
-.featuredVehicleImageSocial {
-  height: auto;
-  width: 100%;
-}
-
-.featuredVehicleImageAmbulance {
-  max-width: 492px;
-}
-
-.featuredVehicleImageSocial {
-  max-width: 520px;
-}
-
-.featuredVehicleDescription {
-  color: #202939;
+.vehicleDescription {
+  color: #d1d5db;
+  flex: 1 0 0;
   font-family: var(--font-ui), sans-serif;
   font-size: 16px;
   font-weight: 400;
-  line-height: 1.35;
-  margin: 8px 0 0;
-  max-width: 560px;
-  min-height: 66px;
-  text-align: center;
+  line-height: 22px;
+  margin: 0;
   width: 100%;
 }
 
-.featuredVehicleButton {
+.chassisLogos {
   align-items: center;
-  align-self: center;
-  background: #ffffff;
-  border: 1px solid #bfc5cf;
-  border-radius: 14px;
-  color: #111827;
+  display: flex;
+  gap: 19.118px;
+}
+
+.chassisLogoItem {
+  display: block;
+  flex: 0 0 auto;
+  overflow: hidden;
+  position: relative;
+  border-radius: 3.89px;
+}
+
+.chassisLogoItemPeugeot {
+  height: 39.431px;
+  width: 41.821px;
+}
+
+.chassisLogoItemCitroen {
+  height: 39px;
+  width: 37px;
+}
+
+.chassisLogoItemFord {
+  height: 38.896px;
+  width: 70.013px;
+}
+
+.chassisLogoItemMercedes {
+  height: 39px;
+  width: 40px;
+}
+
+.chassisLogoPeugeot {
+  height: 39.101px;
+  left: calc(50% + 0.47px);
+  max-width: none;
+  position: absolute;
+  top: calc(50% + 1.03px);
+  transform: translate(-50%, -50%);
+  width: 35.597px;
+}
+
+.chassisLogoCitroen {
+  height: 27.903px;
+  left: calc(50% + 0.3px);
+  max-width: none;
+  position: absolute;
+  top: calc(50% - 0.55px);
+  transform: translate(-50%, -50%);
+  width: 49.606px;
+}
+
+.chassisLogoFord {
+  height: 25.314px;
+  left: calc(50% - 0.24px);
+  max-width: none;
+  position: absolute;
+  top: calc(50% + 0.02px);
+  transform: translate(-50%, -50%);
+  width: 70.315px;
+}
+
+.chassisLogoMercedes {
+  height: 36.194px;
+  left: calc(50% - 0.3px);
+  max-width: none;
+  position: absolute;
+  top: calc(50% - 0.4px);
+  transform: translate(-50%, -50%);
+  width: 58.213px;
+}
+
+.vehicleButton {
+  align-self: flex-start;
+  align-items: center;
+  background: rgba(228, 35, 19, 0.1);
+  border: 1px solid #e42313;
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: #ffffff;
   display: inline-flex;
   font-family: var(--font-ui), sans-serif;
   font-size: 16px;
-  font-weight: 700;
-  height: 48px;
-  justify-content: center;
-  margin-top: 18px;
-  padding: 0 24px;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
-}
-
-.featuredVehicleButton:hover,
-.featuredVehicleButton:focus-visible {
-  background: #f9fafb;
-  border-color: #9ca3af;
-}
-
-.featuredVehiclesLead {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 1040px;
-  position: relative;
-  text-align: center;
-  z-index: 1;
-}
-
-.featuredVehiclesLeadTitle {
-  color: #ffffff;
-  font-family: var(--font-ui), sans-serif;
-  font-size: 30px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-  margin: 0;
-  text-transform: uppercase;
-}
-
-.featuredVehiclesLeadBody {
-  color: #e5e7eb;
-  font-family: var(--font-ui), sans-serif;
-  font-size: 18px;
   font-weight: 400;
-  line-height: 1.4;
-  margin: 0;
+  gap: 8px;
+  height: 44px;
+  justify-content: center;
+  padding: 12px 24px;
+  transition: background-color 0.5s ease, border-color 0.5s ease,
+    color 0.5s ease, opacity 0.5s ease;
+  white-space: nowrap;
+  width: 243px;
 }
 
-.featuredVehicleButton:focus-visible {
+.vehicleButton:hover,
+.vehicleButton:focus-visible {
+  background: rgba(228, 35, 19, 0.18);
+  color: #ffffff;
+}
+
+.vehicleButton:focus-visible {
   outline: none;
+}
+
+.vehicleImageWrapA,
+.vehicleImageWrapB,
+.vehicleImageWrapC,
+.vehicleImageWrapSocial {
+  align-items: flex-end;
+  flex: 0 0 auto;
+  justify-content: flex-end;
+  height: 326px;
+  margin-left: auto;
+  overflow: hidden;
+  position: relative;
+  width: 309px;
+}
+
+.vehicleImageA,
+.vehicleImageB,
+.vehicleImageC,
+.vehicleImageSocial {
+  height: 100%;
+  object-fit: contain;
+  object-position: right bottom;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+}
+
+.vehicleButton {
+  padding: 12px 24px;
+  text-decoration: none;
+}
+
+.vehicleButtonIcon {
+  height: 20px;
+  width: 20px;
 }
 
 .aboutManufacturingSection {
@@ -1205,7 +1359,8 @@
 
 @media (max-width: 1439px) {
   .heroSectionInner,
-  .featuredVehiclesGrid,
+  .vehiclesHeader,
+  .vehiclesGrid,
   .serviceSection,
   .partnersSection,
   .chassisSection,
@@ -1222,8 +1377,7 @@
   .partnersHeader,
   .partnersGrid,
   .faqSectionTitle,
-  .faqSectionList,
-  .featuredVehiclesLead {
+  .faqSectionList {
     width: 100%;
   }
 
@@ -1240,16 +1394,30 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .featuredVehiclesGrid {
+  .vehiclesGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .featuredVehicleCard {
+  .vehicleCard {
+    align-items: stretch;
     min-width: 0;
   }
 
-  .featuredVehicleDescription {
+  .vehicleContent {
+    padding-right: 16px;
+  }
+
+  .vehicleTextGroup {
     max-width: 100%;
+    width: auto;
+  }
+
+  .vehicleImageWrapA,
+  .vehicleImageWrapB,
+  .vehicleImageWrapC,
+  .vehicleImageWrapSocial {
+    flex: 0 0 clamp(220px, 43%, 280px);
+    width: clamp(220px, 43%, 280px);
   }
 
   .aboutManufacturingSection,
@@ -1306,18 +1474,74 @@
     line-height: 28px;
   }
 
-  .featuredVehiclesGrid {
+  .vehiclesGrid {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .featuredVehicleCard {
+  .vehicleCard {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0;
+    height: auto;
     min-height: 0;
   }
 
-  .featuredVehicleMedia {
-    min-height: 220px;
+  .vehicleContent {
+    gap: 14px;
+    justify-content: flex-start;
+    order: 2;
+    padding: 18px 18px 20px;
   }
 
+  .vehicleImageWrapA,
+  .vehicleImageWrapB,
+  .vehicleImageWrapC,
+  .vehicleImageWrapSocial {
+    align-self: center;
+    display: flex;
+    height: auto;
+    justify-content: center;
+    max-width: 300px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  .vehicleImageWrapA {
+    aspect-ratio: 309 / 326;
+    max-width: 309px;
+  }
+
+  .vehicleImageWrapB {
+    aspect-ratio: 1576 / 1484;
+    max-width: 300px;
+  }
+
+  .vehicleImageWrapC {
+    aspect-ratio: 309 / 326;
+    max-width: 309px;
+  }
+
+  .vehicleImageWrapSocial {
+    aspect-ratio: 309 / 326;
+    max-width: 309px;
+  }
+
+  .vehicleImageA,
+  .vehicleImageB,
+  .vehicleImageC,
+  .vehicleImageSocial {
+    height: auto;
+    inset: auto;
+    left: auto;
+    max-height: 100%;
+    max-width: 100%;
+    position: relative;
+    top: auto;
+    width: 100%;
+  }
+
+  .vehicleTextGroup,
   .serviceTextGroup,
   .serviceCardText,
   .aboutManufacturingText,
@@ -1325,7 +1549,34 @@
     width: 100%;
   }
 
-  .featuredVehicleButton {
+  .vehicleTextGroup {
+    flex: none;
+    gap: 10px;
+  }
+
+  .vehicleDescription {
+    flex: none;
+  }
+
+  .chassisLogos {
+    flex-wrap: wrap;
+    gap: 10px 12px;
+  }
+
+  .chassisLogoItem {
+    transform: scale(0.82);
+    transform-origin: left center;
+  }
+
+  .vehicleButton {
+    align-self: stretch;
+    font-size: 15px;
+    gap: 10px;
+    height: auto;
+    min-height: 52px;
+    padding: 12px 16px;
+    text-align: center;
+    white-space: normal;
     width: 100%;
   }
 
@@ -1340,13 +1591,13 @@
   .serviceSectionTitle,
   .faqSectionTitle,
   .chassisTitle,
-  .featuredVehiclesLeadTitle,
+  .vehiclesTitle,
   .sectionTitle {
     font-size: 42px;
     line-height: 1.08;
   }
 
-  .featuredVehiclesLeadBody,
+  .vehiclesDescription,
   .chassisBody,
   .chassisNote {
     width: 100%;
@@ -1381,7 +1632,7 @@
 
   .statsGrid,
   .tenderGrid,
-  .featuredVehiclesGrid {
+  .vehiclesGrid {
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -1395,20 +1646,22 @@
   }
 
   .tenderNote,
+  .vehiclesHeader,
+  .vehiclesDescription,
   .partnersHeader,
   .partnersBody,
   .partnersGrid,
   .faqSectionTitle,
   .faqSectionList,
+  .vehicleTextGroup,
   .serviceTextGroup,
   .serviceCardText,
   .chassisBody,
-  .chassisNote,
-  .featuredVehiclesLead {
+  .chassisNote {
     width: 100%;
   }
 
-  .featuredVehicleButton,
+  .vehicleButton,
   .aboutButton,
   .manufacturingButton,
   .serviceBaseButton,
@@ -1498,7 +1751,7 @@
   .serviceSectionTitle,
   .faqSectionTitle,
   .chassisTitle,
-  .featuredVehiclesLeadTitle,
+  .vehiclesTitle,
   .sectionTitle,
   .priceHeading {
     font-size: 32px;
@@ -1523,11 +1776,11 @@
   .tenderNote,
   .aboutManufacturingText p,
   .serviceCardText p,
+  .vehiclesDescription,
   .partnersBody,
   .chassisBody,
   .chassisNote,
   .faqQuestionText,
-  .featuredVehiclesLeadBody,
   .faqAnswer {
     font-size: 16px;
     line-height: 26px;
@@ -1543,30 +1796,111 @@
     min-height: 80px;
   }
 
-  .featuredVehicleCard {
+  .vehicleCard {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0;
+    height: auto;
     min-height: 0;
-    padding: 20px 18px 18px;
   }
 
-  .featuredVehicleTitle {
-    font-size: 21px;
+  .vehicleContent {
+    gap: 14px;
+    justify-content: flex-start;
+    order: 2;
+    padding: 18px 18px 20px;
   }
 
-  .featuredVehicleMedia {
-    min-height: 180px;
+  .vehicleImageWrapA,
+  .vehicleImageWrapB,
+  .vehicleImageWrapC,
+  .vehicleImageWrapSocial {
+    align-self: flex-end;
+    display: flex;
+    height: 326px;
+    justify-content: flex-end;
+    margin-left: auto;
+    max-width: 309px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
   }
 
-  .featuredVehicleDescription {
+  .vehicleImageWrapA {
+    aspect-ratio: 309 / 326;
+  }
+
+  .vehicleImageWrapB {
+    aspect-ratio: 309 / 326;
+  }
+
+  .vehicleImageWrapC {
+    aspect-ratio: 309 / 326;
+  }
+
+  .vehicleImageWrapSocial {
+    aspect-ratio: 309 / 326;
+  }
+
+  .vehicleImageA,
+  .vehicleImageB,
+  .vehicleImageC,
+  .vehicleImageSocial {
+    height: 100%;
+    inset: 0;
+    left: 0;
+    max-height: none;
+    max-width: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  .vehicleBadge,
+  .vehicleBadgeSocial,
+  .vehicleBadgeSocialIcon {
+    height: 64px;
+    width: 64px;
+  }
+
+  .vehicleBadgeText {
+    font-size: 42px;
+  }
+
+  .vehicleTitle {
+    font-size: 18px;
+    line-height: 1.12;
+  }
+
+  .vehicleDescription {
+    flex: none;
     font-size: 14px;
     line-height: 20px;
-    min-height: 0;
   }
 
-  .featuredVehicleButton {
+  .chassisLogos {
+    flex-wrap: wrap;
+    gap: 10px 12px;
+  }
+
+  .chassisLogoItem {
+    transform: scale(0.82);
+    transform-origin: left center;
+  }
+
+  .vehicleTextGroup {
+    flex: none;
+    gap: 10px;
+  }
+
+  .vehicleButton {
+    align-self: stretch;
     font-size: 15px;
+    gap: 10px;
     height: auto;
     min-height: 52px;
     padding: 12px 16px;
+    text-align: center;
     white-space: normal;
   }
 
