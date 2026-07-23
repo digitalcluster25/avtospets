@@ -22,7 +22,7 @@ const translations = {
       {
         href: "/avtomobili-type-social",
         label: "Соціальний",
-        isAvailable: false,
+        isAvailable: true,
       },
     ],
     headerItems: [
@@ -44,7 +44,7 @@ const translations = {
       {
         href: "/avtomobili-type-social",
         label: "Social",
-        isAvailable: false,
+        isAvailable: true,
       },
     ],
     headerItems: [
