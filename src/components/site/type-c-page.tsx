@@ -24,6 +24,31 @@ type SpecIconInsets = {
 
 const TYPE_C_BRAND_SCROLL_KEY = "type-c-brand-scroll-y";
 
+const pageCopy = {
+  medical: {
+    badge: "B",
+    breadcrumb: "Тип С",
+    title: "Тип С",
+    description:
+      "Реанімобіль для екстреної медичної допомоги, транспортування та моніторингу пацієнтів у тяжкому або критичному стані.",
+    heroAlt: "Автомобіль швидкої медичної допомоги типу C",
+    sectionTitle: "Доступні шасі для типа C",
+    productTitle:
+      "Автомобіль швидкої медичної допомоги на базі шасі Peugeot Boxer",
+  },
+  social: {
+    badge: "S",
+    breadcrumb: "Соціальний",
+    title: "Соціальний",
+    description:
+      "Автомобіль для соціальних і муніципальних перевезень, зокрема транспортування людей з обмеженими фізичними можливостями та мобільних амбулаторій.",
+    heroAlt: "Автомобіль для соціальних перевезень",
+    sectionTitle: "Доступні шасі для соціального транспорту",
+    productTitle:
+      "Автомобіль для соціальних перевезень на базі шасі Peugeot Boxer",
+  },
+} as const;
+
 const chassisTabs = [
   {
     id: "peugeot",
@@ -289,6 +314,8 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
   const detailsGridRef = useRef<HTMLDivElement | null>(null);
   const productAsideRef = useRef<HTMLDivElement | null>(null);
   const productCardRef = useRef<HTMLDivElement | null>(null);
+  const isSocial = page.uri.startsWith("/avtomobili-type-social");
+  const copy = pageCopy[isSocial ? "social" : "medical"];
   const brandSlug =
     chassisTabs.find((tab) => page.uri.endsWith(`/${tab.id}`))?.id ?? "peugeot";
   const activeBrand = typeCBrandContent[brandSlug];
@@ -416,28 +443,27 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
           <div className={styles.heroInner}>
             <div className={styles.heroCopy}>
               <div className={styles.heroBadge} aria-hidden="true">
-                B
+                {copy.badge}
               </div>
 
               <div className={styles.breadcrumbs}>
                 <span>Головна</span>
                 <span>/</span>
-                <span className={styles.breadcrumbCurrent}>Тип С</span>
+                <span className={styles.breadcrumbCurrent}>
+                  {copy.breadcrumb}
+                </span>
               </div>
 
               <div className={styles.heroTextBlock}>
-                <h1 className={styles.heroTitle}>Тип С</h1>
-                <p className={styles.heroDescription}>
-                  Реанімобіль для екстреної медичної допомоги, транспортування
-                  та моніторингу пацієнтів у тяжкому або критичному стані.
-                </p>
+                <h1 className={styles.heroTitle}>{copy.title}</h1>
+                <p className={styles.heroDescription}>{copy.description}</p>
               </div>
             </div>
 
             <div className={styles.heroImageWrap}>
               <Image
                 src="/figma/type-c/hero-vehicle-transparent.png"
-                alt="Автомобіль швидкої медичної допомоги типу C"
+                alt={copy.heroAlt}
                 width={734}
                 height={540}
                 className={styles.heroImage}
@@ -449,7 +475,7 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
 
         <section className={styles.contentSection}>
           <div className={styles.sectionTitleWrap}>
-            <h2 className={styles.sectionTitle}>Доступні шасі для типа C</h2>
+            <h2 className={styles.sectionTitle}>{copy.sectionTitle}</h2>
           </div>
 
           <div className={styles.tabsRow}>
@@ -498,7 +524,7 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
               return (
                 <Link
                   key={tab.id}
-                  href={tab.href}
+                  href={isSocial ? page.uri : tab.href}
                   scroll={false}
                   className={`${isActive ? styles.tabActive : styles.tab} ${tab.className}`}
                   onClick={() => {
@@ -542,9 +568,7 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
             </div>
 
             <div className={styles.specColumn}>
-              <h3 className={styles.productTitle}>
-                {activeBrand.productTitle}
-              </h3>
+              <h3 className={styles.productTitle}>{copy.productTitle}</h3>
 
               <section className={styles.panel}>
                 <h4 className={styles.panelTitle}>

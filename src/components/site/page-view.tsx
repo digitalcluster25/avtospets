@@ -244,7 +244,12 @@ export async function PageView({ page }: PageViewProps) {
     return <MainPage page={page} />;
   }
 
-  if (page.uri === "/avtomobili-type-c" || page.uri.startsWith("/avtomobili-type-c/")) {
+  if (
+    page.uri === "/avtomobili-type-c" ||
+    page.uri.startsWith("/avtomobili-type-c/") ||
+    page.uri === "/avtomobili-type-social" ||
+    page.uri.startsWith("/avtomobili-type-social/")
+  ) {
     const { TypeCPage } = await import("@/components/site/type-c-page");
     return <TypeCPage language={language} page={page} />;
   }
