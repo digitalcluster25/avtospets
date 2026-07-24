@@ -39,6 +39,11 @@ const pageCopy = {
     productImageAlt: "Peugeot Boxer",
     defaultBrand: "peugeot",
     availableBrands: ["peugeot"],
+    salonTitle: "Оснащення медичного салону",
+    salonPhotos: [1, 2, 3].map((index) => ({
+      src: `/figma/type-c/medical-${index}.png`,
+      alt: `Оснащення медичного салону ${index}`,
+    })),
   },
   social: {
     badge: "S",
@@ -54,6 +59,11 @@ const pageCopy = {
     productImageAlt: "Citroen Jumper — соціальне таксі для ветеранів",
     defaultBrand: "citroen",
     availableBrands: ["citroen"],
+    salonTitle: "Оснащення салону",
+    salonPhotos: Array.from({ length: 16 }, (_, index) => ({
+      src: `/assets/social-auto-citroen/salon-${index + 1}.jpg`,
+      alt: `Салон соціального автомобіля ${index + 1}`,
+    })),
   },
 } as const;
 
@@ -616,33 +626,21 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
               </section>
 
               <section className={styles.panel}>
-                <h4 className={styles.panelTitle}>Оснащення медичного салону</h4>
-                <div className={styles.mediaCard}>
-                  <Image
-                    src="/figma/type-c/medical-1.png"
-                    alt="Оснащення медичного салону 1"
-                    width={730}
-                    height={450}
-                    className={styles.mediaImageFixed}
-                  />
-                </div>
-                <div className={styles.mediaCard}>
-                  <Image
-                    src="/figma/type-c/medical-2.png"
-                    alt="Оснащення медичного салону 2"
-                    width={730}
-                    height={450}
-                    className={styles.mediaImageFixed}
-                  />
-                </div>
-                <div className={styles.mediaCard}>
-                  <Image
-                    src="/figma/type-c/medical-3.png"
-                    alt="Оснащення медичного салону 3"
-                    width={730}
-                    height={450}
-                    className={styles.mediaImageFixed}
-                  />
+                <h4 className={styles.panelTitle}>{copy.salonTitle}</h4>
+                <div className={isSocial ? styles.salonGrid : styles.salonStack}>
+                  {copy.salonPhotos.map((photo) => (
+                    <div key={photo.src} className={styles.mediaCard}>
+                      <Image
+                        src={photo.src}
+                        alt={photo.alt}
+                        width={730}
+                        height={450}
+                        className={
+                          isSocial ? styles.salonImage : styles.mediaImageFixed
+                        }
+                      />
+                    </div>
+                  ))}
                 </div>
 
                 <div className={styles.medicalGroups}>

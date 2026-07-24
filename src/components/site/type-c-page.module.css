@@ -370,6 +370,26 @@
   width: 161.06%;
 }
 
+.salonStack {
+  display: contents;
+}
+
+.salonGrid {
+  column-gap: 16px;
+  columns: 3;
+}
+
+.salonGrid > * {
+  break-inside: avoid;
+  margin-bottom: 16px;
+}
+
+.salonImage {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
 .productImageWrapPhoto {
   background: #ffffff;
 }
@@ -756,6 +776,10 @@
 @media (max-width: 900px) {
   .breadcrumbs {
     display: none;
+  }
+
+  .salonGrid {
+    columns: 2;
   }
 
   .heroInner {
