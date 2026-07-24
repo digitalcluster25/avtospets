@@ -288,19 +288,6 @@ const socialSpecCards = [
     wide: false,
     descriptionClassName: styles.specBodyCenter,
   },
-  {
-    title: "Пасажиромісткість",
-    body: "4 особи та пацієнт",
-    icon: "/figma/type-c/spec-passengers.svg",
-    iconInsets: {
-      top: "16.75%",
-      right: "12.56%",
-      bottom: "17.53%",
-      left: "12.44%",
-    },
-    wide: false,
-    descriptionClassName: styles.specBodyCenter,
-  },
 ] as const;
 
 function getSpecIconStyle(insets: SpecIconInsets): CSSProperties {
