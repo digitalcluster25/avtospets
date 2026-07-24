@@ -50,7 +50,7 @@ const pageCopy = {
     sectionTitle: "Доступні шасі для соціального транспорту",
     productTitle:
       "Автомобіль для соціальних перевезень на базі шасі Citroen Jumper",
-    productImage: "/assets/social-auto-citroen/cover.jpg",
+    productImage: "/assets/social-auto-citroen/cover-removebg-preview.png",
     productImageAlt: "Citroen Jumper — соціальне таксі для ветеранів",
     defaultBrand: "citroen",
     availableBrands: ["citroen"],
