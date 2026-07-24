@@ -49,18 +49,18 @@ const pageCopy = {
     })),
   },
   social: {
-    badge: "S",
-    breadcrumb: "Соціальний",
-    title: "Соціальний",
+    badge: "A1",
+    breadcrumb: "Тип А1",
+    title: "Тип А1",
     description:
-      "Автомобіль для соціальних і муніципальних перевезень, зокрема транспортування людей з обмеженими фізичними можливостями та мобільних амбулаторій.",
+      "Спеціалізований автомобіль на базі Citroen Berlingo для транспортування, основного медичного догляду та нагляду за пацієнтом згідно з ДСТУ EN 1789:2019.",
     heroImage: "/assets/social-auto-citroen/citroen-boxer-main-cover.png",
-    heroAlt: "Автомобіль для соціальних перевезень",
-    sectionTitle: "Доступні шасі для соціального транспорту",
+    heroAlt: "Автомобіль швидкої медичної допомоги типу А1",
+    sectionTitle: "Доступні шасі для типу А1",
     productTitle: (model: string) =>
-      `Автомобіль для соціальних перевезень на базі шасі ${model}`,
+      `Спеціалізований автомобіль швидкої медичної допомоги на базі ${model}, тип А1`,
     productImage: "/assets/social-auto-citroen/cover-removebg-preview.png",
-    productImageAlt: "Соціальне таксі для ветеранів",
+    productImageAlt: "Citroen Berlingo типу А1",
     defaultBrand: "citroen",
     visibleBrands: ["citroen"],
     availableBrands: ["citroen"],
@@ -68,7 +68,7 @@ const pageCopy = {
       peugeot: "Peugeot Boxer",
       citroen: "Citroen Berlingo",
     } as Record<string, string>,
-    salonTitle: "Оснащення салону",
+    salonTitle: "Оснащення медичного салону",
     salonPhotos: Array.from({ length: 16 }, (_, index) => ({
       src: `/assets/social-auto-citroen/salon-${index + 1}.jpg`,
       alt: `Салон соціального автомобіля ${index + 1}`,
@@ -205,6 +205,100 @@ const specCards = [
   },
 ] as const;
 
+const socialSpecCards = [
+  {
+    title: "Двигун",
+    body: "Дизельний L4 / 8-клапанний, робочий об'єм 1560 см³, потужність 92 к.с., максимальний крутний момент 230 Нм, EURO 5.",
+    icon: "/figma/type-c/spec-engine.svg",
+    iconInsets: {
+      top: "12.5%",
+      right: "6.37%",
+      bottom: "13.29%",
+      left: "6.25%",
+    },
+    wide: true,
+    descriptionClassName: styles.specBodyWide,
+  },
+  {
+    title: "Максимальна швидкість",
+    body: "161 км/год",
+    icon: "/figma/type-c/spec-speed.svg",
+    iconInsets: {
+      top: "12.18%",
+      right: "12.63%",
+      bottom: "12.96%",
+      left: "12.51%",
+    },
+    wide: false,
+    descriptionClassName: styles.specBodyCenter,
+  },
+  {
+    title: "Коробка передач",
+    body: "5-ступенева, механічна",
+    icon: "/figma/type-c/spec-gearbox.svg",
+    iconInsets: {
+      top: "14.29%",
+      right: "16.31%",
+      bottom: "15.07%",
+      left: "16.19%",
+    },
+    wide: false,
+    descriptionClassName: styles.specBodyCenter,
+  },
+  {
+    title: "Підвіска передня",
+    body: "Незалежна, «Мак-Ферсон»",
+    icon: "/figma/type-c/spec-front-suspension.svg",
+    iconInsets: {
+      top: "12.18%",
+      right: "18.19%",
+      bottom: "12.96%",
+      left: "18.06%",
+    },
+    wide: false,
+    descriptionClassName: styles.specBodyCenter,
+  },
+  {
+    title: "Підвіска задня",
+    body: "Балка, що деформується: незалежна підвіска, стабілізатор поперечної стійкості, роздільна конструкція пружин і амортизаторів",
+    icon: "/figma/type-c/spec-rear-suspension.svg",
+    iconInsets: {
+      top: "6.62%",
+      right: "22.91%",
+      bottom: "7.41%",
+      left: "22.79%",
+    },
+    wide: false,
+    descriptionClassName: styles.specBodyTop,
+  },
+  {
+    title: "Тип приводу",
+    body: "Передній",
+    icon: "/figma/type-c/spec-drive.svg",
+    iconInsets: {
+      top: "12.84%",
+      right: "18.81%",
+      bottom: "13.62%",
+      left: "18.69%",
+    },
+    wide: false,
+    descriptionClassName: styles.specBodyCenter,
+  },
+  {
+    title: "Пасажиромісткість",
+    body: "4 особи та пацієнт",
+    icon: "/figma/type-c/spec-passengers.svg",
+    iconInsets: {
+      top: "16.75%",
+      right: "12.56%",
+      bottom: "17.53%",
+      left: "12.44%",
+    },
+    wide: false,
+    descriptionClassName: styles.specBodyCenter,
+  },
+] as const;
+
 function getSpecIconStyle(insets: SpecIconInsets): CSSProperties {
   return {
     "--spec-icon-top": insets.top,
@@ -263,6 +357,54 @@ const medicalSections = [
   },
 ] as const;
 
+const socialMedicalSections = [
+  {
+    title: "Електрообладнання",
+    items: [
+      "Світильники для освітлення медичного салону",
+      "Точкові світильники над поверхнею носилок",
+      "Світильники для освітлення прилеглої території задніх дверей",
+      "Дві розетки 12В",
+      "Ліхтар для освітлення околиць",
+    ],
+  },
+  {
+    title: "Спеціальні сигнали",
+    items: [
+      "Балка СГУ із сигналом синього світла і системою зовнішньої трансляції",
+      "Флуоресцентне обклеювання автомобіля згідно з ДСТУ EN 1789:2019",
+    ],
+  },
+  {
+    title: "Транспортування пацієнта",
+    items: [
+      "Основні ноші CARRERA T TEC 73 Max 10G із системою блокування S-MAX 10G, матрацом QMX 777 та інфузійною стійкою Track, Spencer Italia",
+      "Механічний завантажувальний пристрій для нош типу 11, АСПА.943229.011.01",
+      "Ноші, що складаються, АСПА.942816.048.01",
+      "Складне крісло Attucho, тип Sedan 0480",
+      "Ноші медичні типу 19 з нетканого матеріалу, АСПА.942816.004.02",
+    ],
+  },
+  {
+    title: "Невідкладна допомога",
+    items: [
+      "Портативний кисень не менше 400 л із вимірювачем витрат не менше 15 л/хв та регулюючим клапаном",
+      "Зовнішній автоматичний дефібрилятор A15, MEDIANA",
+      "Ручний медичний аспіратор MEDICARE ASPIR",
+      "Сумка-укладка для невідкладної допомоги",
+      "Багаторазовий дихальний мішок типу АМБУ MEDICARE для дорослих",
+      "Шприцевий насос Medifusion DS-3000",
+    ],
+  },
+  {
+    title: "Медичні витратні матеріали",
+    items: [
+      "Контейнер для медичних відходів об'ємом 1,5 л",
+      "Мішки для утилізації біологічно небезпечних медичних відходів",
+    ],
+  },
+] as const;
+
 const extraEquipment = [
   "ESP, ABS, EBA, EBD, Hill Start Assist адаптована ходова частина",
   "Бортовий комп'ютер",
@@ -290,6 +432,39 @@ const extraEquipment = [
   "Оздоблення салону – чорна тканина",
 ] as const;
 
+const socialExtraEquipment = [
+  "Підготовка для радіостанції",
+  "Два вогнегасники: у кабіні водія та в медичному салоні",
+  "Приймальний пристрій для нош",
+  "Сидіння збоку носилок",
+] as const;
+
+const socialExternalDimensions = [
+  "Колісна база — 2 975 мм",
+  "Довжина — 4 753 мм",
+  "Висота — 2 010 мм",
+  "Ширина — 1 848 мм",
+  "Кліренс — 153 мм",
+] as const;
+
+const socialBaseEquipment = [
+  "ABS + ESP",
+  "Подушка безпеки водія",
+  "Електронний імобілайзер",
+  "Триточкові ремені безпеки на передніх сидіннях із піротехнічним переднатягувачем",
+  "Підголовники водія та передніх пасажирів",
+  "Кондиціонер",
+  "Передні електросклопідйомники",
+  "Центральний замок із дистанційним керуванням",
+  "Електропідсилювач керма",
+  "Бортовий комп'ютер",
+  "Регульована кермова колона",
+  "Розетка 12В",
+  "Аудіопідготовка",
+  "Сталеві диски",
+  "Запасне колесо зі сталевим диском",
+] as const;
+
 function DownloadArrow() {
   return (
     <Image
@@ -308,6 +483,13 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
   const productCardRef = useRef<HTMLDivElement | null>(null);
   const isSocial = page.uri.startsWith("/avtomobili-type-social");
   const copy = pageCopy[isSocial ? "social" : "medical"];
+  const activeSpecCards = isSocial ? socialSpecCards : specCards;
+  const activeMedicalSections = isSocial
+    ? socialMedicalSections
+    : medicalSections;
+  const activeExtraEquipment = isSocial
+    ? socialExtraEquipment
+    : extraEquipment;
   const baseUri = isSocial ? "/avtomobili-type-social" : "/avtomobili-type-c";
   const visibleTabs = chassisTabs.filter((tab) =>
     (copy.visibleBrands as readonly string[]).includes(tab.id),
@@ -591,7 +773,7 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
                 </h4>
 
                 <div className={styles.specList}>
-                  {specCards.map((card) => (
+                  {activeSpecCards.map((card) => (
                     <article
                       key={card.title}
                       className={card.wide ? styles.specCardWide : styles.specCard}
@@ -616,19 +798,44 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
                     </article>
                   ))}
                 </div>
+
+                {isSocial ? (
+                  <article className={styles.medicalCard}>
+                    <h5 className={styles.medicalCardTitle}>
+                      Безпека та базове оснащення
+                    </h5>
+                    <ul className={styles.medicalList}>
+                      {socialBaseEquipment.map((item) => (
+                        <li key={item} className={styles.medicalItem}>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                ) : null}
               </section>
 
               <section className={styles.panel}>
                 <h4 className={styles.panelTitle}>Зовнішні габарити</h4>
-                <div className={styles.mediaCard}>
-                  <Image
-                    src="/figma/type-c/dimensions.png"
-                    alt="Зовнішні габарити"
-                    width={730}
-                    height={479}
-                    className={styles.mediaImage}
-                  />
-                </div>
+                {isSocial ? (
+                  <ul className={styles.extraList}>
+                    {socialExternalDimensions.map((item) => (
+                      <li key={item} className={styles.extraItem}>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <div className={styles.mediaCard}>
+                    <Image
+                      src="/figma/type-c/dimensions.png"
+                      alt="Зовнішні габарити"
+                      width={730}
+                      height={479}
+                      className={styles.mediaImage}
+                    />
+                  </div>
+                )}
               </section>
 
               <section className={styles.panel}>
@@ -663,7 +870,7 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
                 </div>
 
                 <div className={styles.medicalGroups}>
-                  {medicalSections.map((section) => (
+                  {activeMedicalSections.map((section) => (
                     <article key={section.title} className={styles.medicalCard}>
                       <h5 className={styles.medicalCardTitle}>{section.title}</h5>
                       <ul className={styles.medicalList}>
@@ -681,7 +888,7 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
               <section className={styles.panel}>
                 <h4 className={styles.panelTitle}>Додаткове обладнання</h4>
                 <ul className={styles.extraList}>
-                  {extraEquipment.map((item) => (
+                  {activeExtraEquipment.map((item) => (
                     <li key={item} className={styles.extraItem}>
                       {item}
                     </li>
