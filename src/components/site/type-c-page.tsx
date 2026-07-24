@@ -518,21 +518,45 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
           Number(salonPhotoOrientations[right.src] === "landscape"),
       )
     : copy.salonPhotos;
+  const firstLandscapePhotoIndex = orderedSalonPhotos.findIndex(
+    (photo) => salonPhotoOrientations[photo.src] === "landscape",
+  );
 
-  const registerSalonPhotoOrientation = (
-    src: string,
-    width: number,
-    height: number,
-  ) => {
-    const orientation: PhotoOrientation =
-      width > height ? "landscape" : "portrait";
+  useEffect(() => {
+    if (!isSocial) {
+      return;
+    }
 
-    setSalonPhotoOrientations((current) =>
-      current[src] === orientation
-        ? current
-        : { ...current, [src]: orientation },
-    );
-  };
+    let cancelled = false;
+
+    Promise.all(
+      copy.salonPhotos.map(
+        (photo) =>
+          new Promise<[string, PhotoOrientation]>((resolve) => {
+            const image = new window.Image();
+
+            image.onload = () => {
+              resolve([
+                photo.src,
+                image.naturalWidth > image.naturalHeight
+                  ? "landscape"
+                  : "portrait",
+              ]);
+            };
+            image.onerror = () => resolve([photo.src, "portrait"]);
+            image.src = photo.src;
+          }),
+      ),
+    ).then((orientations) => {
+      if (!cancelled) {
+        setSalonPhotoOrientations(Object.fromEntries(orientations));
+      }
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [copy.salonPhotos, isSocial]);
 
   useEffect(() => {
     const savedScroll = window.sessionStorage.getItem(TYPE_C_BRAND_SCROLL_KEY);
@@ -890,8 +914,15 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
               <section className={styles.panel}>
                 <h4 className={styles.panelTitle}>{copy.salonTitle}</h4>
                 <div className={isSocial ? styles.salonGrid : styles.salonStack}>
-                  {orderedSalonPhotos.map((photo) => (
-                    <div key={photo.src} className={styles.mediaCard}>
+                  {orderedSalonPhotos.map((photo, index) => (
+                    <div
+                      key={photo.src}
+                      className={`${styles.mediaCard} ${
+                        isSocial && index === firstLandscapePhotoIndex
+                          ? styles.salonLandscapeStart
+                          : ""
+                      }`}
+                    >
                       <Image
                         src={photo.src}
                         alt={photo.alt}
@@ -900,17 +931,6 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
                         className={
                           isSocial ? styles.salonImage : styles.mediaImageFixed
                         }
-                        onLoad={(event) => {
-                          if (!isSocial) {
-                            return;
-                          }
-
-                          registerSalonPhotoOrientation(
-                            photo.src,
-                            event.currentTarget.naturalWidth,
-                            event.currentTarget.naturalHeight,
-                          );
-                        }}
                       />
                     </div>
                   ))}
