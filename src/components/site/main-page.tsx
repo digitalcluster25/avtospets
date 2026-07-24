@@ -587,7 +587,14 @@ export async function MainPage({ page }: MainPageProps) {
                         );
                       })}
                     </div>
-                    <Link href="/production" className={styles.vehicleButton}>
+                    <Link
+                      href={
+                        vehicle.social
+                          ? "/avtomobili-type-social"
+                          : "/production"
+                      }
+                      className={styles.vehicleButton}
+                    >
                       <span>{vehicle.button}</span>
                       <Image
                         src="/figma/ambulance-cards/arrow-right.svg"
