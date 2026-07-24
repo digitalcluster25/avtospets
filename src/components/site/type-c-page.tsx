@@ -43,7 +43,9 @@ const pageCopy = {
     defaultBrand: "peugeot",
     visibleBrands: ["peugeot"],
     availableBrands: ["peugeot"],
-    brandLabels: {} as Record<string, string>,
+    brandLabels: {
+      peugeot: "Peugeot Boxer",
+    } as Record<string, string>,
     salonTitle: "Оснащення медичного салону",
     salonPhotos: [1, 2, 3].map((index) => ({
       src: `/figma/type-c/medical-${index}.png`,
@@ -495,6 +497,9 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
   const activeExtraEquipment = isSocial
     ? socialExtraEquipment
     : extraEquipment;
+  const commercialOfferHref = isSocial
+    ? "/documents/citroen-berlingo-a1-commercial-offer.pdf"
+    : "/documents/peugeot-citroen-commercial-offer.pdf";
   const baseUri = isSocial ? "/avtomobili-type-social" : "/avtomobili-type-c";
   const visibleTabs = chassisTabs.filter((tab) =>
     (copy.visibleBrands as readonly string[]).includes(tab.id),
@@ -778,13 +783,9 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
                 </div>
 
                 <SiteButton
-                  href={
-                    isSocial
-                      ? "/documents/citroen-berlingo-a1-commercial-offer.pdf"
-                      : "/contacts"
-                  }
-                  target={isSocial ? "_blank" : undefined}
-                  rel={isSocial ? "noopener noreferrer" : undefined}
+                  href={commercialOfferHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   variant="primary"
                   size="l"
                   className={styles.downloadButton}
@@ -871,18 +872,20 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
                 )}
               </section>
 
-              <section className={styles.panel}>
-                <h4 className={styles.panelTitle}>Внутрішні габарити</h4>
-                <div className={styles.mediaCard}>
-                  <Image
-                    src="/figma/type-c/dimensions-inner.png"
-                    alt="Внутрішні габарити"
-                    width={730}
-                    height={511}
-                    className={styles.mediaImage}
-                  />
-                </div>
-              </section>
+              {!isSocial ? (
+                <section className={styles.panel}>
+                  <h4 className={styles.panelTitle}>Внутрішні габарити</h4>
+                  <div className={styles.mediaCard}>
+                    <Image
+                      src="/figma/type-c/dimensions-inner.png"
+                      alt="Внутрішні габарити"
+                      width={730}
+                      height={511}
+                      className={styles.mediaImage}
+                    />
+                  </div>
+                </section>
+              ) : null}
 
               <section className={styles.panel}>
                 <h4 className={styles.panelTitle}>{copy.salonTitle}</h4>
