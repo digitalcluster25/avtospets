@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useRef, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
 import { SiteButton } from "@/components/site/button";
@@ -21,6 +21,8 @@ type SpecIconInsets = {
   bottom: string;
   left: string;
 };
+
+type PhotoOrientation = "portrait" | "landscape";
 
 const TYPE_C_BRAND_SCROLL_KEY = "type-c-brand-scroll-y";
 
@@ -481,6 +483,9 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
   const detailsGridRef = useRef<HTMLDivElement | null>(null);
   const productAsideRef = useRef<HTMLDivElement | null>(null);
   const productCardRef = useRef<HTMLDivElement | null>(null);
+  const [salonPhotoOrientations, setSalonPhotoOrientations] = useState<
+    Record<string, PhotoOrientation>
+  >({});
   const isSocial = page.uri.startsWith("/avtomobili-type-social");
   const copy = pageCopy[isSocial ? "social" : "medical"];
   const activeSpecCards = isSocial ? socialSpecCards : specCards;
@@ -501,6 +506,28 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
     copy.brandLabels[tabId] ??
     chassisTabs.find((tab) => tab.id === tabId)?.label ??
     tabId;
+  const orderedSalonPhotos = isSocial
+    ? [...copy.salonPhotos].sort(
+        (left, right) =>
+          Number(salonPhotoOrientations[left.src] === "landscape") -
+          Number(salonPhotoOrientations[right.src] === "landscape"),
+      )
+    : copy.salonPhotos;
+
+  const registerSalonPhotoOrientation = (
+    src: string,
+    width: number,
+    height: number,
+  ) => {
+    const orientation: PhotoOrientation =
+      width > height ? "landscape" : "portrait";
+
+    setSalonPhotoOrientations((current) =>
+      current[src] === orientation
+        ? current
+        : { ...current, [src]: orientation },
+    );
+  };
 
   useEffect(() => {
     const savedScroll = window.sessionStorage.getItem(TYPE_C_BRAND_SCROLL_KEY);
@@ -854,7 +881,7 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
               <section className={styles.panel}>
                 <h4 className={styles.panelTitle}>{copy.salonTitle}</h4>
                 <div className={isSocial ? styles.salonGrid : styles.salonStack}>
-                  {copy.salonPhotos.map((photo) => (
+                  {orderedSalonPhotos.map((photo) => (
                     <div key={photo.src} className={styles.mediaCard}>
                       <Image
                         src={photo.src}
@@ -864,6 +891,17 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
                         className={
                           isSocial ? styles.salonImage : styles.mediaImageFixed
                         }
+                        onLoad={(event) => {
+                          if (!isSocial) {
+                            return;
+                          }
+
+                          registerSalonPhotoOrientation(
+                            photo.src,
+                            event.currentTarget.naturalWidth,
+                            event.currentTarget.naturalHeight,
+                          );
+                        }}
                       />
                     </div>
                   ))}
