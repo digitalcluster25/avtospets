@@ -33,12 +33,14 @@ const pageCopy = {
       "Реанімобіль для екстреної медичної допомоги, транспортування та моніторингу пацієнтів у тяжкому або критичному стані.",
     heroAlt: "Автомобіль швидкої медичної допомоги типу C",
     sectionTitle: "Доступні шасі для типа C",
-    productTitle:
+    productTitle: () =>
       "Автомобіль швидкої медичної допомоги на базі шасі Peugeot Boxer",
     productImage: "/figma/type-c/product-vehicle.png",
     productImageAlt: "Peugeot Boxer",
     defaultBrand: "peugeot",
+    visibleBrands: ["peugeot", "citroen", "ford", "mercedes"],
     availableBrands: ["peugeot"],
+    brandLabels: {} as Record<string, string>,
     salonTitle: "Оснащення медичного салону",
     salonPhotos: [1, 2, 3].map((index) => ({
       src: `/figma/type-c/medical-${index}.png`,
@@ -53,12 +55,17 @@ const pageCopy = {
       "Автомобіль для соціальних і муніципальних перевезень, зокрема транспортування людей з обмеженими фізичними можливостями та мобільних амбулаторій.",
     heroAlt: "Автомобіль для соціальних перевезень",
     sectionTitle: "Доступні шасі для соціального транспорту",
-    productTitle:
-      "Автомобіль для соціальних перевезень на базі шасі Citroen Jumper",
+    productTitle: (model: string) =>
+      `Автомобіль для соціальних перевезень на базі шасі ${model}`,
     productImage: "/assets/social-auto-citroen/cover-removebg-preview.png",
-    productImageAlt: "Citroen Jumper — соціальне таксі для ветеранів",
-    defaultBrand: "citroen",
-    availableBrands: ["citroen"],
+    productImageAlt: "Соціальне таксі для ветеранів",
+    defaultBrand: "peugeot",
+    visibleBrands: ["peugeot", "citroen"],
+    availableBrands: ["peugeot", "citroen"],
+    brandLabels: {
+      peugeot: "Peugeot Boxer",
+      citroen: "Citroen Berlingo",
+    } as Record<string, string>,
     salonTitle: "Оснащення салону",
     salonPhotos: Array.from({ length: 16 }, (_, index) => ({
       src: `/assets/social-auto-citroen/salon-${index + 1}.jpg`,
@@ -71,7 +78,6 @@ const chassisTabs = [
   {
     id: "peugeot",
     label: "Peugeot",
-    href: "/avtomobili-type-c/peugeot",
     asset: "/figma/type-c/chassis-peugeot.png",
     assetClassName: styles.peugeotLogoImage,
     className: styles.tabPeugeot,
@@ -80,7 +86,6 @@ const chassisTabs = [
   {
     id: "citroen",
     label: "Citroen",
-    href: "/avtomobili-type-c/citroen",
     asset: "/figma/type-c/chassis-citroen.png",
     assetClassName: styles.citroenLogoImage,
     className: styles.tabCitroen,
@@ -89,7 +94,6 @@ const chassisTabs = [
   {
     id: "ford",
     label: "Ford",
-    href: "/avtomobili-type-c/ford",
     asset: "/figma/type-c/chassis-ford.png",
     assetClassName: styles.fordLogoImage,
     isWideLogo: true,
@@ -98,7 +102,6 @@ const chassisTabs = [
   {
     id: "mercedes",
     label: "Mercedes",
-    href: "/avtomobili-type-c/mercedes",
     asset: "/figma/type-c/chassis-mercedes.png",
     assetClassName: styles.mercedesLogoImage,
     className: styles.tabMercedes,
@@ -303,9 +306,17 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
   const productCardRef = useRef<HTMLDivElement | null>(null);
   const isSocial = page.uri.startsWith("/avtomobili-type-social");
   const copy = pageCopy[isSocial ? "social" : "medical"];
+  const baseUri = isSocial ? "/avtomobili-type-social" : "/avtomobili-type-c";
+  const visibleTabs = chassisTabs.filter((tab) =>
+    (copy.visibleBrands as readonly string[]).includes(tab.id),
+  );
   const brandSlug =
-    chassisTabs.find((tab) => page.uri.endsWith(`/${tab.id}`))?.id ??
+    visibleTabs.find((tab) => page.uri.endsWith(`/${tab.id}`))?.id ??
     copy.defaultBrand;
+  const brandLabel = (tabId: string) =>
+    copy.brandLabels[tabId] ??
+    chassisTabs.find((tab) => tab.id === tabId)?.label ??
+    tabId;
 
   useEffect(() => {
     const savedScroll = window.sessionStorage.getItem(TYPE_C_BRAND_SCROLL_KEY);
@@ -466,7 +477,7 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
           </div>
 
           <div className={styles.tabsRow}>
-            {chassisTabs.map((tab) => {
+            {visibleTabs.map((tab) => {
               const isActive = brandSlug === tab.id;
               const isAvailable = (
                 copy.availableBrands as readonly string[]
@@ -493,7 +504,7 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
                         isActive ? styles.tabLabelActive : styles.tabLabel
                       }
                     >
-                      {tab.label}
+                      {brandLabel(tab.id)}
                     </span>
                   </span>
                 </>
@@ -514,7 +525,7 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
               return (
                 <Link
                   key={tab.id}
-                  href={isSocial ? page.uri : tab.href}
+                  href={`${baseUri}/${tab.id}`}
                   scroll={false}
                   className={`${isActive ? styles.tabActive : styles.tab} ${tab.className}`}
                   onClick={() => {
@@ -564,7 +575,9 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
             </div>
 
             <div className={styles.specColumn}>
-              <h3 className={styles.productTitle}>{copy.productTitle}</h3>
+              <h3 className={styles.productTitle}>
+                {copy.productTitle(brandLabel(brandSlug))}
+              </h3>
 
               <section className={styles.panel}>
                 <h4 className={styles.panelTitle}>

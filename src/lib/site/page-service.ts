@@ -5,8 +5,10 @@ import { getClient } from "@/lib/apollo/client";
 import { pages } from "@/lib/site/page-data";
 import type { SitePage, WordPressNodeResponse } from "@/lib/site/types";
 
-const TYPE_C_BASE_URI = "/avtomobili-type-c";
-const TYPE_C_BRAND_SLUGS = ["peugeot", "citroen", "ford", "mercedes"] as const;
+const BRAND_ROUTES: Record<string, readonly string[]> = {
+  "/avtomobili-type-c": ["peugeot", "citroen", "ford", "mercedes"],
+  "/avtomobili-type-social": ["peugeot", "citroen"],
+};
 
 const PAGE_BY_URI_QUERY = gql`
   query PageByUri($uri: String!) {
@@ -60,8 +62,10 @@ function findFallbackPage(uri: string) {
   return pages.find((page) => page.uri === uri);
 }
 
-function isTypeCBrandUri(uri: string) {
-  return TYPE_C_BRAND_SLUGS.some((slug) => uri === `${TYPE_C_BASE_URI}/${slug}`);
+function findBrandBaseUri(uri: string) {
+  return Object.keys(BRAND_ROUTES).find((baseUri) =>
+    BRAND_ROUTES[baseUri].some((slug) => uri === `${baseUri}/${slug}`),
+  );
 }
 
 function findExtendedFallbackPage(uri: string) {
@@ -71,8 +75,10 @@ function findExtendedFallbackPage(uri: string) {
     return directMatch;
   }
 
-  if (isTypeCBrandUri(uri)) {
-    return findFallbackPage(TYPE_C_BASE_URI) ?? null;
+  const brandBaseUri = findBrandBaseUri(uri);
+
+  if (brandBaseUri) {
+    return findFallbackPage(brandBaseUri) ?? null;
   }
 
   return null;
@@ -153,9 +159,11 @@ export function getAllRouteParams() {
     };
   });
 
-  const typeCBrandParams = TYPE_C_BRAND_SLUGS.map((slug) => ({
-    slug: ["avtomobili-type-c", slug],
-  }));
+  const brandParams = Object.entries(BRAND_ROUTES).flatMap(([baseUri, slugs]) =>
+    slugs.map((slug) => ({
+      slug: [...baseUri.replace(/^\/|\/$/g, "").split("/"), slug],
+    })),
+  );
 
-  return [...pageParams, ...typeCBrandParams];
+  return [...pageParams, ...brandParams];
 }
