@@ -7,7 +7,7 @@ import type { SitePage, WordPressNodeResponse } from "@/lib/site/types";
 
 const BRAND_ROUTES: Record<string, readonly string[]> = {
   "/avtomobili-type-c": ["peugeot", "citroen", "ford", "mercedes"],
-  "/avtomobili-type-social": ["peugeot", "citroen"],
+  "/avtomobili-type-social": ["citroen"],
 };
 
 const PAGE_BY_URI_QUERY = gql`

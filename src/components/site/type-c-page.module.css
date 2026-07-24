@@ -174,12 +174,11 @@
 .tabsRow {
   align-items: center;
   display: flex;
+  flex-wrap: wrap;
   gap: 24px;
-  justify-content: center;
+  justify-content: flex-start;
   margin-bottom: 64px;
-  width: 828px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
 }
 
 .tab,
@@ -735,7 +734,7 @@
   .tabCitroen,
   .tabFord,
   .tabMercedes {
-    flex: 1 1 calc(50% - 8px);
+    flex: 0 0 auto;
     min-width: 0;
     width: auto;
   }
@@ -868,7 +867,7 @@
   .tabCitroen,
   .tabFord,
   .tabMercedes {
-    flex: 0 0 calc(50% - 6px);
+    flex: 0 0 auto;
     justify-content: center;
     min-width: 0;
     padding: 14px 12px;
