@@ -53,14 +53,14 @@ const pageCopy = {
     })),
   },
   social: {
-    badge: "A1",
-    breadcrumb: "Тип А1",
-    title: "Тип А1",
+    badge: "S",
+    breadcrumb: "Соціальний",
+    title: "Соціальний",
     description:
       "Автомобіль для соціальних і муніципальних перевезень, зокрема транспортування людей з обмеженими фізичними можливостями та мобільних амбулаторій.",
     heroImage: "/assets/social-auto-citroen/citroen-boxer-main-cover.png",
     heroAlt: "Автомобіль швидкої медичної допомоги типу А1",
-    sectionTitle: "Доступні шасі для типу А1",
+    sectionTitle: "Доступні шасі для соціального транспорту",
     productTitle: (model: string) =>
       `Спеціалізований автомобіль швидкої медичної допомоги на базі ${model}, тип А1`,
     productImage: "/assets/social-auto-citroen/cover-removebg-preview.png",
@@ -72,7 +72,7 @@ const pageCopy = {
       peugeot: "Peugeot Boxer",
       citroen: "Citroen Berlingo",
     } as Record<string, string>,
-    salonTitle: "Оснащення медичного салону",
+    salonTitle: "Оснащення салону",
     salonPhotos: Array.from({ length: 16 }, (_, index) => ({
       src: `/assets/social-auto-citroen/salon-${index + 1}.jpg`,
       alt: `Салон соціального автомобіля ${index + 1}`,

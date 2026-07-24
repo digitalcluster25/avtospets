@@ -250,7 +250,12 @@
 }
 
 .tabPeugeot {
-  width: 180px;
+  width: auto;
+}
+
+.tabPeugeot .tabLabel,
+.tabPeugeot .tabLabelActive {
+  white-space: nowrap;
 }
 
 .tabCitroen {
