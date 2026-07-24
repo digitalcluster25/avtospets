@@ -35,6 +35,10 @@ const pageCopy = {
     sectionTitle: "Доступні шасі для типа C",
     productTitle:
       "Автомобіль швидкої медичної допомоги на базі шасі Peugeot Boxer",
+    productImage: "/figma/type-c/product-vehicle.png",
+    productImageAlt: "Peugeot Boxer",
+    defaultBrand: "peugeot",
+    availableBrands: ["peugeot"],
   },
   social: {
     badge: "S",
@@ -45,7 +49,11 @@ const pageCopy = {
     heroAlt: "Автомобіль для соціальних перевезень",
     sectionTitle: "Доступні шасі для соціального транспорту",
     productTitle:
-      "Автомобіль для соціальних перевезень на базі шасі Peugeot Boxer",
+      "Автомобіль для соціальних перевезень на базі шасі Citroen Jumper",
+    productImage: "/assets/social-auto-citroen/cover.jpg",
+    productImageAlt: "Citroen Jumper — соціальне таксі для ветеранів",
+    defaultBrand: "citroen",
+    availableBrands: ["citroen"],
   },
 } as const;
 
@@ -58,7 +66,6 @@ const chassisTabs = [
     assetClassName: styles.peugeotLogoImage,
     className: styles.tabPeugeot,
     isWideLogo: false,
-    isAvailable: true,
   },
   {
     id: "citroen",
@@ -68,7 +75,6 @@ const chassisTabs = [
     assetClassName: styles.citroenLogoImage,
     className: styles.tabCitroen,
     isWideLogo: false,
-    isAvailable: false,
   },
   {
     id: "ford",
@@ -78,7 +84,6 @@ const chassisTabs = [
     assetClassName: styles.fordLogoImage,
     isWideLogo: true,
     className: styles.tabFord,
-    isAvailable: false,
   },
   {
     id: "mercedes",
@@ -88,36 +93,8 @@ const chassisTabs = [
     assetClassName: styles.mercedesLogoImage,
     className: styles.tabMercedes,
     isWideLogo: false,
-    isAvailable: false,
   },
 ] as const;
-
-const typeCBrandContent = {
-  peugeot: {
-    productImage: "/figma/type-c/product-vehicle.png",
-    productImageAlt: "Peugeot Boxer",
-    productTitle:
-      "Автомобіль швидкої медичної допомоги на базі шасі Peugeot Boxer",
-  },
-  citroen: {
-    productImage: "/figma/type-c/product-vehicle.png",
-    productImageAlt: "Peugeot Boxer",
-    productTitle:
-      "Автомобіль швидкої медичної допомоги на базі шасі Peugeot Boxer",
-  },
-  ford: {
-    productImage: "/figma/type-c/product-vehicle.png",
-    productImageAlt: "Peugeot Boxer",
-    productTitle:
-      "Автомобіль швидкої медичної допомоги на базі шасі Peugeot Boxer",
-  },
-  mercedes: {
-    productImage: "/figma/type-c/product-vehicle.png",
-    productImageAlt: "Peugeot Boxer",
-    productTitle:
-      "Автомобіль швидкої медичної допомоги на базі шасі Peugeot Boxer",
-  },
-} as const;
 
 const specCards = [
   {
@@ -317,8 +294,8 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
   const isSocial = page.uri.startsWith("/avtomobili-type-social");
   const copy = pageCopy[isSocial ? "social" : "medical"];
   const brandSlug =
-    chassisTabs.find((tab) => page.uri.endsWith(`/${tab.id}`))?.id ?? "peugeot";
-  const activeBrand = typeCBrandContent[brandSlug];
+    chassisTabs.find((tab) => page.uri.endsWith(`/${tab.id}`))?.id ??
+    copy.defaultBrand;
 
   useEffect(() => {
     const savedScroll = window.sessionStorage.getItem(TYPE_C_BRAND_SCROLL_KEY);
@@ -481,6 +458,9 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
           <div className={styles.tabsRow}>
             {chassisTabs.map((tab) => {
               const isActive = brandSlug === tab.id;
+              const isAvailable = (
+                copy.availableBrands as readonly string[]
+              ).includes(tab.id);
 
               const tabInner = (
                 <>
@@ -509,7 +489,7 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
                 </>
               );
 
-              if (!tab.isAvailable) {
+              if (!isAvailable) {
                 return (
                   <span
                     key={tab.id}
@@ -543,14 +523,20 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
           <div ref={detailsGridRef} className={styles.detailsGrid}>
             <div ref={productAsideRef} className={styles.productAside}>
               <div ref={productCardRef} className={styles.productCard}>
-                <div className={styles.productImageWrap}>
+                <div
+                  className={`${styles.productImageWrap} ${
+                    isSocial ? styles.productImageWrapPhoto : ""
+                  }`}
+                >
                   <div className={styles.productImageFrame}>
                     <Image
-                      src={activeBrand.productImage}
-                      alt={activeBrand.productImageAlt}
+                      src={copy.productImage}
+                      alt={copy.productImageAlt}
                       width={538}
                       height={488}
-                      className={styles.productImage}
+                      className={
+                        isSocial ? styles.productImagePhoto : styles.productImage
+                      }
                     />
                   </div>
                 </div>
