@@ -847,7 +847,7 @@ export function ServicePage({ language, page }: ServicePageProps) {
           <div className={styles.medicalInner}>
             <div className={styles.medicalImageCard}>
               <Image
-                src="/figma/services-page/medical-service-image.webp"
+                src="/figma/services-page/medical-service-maintenance.jpg"
                 alt="Ремонт і обслуговування медичного обладнання"
                 fill
                 loading="lazy"
