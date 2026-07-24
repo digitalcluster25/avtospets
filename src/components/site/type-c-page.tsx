@@ -31,6 +31,7 @@ const pageCopy = {
     title: "Тип С",
     description:
       "Реанімобіль для екстреної медичної допомоги, транспортування та моніторингу пацієнтів у тяжкому або критичному стані.",
+    heroImage: "/figma/type-c/hero-vehicle-transparent.png",
     heroAlt: "Автомобіль швидкої медичної допомоги типу C",
     sectionTitle: "Доступні шасі для типа C",
     productTitle: () =>
@@ -53,6 +54,7 @@ const pageCopy = {
     title: "Соціальний",
     description:
       "Автомобіль для соціальних і муніципальних перевезень, зокрема транспортування людей з обмеженими фізичними можливостями та мобільних амбулаторій.",
+    heroImage: "/assets/social-auto-citroen/citroen-boxer-main-cover.png",
     heroAlt: "Автомобіль для соціальних перевезень",
     sectionTitle: "Доступні шасі для соціального транспорту",
     productTitle: (model: string) =>
@@ -460,7 +462,7 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
 
             <div className={styles.heroImageWrap}>
               <Image
-                src="/figma/type-c/hero-vehicle-transparent.png"
+                src={copy.heroImage}
                 alt={copy.heroAlt}
                 width={734}
                 height={540}
@@ -514,7 +516,9 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
                 return (
                   <span
                     key={tab.id}
-                    className={`${styles.tabDisabled} ${tab.className}`}
+                    className={`${styles.tabDisabled} ${tab.className} ${
+                      isSocial ? styles.tabAuto : ""
+                    }`}
                     aria-disabled="true"
                   >
                     {tabInner}
@@ -527,7 +531,9 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
                   key={tab.id}
                   href={`${baseUri}/${tab.id}`}
                   scroll={false}
-                  className={`${isActive ? styles.tabActive : styles.tab} ${tab.className}`}
+                  className={`${isActive ? styles.tabActive : styles.tab} ${tab.className} ${
+                    isSocial ? styles.tabAuto : ""
+                  }`}
                   onClick={() => {
                     window.sessionStorage.setItem(
                       TYPE_C_BRAND_SCROLL_KEY,
