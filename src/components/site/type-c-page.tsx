@@ -778,7 +778,13 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
                 </div>
 
                 <SiteButton
-                  href="/contacts"
+                  href={
+                    isSocial
+                      ? "/documents/citroen-berlingo-a1-commercial-offer.pdf"
+                      : "/contacts"
+                  }
+                  target={isSocial ? "_blank" : undefined}
+                  rel={isSocial ? "noopener noreferrer" : undefined}
                   variant="primary"
                   size="l"
                   className={styles.downloadButton}

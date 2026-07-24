@@ -1,5 +1,9 @@
 import Link from "next/link";
-import type { MouseEventHandler, ReactNode } from "react";
+import type {
+  HTMLAttributeAnchorTarget,
+  MouseEventHandler,
+  ReactNode,
+} from "react";
 import styles from "./button.module.css";
 
 type ButtonVariant = "primary" | "secondary" | "tertiary" | "ghost";
@@ -12,8 +16,10 @@ type SiteButtonProps = {
   href?: string;
   leftIcon?: ReactNode;
   onClick?: MouseEventHandler<HTMLAnchorElement | HTMLButtonElement>;
+  rel?: string;
   rightIcon?: ReactNode;
   size?: ButtonSize;
+  target?: HTMLAttributeAnchorTarget;
   variant?: ButtonVariant;
 };
 
@@ -54,8 +60,10 @@ export function SiteButton({
   href,
   leftIcon,
   onClick,
+  rel,
   rightIcon,
   size = "l",
+  target,
   variant = "primary",
 }: SiteButtonProps) {
   const sizeClass = size === "m" ? styles.sizeM : styles.sizeL;
@@ -92,7 +100,13 @@ export function SiteButton({
 
   if (href && !disabled) {
     return (
-      <Link href={href} className={classes} onClick={onClick}>
+      <Link
+        href={href}
+        className={classes}
+        onClick={onClick}
+        rel={rel}
+        target={target}
+      >
         {content}
       </Link>
     );
