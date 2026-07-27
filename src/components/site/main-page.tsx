@@ -765,7 +765,7 @@ export async function MainPage({ page }: MainPageProps) {
               <div className={styles.serviceRow}>
                 <div className={styles.serviceImageCardExact}>
                   <Image
-                    src="/figma/service-2746/service-medical.webp"
+                    src="/figma/services-page/medical-service-maintenance.jpg"
                     alt={copy.serviceMedicalAlt}
                     fill
                     loading="lazy"
