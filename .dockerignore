@@ -12,4 +12,6 @@ coverage
 *.pem
 .tmp
 .tmp-*.png
+.codex-tmp
+.agents
 tsconfig.tsbuildinfo

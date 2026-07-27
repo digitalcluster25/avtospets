@@ -36,6 +36,11 @@ yarn-error.log*
 # vercel
 .vercel
 
+# temp screenshots / scratch dirs (never commit)
+.tmp
+.tmp-*.png
+.codex-tmp
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
