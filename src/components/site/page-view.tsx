@@ -19,6 +19,7 @@ import type {
   TestimonialsSection,
 } from "@/lib/site/types";
 import styles from "./page-view.module.css";
+import { tr, translateDeep } from "@/components/site/i18n";
 
 type PageViewProps = {
   page: SitePage;
@@ -234,10 +235,11 @@ function renderSections(page: SitePage) {
   });
 }
 
-export async function PageView({ page }: PageViewProps) {
+export async function PageView({ page: sourcePage }: PageViewProps) {
   const cookieStore = await cookies();
   const language: SiteLanguage =
     cookieStore.get(SITE_LANGUAGE_COOKIE_KEY)?.value === "en" ? "en" : "ua";
+  const page = translateDeep(sourcePage, language);
 
   if (page.uri === "/") {
     const { MainPage } = await import("@/components/site/main-page");
@@ -316,7 +318,7 @@ export async function PageView({ page }: PageViewProps) {
                         variant="primary"
                         size="l"
                       >
-                        {page.ctaLabel ?? "Связаться"}
+                        {page.ctaLabel ?? tr(language, "Связаться")}
                       </OpenContactFormButton>
                       <SiteButton
                         className={styles.secondaryAction}
@@ -324,7 +326,7 @@ export async function PageView({ page }: PageViewProps) {
                         variant="secondary"
                         size="l"
                       >
-                        Смотреть структуру
+                        {tr(language, "Смотреть структуру")}
                       </SiteButton>
                     </div>
                   </div>

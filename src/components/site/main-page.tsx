@@ -175,7 +175,7 @@ const pageCopy = {
           "Full production cycle for A1, A2, B and C types, including standard and neonatal configurations. Specialized medical equipment.",
         button: "More about ambulances",
         href: "/production",
-        image: "/figma/ambulance-cards/card-a-figma.png",
+        image: "/figma/hero409/hero-image.webp",
         imageAlt: "Production of ambulances",
       },
       {

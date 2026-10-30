@@ -7,6 +7,7 @@ import { useContactForm } from "@/components/site/contact-form-provider";
 import type { SiteLanguage } from "@/components/site/site-language";
 import type { SitePage } from "@/lib/site/types";
 import styles from "./contact-page.module.css";
+import { tr, translateDeep } from "@/components/site/i18n";
 
 type ContactPageProps = {
   language: SiteLanguage;
@@ -33,6 +34,7 @@ const contactRows = [
 ] as const;
 
 export function ContactPage({ language, page }: ContactPageProps) {
+  const contactRowsT = translateDeep(contactRows, language);
   const { openContactForm } = useContactForm();
 
   return (
@@ -52,18 +54,16 @@ export function ContactPage({ language, page }: ContactPageProps) {
                 <div className={styles.copyBlock}>
                   <div className={styles.headGroup}>
                     <div className={styles.breadcrumbs}>
-                      <span className={styles.breadcrumbMuted}>Головна</span>
+                      <span className={styles.breadcrumbMuted}>{tr(language, "Головна")}</span>
                       <span className={styles.breadcrumbMuted}>/</span>
-                      <span className={styles.breadcrumbCurrent}>Контакти</span>
+                      <span className={styles.breadcrumbCurrent}>{tr(language, "Контакти")}</span>
                     </div>
 
-                    <h1 className={styles.title}>Контакти</h1>
+                    <h1 className={styles.title}>{tr(language, "Контакти")}</h1>
                   </div>
 
                   <p className={styles.description}>
-                    Наша команда експертів готова допомогти вам знайти
-                    оптимальні рішення для захисту та інновацій. Чекаємо на вашу
-                    заявку та сподіваємося на плідну співпрацю!
+                    {tr(language, "Наша команда експертів готова допомогти вам знайти оптимальні рішення для захисту та інновацій. Чекаємо на вашу заявку та сподіваємося на плідну співпрацю!")}
                   </p>
                 </div>
 
@@ -77,13 +77,13 @@ export function ContactPage({ language, page }: ContactPageProps) {
                     openContactForm();
                   }}
                 >
-                  Звʼязатися з нами
+                  {tr(language, "Звʼязатися з нами")}
                 </SiteButton>
               </div>
 
               <div className={styles.rightPanel}>
                 <div className={styles.contactList}>
-                  {contactRows.map((row) => (
+                  {contactRowsT.map((row) => (
                     <section key={row.label} className={styles.contactRow}>
                       <p className={styles.contactLabel}>{row.label}</p>
                       <div className={styles.contactValue}>

@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
+import { tr } from "@/components/site/i18n";
+import { SITE_LANGUAGE_COOKIE_KEY } from "@/components/site/site-language";
 import { PageView } from "@/components/site/page-view";
 import { getAllRouteParams, getPageBySegments } from "@/lib/site/page-service";
 
@@ -25,9 +28,15 @@ export async function generateMetadata({
     return {};
   }
 
+  const cookieStore = await cookies();
+  const language =
+    cookieStore.get(SITE_LANGUAGE_COOKIE_KEY)?.value === "en" ? "en" : "ua";
+
   return {
-    title: page.metaTitle ?? page.title,
-    description: page.description,
+    title: tr(language, page.metaTitle ?? page.title),
+    description: page.description
+      ? tr(language, page.description)
+      : undefined,
   };
 }
 

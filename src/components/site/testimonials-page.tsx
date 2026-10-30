@@ -4,6 +4,7 @@ import { Header } from "@/components/site/header";
 import type { SiteLanguage } from "@/components/site/site-language";
 import type { SitePage } from "@/lib/site/types";
 import styles from "./testimonials-page.module.css";
+import { tr, translateDeep } from "@/components/site/i18n";
 
 type TestimonialsPageProps = {
   language: SiteLanguage;
@@ -42,6 +43,7 @@ const testimonials = [
 ] as const;
 
 export function TestimonialsPage({ language, page }: TestimonialsPageProps) {
+  const testimonialsT = translateDeep(testimonials, language);
   return (
     <div className={styles.page}>
       <Header currentPath={page.uri} initialLanguage={language} page={page} />
@@ -51,18 +53,18 @@ export function TestimonialsPage({ language, page }: TestimonialsPageProps) {
           <div className={styles.inner}>
             <div className={styles.heading}>
               <div className={styles.breadcrumbs}>
-                <span className={styles.breadcrumbMuted}>Головна</span>
+                <span className={styles.breadcrumbMuted}>{tr(language, "Головна")}</span>
                 <span className={styles.breadcrumbMuted}>/</span>
-                <span className={styles.breadcrumbCurrent}>Відгуки</span>
+                <span className={styles.breadcrumbCurrent}>{tr(language, "Відгуки")}</span>
               </div>
 
               <div className={styles.titleRow}>
-                <h1 className={styles.title}>Відгуки</h1>
+                <h1 className={styles.title}>{tr(language, "Відгуки")}</h1>
               </div>
             </div>
 
             <div className={styles.grid}>
-              {testimonials.map((item) => (
+              {testimonialsT.map((item) => (
                 <article
                   key={item.title}
                   className={`${styles.card} ${item.heightClassName}`}
@@ -92,7 +94,7 @@ export function TestimonialsPage({ language, page }: TestimonialsPageProps) {
                       unoptimized
                       className={styles.documentIcon}
                     />
-                    <span className={styles.documentLabel}>Лист-відгук</span>
+                    <span className={styles.documentLabel}>{tr(language, "Лист-відгук")}</span>
                   </button>
                 </article>
               ))}

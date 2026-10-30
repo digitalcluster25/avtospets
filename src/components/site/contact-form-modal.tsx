@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import { useState, type FormEvent } from "react";
+import type { SiteLanguage } from "@/components/site/site-language";
 import styles from "./contact-form-modal.module.css";
+import { tr, translateDeep } from "@/components/site/i18n";
 
 const contactOptions = ["Telegram", "WhatsApp", "Телефон"] as const;
 
@@ -15,11 +17,16 @@ export function ContactFormModal({
   isOpen,
   onClose,
 }: ContactFormModalProps) {
+  const language: SiteLanguage =
+    typeof document !== "undefined" && document.documentElement.lang === "en"
+      ? "en"
+      : "ua";
+  const contactOptionsT = translateDeep(contactOptions, language);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
   const [selectedContactMethod, setSelectedContactMethod] = useState(
-    "Спосіб звʼязку з вами",
+    tr(language, "Спосіб звʼязку з вами"),
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
@@ -29,7 +36,7 @@ export function ContactFormModal({
     setIsDropdownOpen(false);
     setPhone("");
     setName("");
-    setSelectedContactMethod("Спосіб звʼязку з вами");
+    setSelectedContactMethod(tr(language, "Спосіб звʼязку з вами"));
     setIsSubmitting(false);
     setSubmitMessage("");
     setIsSuccess(false);
@@ -77,12 +84,12 @@ export function ContactFormModal({
     event.preventDefault();
 
     if (!phone.trim() || !name.trim()) {
-      setSubmitMessage("Заповніть номер телефону та імʼя.");
+      setSubmitMessage(tr(language, "Заповніть номер телефону та імʼя."));
       return;
     }
 
-    if (selectedContactMethod === "Спосіб звʼязку з вами") {
-      setSubmitMessage("Оберіть спосіб звʼязку.");
+    if (selectedContactMethod === tr(language, "Спосіб звʼязку з вами")) {
+      setSubmitMessage(tr(language, "Оберіть спосіб звʼязку."));
       return;
     }
 
@@ -108,7 +115,7 @@ export function ContactFormModal({
 
       setIsSuccess(true);
     } catch {
-      setSubmitMessage("Не вдалося відправити форму.");
+      setSubmitMessage(tr(language, "Не вдалося відправити форму."));
     } finally {
       setIsSubmitting(false);
     }
@@ -148,10 +155,10 @@ export function ContactFormModal({
 
               <div className={styles.successHeader}>
                 <h2 id="contact-form-title" className={styles.successTitle}>
-                  Ваше замовлення прийнято
+                  {tr(language, "Ваше замовлення прийнято")}
                 </h2>
                 <p className={styles.successSubtitle}>
-                  Очікуйте на дзвінок. З вами зв&apos;яжуться наші спеціалісти!
+                  {tr(language, "Очікуйте на дзвінок. З вами зв'яжуться наші спеціалісти!")}
                 </p>
               </div>
             </div>
@@ -161,25 +168,24 @@ export function ContactFormModal({
               className={styles.successButton}
               onClick={handleClose}
             >
-              <span className={styles.successButtonLabel}>ОК</span>
+              <span className={styles.successButtonLabel}>{tr(language, "ОК")}</span>
             </button>
           </>
         ) : (
           <>
             <div className={styles.header}>
               <h2 id="contact-form-title" className={styles.title}>
-                Заповніть форму
+                {tr(language, "Заповніть форму")}
               </h2>
               <p className={styles.subtitle}>
-                Наш менеджер зв&apos;яжеться з вами впродовж кількох годин
+                {tr(language, "Наш менеджер зв'яжеться з вами впродовж кількох годин")}
               </p>
             </div>
 
             <form className={styles.content} onSubmit={handleSubmit}>
               <div className={styles.contactPromptRow}>
                 <p className={styles.contactPrompt}>
-                  Щоб не чекати, ви можете зв&apos;язатися з нами натиснувши на
-                  кнопку телефона.
+                  {tr(language, "Щоб не чекати, ви можете зв'язатися з нами натиснувши на кнопку телефона.")}
                 </p>
 
                 <a href="tel:+380442336740" className={styles.phoneCard}>
@@ -200,7 +206,7 @@ export function ContactFormModal({
               <input
                 type="tel"
                 className={styles.input}
-                aria-label="Номер телефону"
+                aria-label={tr(language, "Номер телефону")}
                 placeholder="+38 044 233 67 40"
                 value={phone}
                 onChange={(event) =>
@@ -210,8 +216,8 @@ export function ContactFormModal({
               <input
                 type="text"
                 className={styles.input}
-                aria-label="Імʼя"
-                placeholder="Імʼя"
+                aria-label={tr(language, "Імʼя")}
+                placeholder={tr(language, "Імʼя")}
                 value={name}
                 onChange={(event) => setName(event.target.value)}
               />
@@ -222,7 +228,7 @@ export function ContactFormModal({
                   className={styles.dropdownField}
                   aria-expanded={isDropdownOpen}
                   aria-haspopup="listbox"
-                  aria-label="Спосіб звʼязку"
+                  aria-label={tr(language, "Спосіб звʼязку")}
                   onClick={() => setIsDropdownOpen((current) => !current)}
                 >
                   <span className={styles.dropdownValue}>
@@ -240,7 +246,7 @@ export function ContactFormModal({
 
                 {isDropdownOpen ? (
                   <div className={styles.dropdownMenu} role="listbox">
-                    {contactOptions.map((option) => (
+                    {contactOptionsT.map((option) => (
                       <button
                         key={option}
                         type="button"
@@ -268,7 +274,7 @@ export function ContactFormModal({
                 className={styles.submitButton}
                 disabled={isSubmitting}
               >
-                <span className={styles.submitLabel}>Відправити</span>
+                <span className={styles.submitLabel}>{tr(language, "Відправити")}</span>
               </button>
 
               {submitMessage ? (
@@ -276,7 +282,7 @@ export function ContactFormModal({
               ) : null}
 
               <div className={styles.socialSection}>
-                <p className={styles.socialTitle}>Ми в соціальних мережах</p>
+                <p className={styles.socialTitle}>{tr(language, "Ми в соціальних мережах")}</p>
                 <div className={styles.socialIcons}>
                   <span
                     className={styles.socialIconLink}
@@ -305,7 +311,7 @@ export function ContactFormModal({
         <button
           type="button"
           className={styles.closeButton}
-          aria-label="Закрити"
+          aria-label={tr(language, "Закрити")}
           onClick={handleClose}
         >
           <span className={styles.closeIcon}>

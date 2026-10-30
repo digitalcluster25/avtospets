@@ -9,6 +9,7 @@ import { SiteButton } from "@/components/site/button";
 import type { SiteLanguage } from "@/components/site/site-language";
 import type { SitePage } from "@/lib/site/types";
 import styles from "./type-c-page.module.css";
+import { tr, translateDeep } from "@/components/site/i18n";
 
 type TypeCPageProps = {
   language: SiteLanguage;
@@ -469,6 +470,15 @@ function DownloadArrow() {
 }
 
 export function TypeCPage({ language, page }: TypeCPageProps) {
+  const pageCopyT = translateDeep(pageCopy, language);
+  const socialSpecCardsT = translateDeep(socialSpecCards, language);
+  const specCardsT = translateDeep(specCards, language);
+  const socialMedicalSectionsT = translateDeep(socialMedicalSections, language);
+  const medicalSectionsT = translateDeep(medicalSections, language);
+  const socialExtraEquipmentT = translateDeep(socialExtraEquipment, language);
+  const extraEquipmentT = translateDeep(extraEquipment, language);
+  const socialBaseEquipmentT = translateDeep(socialBaseEquipment, language);
+  const socialExternalDimensionsT = translateDeep(socialExternalDimensions, language);
   const detailsGridRef = useRef<HTMLDivElement | null>(null);
   const productAsideRef = useRef<HTMLDivElement | null>(null);
   const productCardRef = useRef<HTMLDivElement | null>(null);
@@ -476,14 +486,14 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
     Record<string, PhotoOrientation>
   >({});
   const isSocial = page.uri.startsWith("/avtomobili-type-social");
-  const copy = pageCopy[isSocial ? "social" : "medical"];
-  const activeSpecCards = isSocial ? socialSpecCards : specCards;
+  const copy = pageCopyT[isSocial ? "social" : "medical"];
+  const activeSpecCards = isSocial ? socialSpecCardsT : specCardsT;
   const activeMedicalSections = isSocial
-    ? socialMedicalSections
-    : medicalSections;
+    ? socialMedicalSectionsT
+    : medicalSectionsT;
   const activeExtraEquipment = isSocial
-    ? socialExtraEquipment
-    : extraEquipment;
+    ? socialExtraEquipmentT
+    : extraEquipmentT;
   const commercialOfferHref = isSocial
     ? "/documents/citroen-berlingo-a1-commercial-offer.pdf"
     : "/documents/peugeot-citroen-commercial-offer.pdf";
@@ -672,7 +682,7 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
               </div>
 
               <div className={styles.breadcrumbs}>
-                <span>Головна</span>
+                <span>{tr(language, "Головна")}</span>
                 <span>/</span>
                 <span className={styles.breadcrumbCurrent}>
                   {copy.breadcrumb}
@@ -802,7 +812,7 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
                   className={styles.downloadButton}
                   rightIcon={<DownloadArrow />}
                 >
-                  Завантажити КП
+                  {tr(language, "Завантажити КП")}
                 </SiteButton>
               </div>
             </div>
@@ -814,7 +824,7 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
 
               <section className={styles.panel}>
                 <h4 className={styles.panelTitle}>
-                  Технічні характеристики автомобіля
+                  {tr(language, "Технічні характеристики автомобіля")}
                 </h4>
 
                 <div className={styles.specList}>
@@ -847,10 +857,10 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
                 {isSocial ? (
                   <article className={styles.medicalCard}>
                     <h5 className={styles.medicalCardTitle}>
-                      Безпека та базове оснащення
+                      {tr(language, "Безпека та базове оснащення")}
                     </h5>
                     <ul className={styles.medicalList}>
-                      {socialBaseEquipment.map((item) => (
+                      {socialBaseEquipmentT.map((item) => (
                         <li key={item} className={styles.medicalItem}>
                           {item}
                         </li>
@@ -861,10 +871,10 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
               </section>
 
               <section className={styles.panel}>
-                <h4 className={styles.panelTitle}>Зовнішні габарити</h4>
+                <h4 className={styles.panelTitle}>{tr(language, "Зовнішні габарити")}</h4>
                 {isSocial ? (
                   <ul className={styles.extraList}>
-                    {socialExternalDimensions.map((item) => (
+                    {socialExternalDimensionsT.map((item) => (
                       <li key={item} className={styles.extraItem}>
                         {item}
                       </li>
@@ -874,7 +884,7 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
                   <div className={styles.mediaCard}>
                     <Image
                       src="/figma/type-c/dimensions.png"
-                      alt="Зовнішні габарити"
+                      alt={tr(language, "Зовнішні габарити")}
                       width={730}
                       height={479}
                       className={styles.mediaImage}
@@ -885,11 +895,11 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
 
               {!isSocial ? (
                 <section className={styles.panel}>
-                  <h4 className={styles.panelTitle}>Внутрішні габарити</h4>
+                  <h4 className={styles.panelTitle}>{tr(language, "Внутрішні габарити")}</h4>
                   <div className={styles.mediaCard}>
                     <Image
                       src="/figma/type-c/dimensions-inner.png"
-                      alt="Внутрішні габарити"
+                      alt={tr(language, "Внутрішні габарити")}
                       width={730}
                       height={511}
                       className={styles.mediaImage}
@@ -940,7 +950,7 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
               </section>
 
               <section className={styles.panel}>
-                <h4 className={styles.panelTitle}>Додаткове обладнання</h4>
+                <h4 className={styles.panelTitle}>{tr(language, "Додаткове обладнання")}</h4>
                 <ul className={styles.extraList}>
                   {activeExtraEquipment.map((item) => (
                     <li key={item} className={styles.extraItem}>
@@ -952,8 +962,7 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
 
               <section className={styles.notePanel}>
                 <p className={styles.noteText}>
-                  Специфікація медичного обладнання та інші деталі доступні в
-                  документі комерційної пропозиції (КП)
+                  {tr(language, "Специфікація медичного обладнання та інші деталі доступні в документі комерційної пропозиції (КП)")}
                 </p>
               </section>
             </div>

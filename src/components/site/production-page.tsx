@@ -10,6 +10,7 @@ import { Header } from "@/components/site/header";
 import type { SiteLanguage } from "@/components/site/site-language";
 import type { SitePage } from "@/lib/site/types";
 import styles from "./production-page.module.css";
+import { tr, translateDeep } from "@/components/site/i18n";
 
 type ProductionPageProps = {
   language: SiteLanguage;
@@ -103,6 +104,8 @@ const MOBILE_INITIAL_GALLERY_COUNT = 4;
 const MOBILE_GALLERY_INCREMENT = 2;
 
 export function ProductionPage({ language, page }: ProductionPageProps) {
+  const typeCardsT = translateDeep(typeCards, language);
+  const constructionCardsT = translateDeep(constructionCards, language);
   const { openContactForm } = useContactForm();
   const [isMobileGallery, setIsMobileGallery] = useState(false);
   const allGalleryCards = useMemo(
@@ -147,17 +150,17 @@ export function ProductionPage({ language, page }: ProductionPageProps) {
           <div className={styles.heroInner}>
             <div className={styles.heroCopy}>
               <div className={styles.breadcrumbs}>
-                <span className={styles.breadcrumbMuted}>Головна</span>
+                <span className={styles.breadcrumbMuted}>{tr(language, "Головна")}</span>
                 <span className={styles.breadcrumbMuted}>/</span>
-                <span className={styles.breadcrumbCurrent}>Виробництво</span>
+                <span className={styles.breadcrumbCurrent}>{tr(language, "Виробництво")}</span>
               </div>
 
               <div className={styles.heroTextGroup}>
-                <h1 className={styles.heroTitle}>Виробництво</h1>
+                <h1 className={styles.heroTitle}>{tr(language, "Виробництво")}</h1>
                 <div className={styles.heroImageCardMobile}>
                   <Image
                     src="/figma/production-page/hero-image.webp"
-                    alt="Виробництво"
+                    alt={tr(language, "Виробництво")}
                     fill
                     sizes="100vw"
                     className={styles.heroImage}
@@ -166,17 +169,10 @@ export function ProductionPage({ language, page }: ProductionPageProps) {
                 </div>
                 <div className={styles.heroBody}>
                   <p>
-                    ТОВ &quot;Автоспецпром&quot; виробляє автомобілі швидкої допомоги в
-                    типах А1, А2, В та С в стандартній та неонатальній
-                    конфігураціях. А також спеціалізований транспорт для
-                    перевезення людей з обмеженими фізичними можливостями,
-                    мобільних амбулаторій тощо.
+                    {tr(language, "ТОВ \"Автоспецпром\" виробляє автомобілі швидкої допомоги в типах А1, А2, В та С в стандартній та неонатальній конфігураціях. А також спеціалізований транспорт для перевезення людей з обмеженими фізичними можливостями, мобільних амбулаторій тощо.")}
                   </p>
                   <p>
-                    Підприємство має власний конструкторський відділ, який
-                    постійно працює над поліпшенням ергономічності, надійності
-                    та комфорту автомобілів швидкої допомоги як для лікарів
-                    (фельдшерських бригад), так і для пацієнтів.
+                    {tr(language, "Підприємство має власний конструкторський відділ, який постійно працює над поліпшенням ергономічності, надійності та комфорту автомобілів швидкої допомоги як для лікарів (фельдшерських бригад), так і для пацієнтів.")}
                   </p>
                 </div>
               </div>
@@ -191,14 +187,14 @@ export function ProductionPage({ language, page }: ProductionPageProps) {
                   openContactForm();
                 }}
               >
-                Звʼязатися з нами
+                {tr(language, "Звʼязатися з нами")}
               </SiteButton>
             </div>
 
             <div className={styles.heroImageCard}>
               <Image
                 src="/figma/production-page/hero-image.webp"
-                alt="Виробництво"
+                alt={tr(language, "Виробництво")}
                 fill
                 sizes="(max-width: 767px) 100vw, (max-width: 1439px) 50vw, 650px"
                 className={styles.heroImage}
@@ -211,9 +207,9 @@ export function ProductionPage({ language, page }: ProductionPageProps) {
         </section>
 
         <section className={styles.typesSection}>
-          <h2 className={styles.sectionTitle}>Типи автомобілів швидкої допомоги</h2>
+          <h2 className={styles.sectionTitle}>{tr(language, "Типи автомобілів швидкої допомоги")}</h2>
           <div className={styles.typesGrid}>
-            {typeCards.map((card) => (
+            {typeCardsT.map((card) => (
               <article key={card.letter} className={styles.typeCard} tabIndex={0}>
                 <div className={styles.typeCardGlow} aria-hidden="true" />
                 <div className={styles.typeCardLetterLayer} aria-hidden="true">
@@ -230,9 +226,9 @@ export function ProductionPage({ language, page }: ProductionPageProps) {
 
         <section className={styles.constructionSection}>
           <div className={styles.constructionInner}>
-            <h2 className={styles.sectionTitle}>Конструкція автомобілів</h2>
+            <h2 className={styles.sectionTitle}>{tr(language, "Конструкція автомобілів")}</h2>
             <div className={styles.constructionGrid}>
-              {constructionCards.map((card) => (
+              {constructionCardsT.map((card) => (
                 <article
                   key={card.title}
                   className={`${styles.constructionCard} ${card.rowClassName}`}
@@ -248,16 +244,12 @@ export function ProductionPage({ language, page }: ProductionPageProps) {
 
         <section className={styles.medicalSection}>
           <div className={styles.medicalHeader}>
-            <h2 className={styles.sectionTitle}>Медичне обладнання</h2>
+            <h2 className={styles.sectionTitle}>{tr(language, "Медичне обладнання")}</h2>
             <p className={styles.medicalBody}>
-              Фахівці нашої компанії комплектують “швидкі” необхідним медичним
-              обладнанням згідно з вимогами до відповідного типу автомобілю (А1
-              та А2, В та С, а також неонатальні).
+              {tr(language, "Фахівці нашої компанії комплектують “швидкі” необхідним медичним обладнанням згідно з вимогами до відповідного типу автомобілю (А1 та А2, В та С, а також неонатальні).")}
             </p>
             <p className={styles.medicalBody}>
-              Ми використовуємо медичне обладнання яке відповідає стандартам
-              щодо надання невідкладної медичної допомоги, безпеки та комфорту
-              пацієнтів і медпрацівників.
+              {tr(language, "Ми використовуємо медичне обладнання яке відповідає стандартам щодо надання невідкладної медичної допомоги, безпеки та комфорту пацієнтів і медпрацівників.")}
             </p>
           </div>
 
@@ -266,7 +258,7 @@ export function ProductionPage({ language, page }: ProductionPageProps) {
               <div key={src} className={styles.medicalCard}>
                 <Image
                   src={src}
-                  alt={`Медичне обладнання ${index + 1}`}
+                  alt={tr(language, "Медичне обладнання {0}", index + 1)}
                   fill
                   sizes="(max-width: 767px) 42vw, (max-width: 1439px) 25vw, 266px"
                   className={styles.medicalImage}
@@ -278,9 +270,9 @@ export function ProductionPage({ language, page }: ProductionPageProps) {
 
         <section className={styles.chassisShell}>
           <ChassisSection
-            title="Базові автомобілі"
-            body={'Зазначені типи "швидких" виробляються на базі автомобілів Citroën, Peugeot, Ford, Mercedes-Benz'}
-            note="Прямі договори з виробником базових автомобілів дозволяють нам забезпечувати найкращі ціни на продукцію"
+            title={tr(language, "Базові автомобілі")}
+            body={tr(language, "Зазначені типи \"швидких\" виробляються на базі автомобілів Citroën, Peugeot, Ford, Mercedes-Benz")}
+            note={tr(language, "Прямі договори з виробником базових автомобілів дозволяють нам забезпечувати найкращі ціни на продукцію")}
           />
         </section>
 
@@ -290,7 +282,7 @@ export function ProductionPage({ language, page }: ProductionPageProps) {
               <div key={index} className={styles.galleryCard}>
                 <Image
                   src={card.src}
-                  alt={`Фото виробництва ${index + 1}`}
+                  alt={tr(language, "Фото виробництва {0}", index + 1)}
                   fill
                   sizes="426px"
                   className={styles.galleryImage}
@@ -320,7 +312,7 @@ export function ProductionPage({ language, page }: ProductionPageProps) {
             size="m"
             className={styles.galleryButton}
           >
-            Більше фото
+            {tr(language, "Більше фото")}
           </SiteButton>
         </section>
       </main>

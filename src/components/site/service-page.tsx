@@ -14,6 +14,7 @@ import { Header } from "@/components/site/header";
 import type { SiteLanguage } from "@/components/site/site-language";
 import type { SitePage } from "@/lib/site/types";
 import styles from "./service-page.module.css";
+import { tr, translateDeep } from "@/components/site/i18n";
 
 type ServicePageProps = {
   language: SiteLanguage;
@@ -311,10 +312,12 @@ function ensureServiceCenterLayers(map: MapboxMap) {
   }
 }
 
-function HeroServiceGrid() {
+function HeroServiceGrid({ language }: { language: SiteLanguage }) {
+  const heroServicesT = translateDeep(heroServices, language);
+
   return (
     <div className={styles.heroServicesGrid}>
-      {heroServices.map((item) => (
+      {heroServicesT.map((item) => (
         <div
           key={item.title}
           className={
@@ -338,6 +341,10 @@ function HeroServiceGrid() {
 }
 
 export function ServicePage({ language, page }: ServicePageProps) {
+  const serviceCentersT = useMemo(
+    () => translateDeep(serviceCenters, language),
+    [language],
+  );
   const { openContactForm } = useContactForm();
   const [regionQuery, setRegionQuery] = useState("");
   const [isAutocompleteOpen, setIsAutocompleteOpen] = useState(false);
@@ -351,8 +358,8 @@ export function ServicePage({ language, page }: ServicePageProps) {
   const centerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const normalizedQuery = regionQuery.trim().toLocaleLowerCase("uk-UA");
   const cityOptions = useMemo(
-    () => Array.from(new Set(serviceCenters.map((item) => item.city))),
-    [],
+    () => Array.from(new Set(serviceCentersT.map((item) => item.city))),
+    [serviceCentersT],
   );
   const autocompleteOptions = useMemo(
     () => cityOptions.filter((city) => !selectedCities.includes(city)),
@@ -360,7 +367,7 @@ export function ServicePage({ language, page }: ServicePageProps) {
   );
   const filteredCenters = useMemo(
     () =>
-      serviceCenters.filter((item) => {
+      serviceCentersT.filter((item) => {
         if (!normalizedQuery && selectedCities.length === 0) {
           return true;
         }
@@ -379,7 +386,7 @@ export function ServicePage({ language, page }: ServicePageProps) {
 
         return normalizedCity === normalizedQuery;
       }),
-    [normalizedQuery, selectedCities],
+    [normalizedQuery, selectedCities, serviceCentersT],
   );
   const visibleCenterKeys = useMemo(
     () => filteredCenters.map((item) => getCenterKey(item)),
@@ -655,7 +662,7 @@ export function ServicePage({ language, page }: ServicePageProps) {
           <input
             type="text"
             value={regionQuery}
-            placeholder="Всі регіони"
+            placeholder={tr(language, "Всі регіони")}
             className={styles.regionInputField}
             onFocus={() => setIsAutocompleteOpen(true)}
             onChange={(event) => handleRegionChange(event.target.value)}
@@ -669,7 +676,7 @@ export function ServicePage({ language, page }: ServicePageProps) {
               className={styles.regionAutocompleteOption}
               onClick={handleRegionReset}
             >
-              Всі регіони
+              {tr(language, "Всі регіони")}
             </button>
             {autocompleteOptions.map((city) => (
               <button
@@ -752,20 +759,19 @@ export function ServicePage({ language, page }: ServicePageProps) {
           <div className={styles.heroInner}>
             <div className={styles.heroCopy}>
               <div className={styles.breadcrumbs}>
-                <span className={styles.breadcrumbMuted}>Головна</span>
+                <span className={styles.breadcrumbMuted}>{tr(language, "Головна")}</span>
                 <span className={styles.breadcrumbMuted}>/</span>
-                <span className={styles.breadcrumbCurrent}>Сервіс</span>
+                <span className={styles.breadcrumbCurrent}>{tr(language, "Сервіс")}</span>
               </div>
 
               <div className={styles.heroContent}>
-                <h1 className={styles.heroTitle}>Сервісне обслуговування</h1>
+                <h1 className={styles.heroTitle}>{tr(language, "Сервісне обслуговування")}</h1>
 
                 <div className={styles.heroTextBlock}>
                   <p className={styles.heroLead}>
-                    Cервісні центри компанії надають широкий перелік послуг і
-                    виконують усі види робіт.
+                    {tr(language, "Cервісні центри компанії надають широкий перелік послуг і виконують усі види робіт.")}
                   </p>
-                  <HeroServiceGrid />
+                  <HeroServiceGrid language={language} />
                 </div>
               </div>
 
@@ -774,14 +780,14 @@ export function ServicePage({ language, page }: ServicePageProps) {
                 className={styles.heroButton}
                 onClick={openContactForm}
               >
-                <span className={styles.heroButtonLabel}>Зв&apos;язатися з нами</span>
+                <span className={styles.heroButtonLabel}>{tr(language, "Зв'язатися з нами")}</span>
               </button>
             </div>
 
             <div className={styles.heroImageCard}>
               <Image
                 src="/figma/services-page/hero-image.webp"
-                alt="Сервісне обслуговування"
+                alt={tr(language, "Сервісне обслуговування")}
                 fill
                 sizes="(max-width: 767px) 100vw, (max-width: 1439px) 50vw, 650px"
                 className={styles.heroImage}
@@ -799,11 +805,10 @@ export function ServicePage({ language, page }: ServicePageProps) {
 
           <div className={styles.centersHeader}>
             <h2 className={styles.centersTitle}>
-              Сервісні центри у всіх регіонах України
+              {tr(language, "Сервісні центри у всіх регіонах України")}
             </h2>
             <p className={styles.centersDescription}>
-              Технічне обслуговування базових автомобілів відбувається в
-              регіональних сервісних центрах по всій країні.
+              {tr(language, "Технічне обслуговування базових автомобілів відбувається в регіональних сервісних центрах по всій країні.")}
             </p>
           </div>
 
@@ -821,7 +826,7 @@ export function ServicePage({ language, page }: ServicePageProps) {
                         className={styles.mobileCentersClose}
                         onClick={() => setIsMobileCentersPanelOpen(false)}
                       >
-                        Закрити список
+                        {tr(language, "Закрити список")}
                       </button>
                     </div>
                     <div className={styles.mobileCentersPanel}>{centersPanel}</div>
@@ -835,7 +840,7 @@ export function ServicePage({ language, page }: ServicePageProps) {
                     className={styles.mobileCentersToggle}
                     onClick={() => setIsMobileCentersPanelOpen(true)}
                   >
-                    Показати список представництв
+                    {tr(language, "Показати список представництв")}
                   </button>
                 </div>
               ) : null}
@@ -848,7 +853,7 @@ export function ServicePage({ language, page }: ServicePageProps) {
             <div className={styles.medicalImageCard}>
               <Image
                 src="/figma/services-page/medical-service-maintenance.jpg"
-                alt="Ремонт і обслуговування медичного обладнання"
+                alt={tr(language, "Ремонт і обслуговування медичного обладнання")}
                 fill
                 loading="lazy"
                 sizes="(max-width: 767px) 100vw, (max-width: 1439px) 50vw, 650px"
@@ -859,17 +864,15 @@ export function ServicePage({ language, page }: ServicePageProps) {
             <div className={styles.medicalCopy}>
               <div className={styles.medicalTextBlock}>
                 <h2 className={styles.medicalTitle}>
-                  Ремонт і обслуговування медичного обладнання
+                  {tr(language, "Ремонт і обслуговування медичного обладнання")}
                 </h2>
 
                 <div className={styles.medicalDescription}>
                   <p>
-                    Ремонт медичної техніки забезпечують виробники або їхні
-                    офіційні представники в Україні за запитом.
+                    {tr(language, "Ремонт медичної техніки забезпечують виробники або їхні офіційні представники в Україні за запитом.")}
                   </p>
                   <p>
-                    Щоб дізнатися більше, зв&apos;яжіться з нами або залиште вашу
-                    заявку.
+                    {tr(language, "Щоб дізнатися більше, зв'яжіться з нами або залиште вашу заявку.")}
                   </p>
                 </div>
               </div>
@@ -884,7 +887,7 @@ export function ServicePage({ language, page }: ServicePageProps) {
                   />
                 </span>
                 <span className={styles.medicalButtonText}>
-                  Замовити сервіс медичного обладнання
+                  {tr(language, "Замовити сервіс медичного обладнання")}
                 </span>
               </button>
             </div>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { footerCopyByLanguage } from "@/components/site/footer-copy";
 import type { SiteLanguage } from "@/components/site/site-language";
 import styles from "./footer.module.css";
+import { tr } from "@/components/site/i18n";
 
 type FooterStaticProps = {
   language: SiteLanguage;
@@ -20,7 +21,7 @@ export function FooterStatic({ language }: FooterStaticProps) {
           <div className={styles.brandColumn}>
             <Image
               src="/figma/footer-2821/logo-dark.svg"
-              alt="Автоспецпром"
+              alt={tr(language, "Автоспецпром")}
               width={259}
               height={39}
               unoptimized

@@ -4,6 +4,7 @@ import { Header } from "@/components/site/header";
 import type { SiteLanguage } from "@/components/site/site-language";
 import type { SitePage } from "@/lib/site/types";
 import styles from "./certifications-page.module.css";
+import { tr, translateDeep } from "@/components/site/i18n";
 
 type CertificationsPageProps = {
   language: SiteLanguage;
@@ -67,6 +68,8 @@ function FileList({
 }
 
 export function CertificationsPage({ language, page }: CertificationsPageProps) {
+  const declarationsT = translateDeep(declarations, language);
+  const certificatesT = translateDeep(certificates, language);
   return (
     <div className={styles.page}>
       <Header currentPath={page.uri} initialLanguage={language} page={page} />
@@ -76,38 +79,29 @@ export function CertificationsPage({ language, page }: CertificationsPageProps) 
           <div className={styles.content}>
             <div className={styles.titleBlock}>
               <div className={styles.breadcrumbs}>
-                <span className={styles.breadcrumbMuted}>Головна</span>
+                <span className={styles.breadcrumbMuted}>{tr(language, "Головна")}</span>
                 <span className={styles.breadcrumbMuted}>/</span>
-                <span className={styles.breadcrumbCurrent}>Виробництво</span>
+                <span className={styles.breadcrumbCurrent}>{tr(language, "Виробництво")}</span>
               </div>
 
-              <h1 className={styles.title}>Сертифікати та нормативна база</h1>
+              <h1 className={styles.title}>{tr(language, "Сертифікати та нормативна база")}</h1>
             </div>
 
             <div className={styles.description}>
               <p>
-                ТОВ &quot;Автоспецпром&quot; має повний комплект необхідних
-                ліцензій та сертифікатів.
+                {tr(language, "ТОВ \"Автоспецпром\" має повний комплект необхідних ліцензій та сертифікатів.")}
               </p>
               <p>
-                Спеціалізовані автомобілі швидкої медичної допомоги типу А1,
-                А2, В, С відповідають вимогам ДСТУ EN 1789:2019 та Порядку
-                затвердження конструкції транспортних засобів, їх частин та
-                обладнання, затвердженого Наказом Міністерства інфраструктури
-                України 17.08.2012 № 521.
+                {tr(language, "Спеціалізовані автомобілі швидкої медичної допомоги типу А1, А2, В, С відповідають вимогам ДСТУ EN 1789:2019 та Порядку затвердження конструкції транспортних засобів, їх частин та обладнання, затвердженого Наказом Міністерства інфраструктури України 17.08.2012 № 521.")}
               </p>
               <p>
-                Інші автомобілі спеціалізованого призначення, які виробляє ТОВ
-                «Автоспецпром» відповідають вимогам Порядку затвердження
-                конструкції транспортних засобів, їх частин та обладнання,
-                затвердженого Наказом Міністерства інфраструктури України
-                17.08.2012 № 521.
+                {tr(language, "Інші автомобілі спеціалізованого призначення, які виробляє ТОВ «Автоспецпром» відповідають вимогам Порядку затвердження конструкції транспортних засобів, їх частин та обладнання, затвердженого Наказом Міністерства інфраструктури України 17.08.2012 № 521.")}
               </p>
             </div>
 
             <div className={styles.groups}>
-              <FileList title="Декларації" items={declarations} />
-              <FileList title="Сертифікати" items={certificates} />
+              <FileList title={tr(language, "Декларації")} items={declarationsT} />
+              <FileList title={tr(language, "Сертифікати")} items={certificatesT} />
             </div>
           </div>
         </section>

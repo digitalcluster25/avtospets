@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { Inter, Oswald, Rubik } from "next/font/google";
 import { SITE_LANGUAGE_COOKIE_KEY } from "@/components/site/site-language";
+import { tr } from "@/components/site/i18n";
 import "./globals.css";
 
 const headingFont = Oswald({
@@ -19,17 +20,25 @@ const uiFont = Inter({
   subsets: ["latin", "cyrillic"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  ),
-  title: {
-    default: "Автоспецпром",
-    template: "%s | Автоспецпром",
-  },
-  description:
-    "Headless-фронт для промо-сайта Автоспецпром на Next.js и WordPress.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore = await cookies();
+  const language =
+    cookieStore.get(SITE_LANGUAGE_COOKIE_KEY)?.value === "en" ? "en" : "ua";
+
+  return {
+    metadataBase: new URL(
+      process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+    ),
+    title: {
+      default: tr(language, "Автоспецпром"),
+      template: tr(language, "%s | Автоспецпром"),
+    },
+    description: tr(
+      language,
+      "Headless-фронт для промо-сайта Автоспецпром на Next.js и WordPress.",
+    ),
+  };
+}
 
 export default async function RootLayout({
   children,

@@ -9,6 +9,7 @@ import {
   SITE_LANGUAGE_STORAGE_KEY,
   type SiteLanguage,
 } from "@/components/site/site-language";
+import { tr } from "@/components/site/i18n";
 import type { SitePage } from "@/lib/site/types";
 import styles from "./header.module.css";
 
@@ -150,7 +151,7 @@ export function Header({
         <Link href="/" className={styles.brand}>
           <Image
             src="/figma/header-logo-exact.svg"
-            alt="Автоспецпром"
+            alt={tr(language, "Автоспецпром")}
             width={213}
             height={32}
             priority
@@ -209,7 +210,7 @@ export function Header({
                       aria-disabled="true"
                     >
                       <span className={styles.dropdownItemText}>{item.label}</span>
-                      <span className={styles.dropdownItemChip}>В разработке</span>
+                      <span className={styles.dropdownItemChip}>{tr(language, "В разработке")}</span>
                     </span>
                   ),
                 )}
@@ -238,7 +239,7 @@ export function Header({
             type="button"
             className={styles.mobileToggle}
             aria-expanded={mobileMenuOpen}
-            aria-label="Відкрити меню"
+            aria-label={tr(language, "Відкрити меню")}
             onClick={() => setMobileMenuOpen((current) => !current)}
           >
             <span className={styles.mobileToggleBar} />
@@ -322,7 +323,7 @@ export function Header({
         className={`${styles.mobileOverlay} ${
           mobileMenuOpen ? styles.mobileOverlayOpen : ""
         }`}
-        aria-label="Закрити меню"
+        aria-label={tr(language, "Закрити меню")}
         tabIndex={mobileMenuOpen ? 0 : -1}
         aria-hidden={!mobileMenuOpen}
         onClick={closeAllMenus}
@@ -337,7 +338,7 @@ export function Header({
               <Link href="/" className={styles.mobilePanelBrand} onClick={closeAllMenus}>
                 <Image
                   src="/figma/header-logo-exact.svg"
-                  alt="Автоспецпром"
+                  alt={tr(language, "Автоспецпром")}
                   width={213}
                   height={32}
                   className={styles.mobilePanelLogo}
@@ -346,7 +347,7 @@ export function Header({
               <button
                 type="button"
                 className={styles.mobileClose}
-                aria-label="Закрити меню"
+                aria-label={tr(language, "Закрити меню")}
                 onClick={closeAllMenus}
               >
                 ×
@@ -378,7 +379,7 @@ export function Header({
                         aria-disabled="true"
                       >
                         <span className={styles.mobileLinkText}>{item.label}</span>
-                        <span className={styles.mobileLinkChip}>В разработке</span>
+                        <span className={styles.mobileLinkChip}>{tr(language, "В разработке")}</span>
                       </span>
                     ),
                   )}

@@ -4,6 +4,7 @@ import { Header } from "@/components/site/header";
 import type { SiteLanguage } from "@/components/site/site-language";
 import type { SitePage } from "@/lib/site/types";
 import styles from "./about-page.module.css";
+import { tr, translateDeep } from "@/components/site/i18n";
 
 type AboutPageProps = {
   language: SiteLanguage;
@@ -41,6 +42,8 @@ const partnerLogos = partnerLogosOrder.map((index) => ({
 }));
 
 export function AboutPage({ language, page }: AboutPageProps) {
+  const dealerCardsT = translateDeep(dealerCards, language);
+  const partnerLogosT = translateDeep(partnerLogos, language);
   return (
     <div className={styles.page}>
       <Header currentPath={page.uri} initialLanguage={language} page={page} />
@@ -51,30 +54,22 @@ export function AboutPage({ language, page }: AboutPageProps) {
             <div className={styles.heroCopy}>
               <div className={styles.heroHead}>
                 <div className={styles.breadcrumbs}>
-                  <span className={styles.breadcrumbMuted}>Головна</span>
+                  <span className={styles.breadcrumbMuted}>{tr(language, "Головна")}</span>
                   <span className={styles.breadcrumbMuted}>/</span>
-                  <span className={styles.breadcrumbCurrent}>Про компанію</span>
+                  <span className={styles.breadcrumbCurrent}>{tr(language, "Про компанію")}</span>
                 </div>
-                <h1 className={styles.heroTitle}>Про компанію</h1>
+                <h1 className={styles.heroTitle}>{tr(language, "Про компанію")}</h1>
               </div>
 
               <div className={styles.heroBody}>
                 <p>
-                  ТОВ &quot;Автоспецпром&quot; — перший та найбільший в Україні
-                  виробник автомобілів швидкої (екстреної) медичної допомоги.
+                  {tr(language, "ТОВ \"Автоспецпром\" — перший та найбільший в Україні виробник автомобілів швидкої (екстреної) медичної допомоги.")}
                 </p>
                 <p>
-                  Свою діяльність підприємство розпочало в 2012 році. В даний
-                  час потужності ТОВ &quot;Автоспецпром&quot; дозволяють випускати на
-                  місяць до 100 одиниць автомобілів швидкої допомоги, а також
-                  транспорту спеціального призначення, в тому числі — для
-                  перевезення людей з обмеженими фізичними можливостями,
-                  мобільних амбулаторій тощо.
+                  {tr(language, "Свою діяльність підприємство розпочало в 2012 році. В даний час потужності ТОВ \"Автоспецпром\" дозволяють випускати на місяць до 100 одиниць автомобілів швидкої допомоги, а також транспорту спеціального призначення, в тому числі — для перевезення людей з обмеженими фізичними можливостями, мобільних амбулаторій тощо.")}
                 </p>
                 <p>
-                  За час своєї роботи підприємство випустило більше 3100 машин
-                  швидкої допомоги всіх типів, з яких більше 1600 — вже після
-                  початку повномасштабного вторгнення.
+                  {tr(language, "За час своєї роботи підприємство випустило більше 3100 машин швидкої допомоги всіх типів, з яких більше 1600 — вже після початку повномасштабного вторгнення.")}
                 </p>
               </div>
             </div>
@@ -82,7 +77,7 @@ export function AboutPage({ language, page }: AboutPageProps) {
             <div className={styles.heroImageCard}>
               <Image
                 src="/figma/about-manufacturing/company-image.webp"
-                alt="Про компанію"
+                alt={tr(language, "Про компанію")}
                 fill
                 sizes="(max-width: 767px) 100vw, (max-width: 1439px) 50vw, 650px"
                 className={styles.heroImage}
@@ -96,15 +91,14 @@ export function AboutPage({ language, page }: AboutPageProps) {
 
         <section className={styles.dealerSection}>
           <div className={styles.dealerTitleBlock}>
-            <h2 className={styles.sectionTitle}>Офіційний дилер</h2>
+            <h2 className={styles.sectionTitle}>{tr(language, "Офіційний дилер")}</h2>
             <p className={styles.dealerBody}>
-              ТОВ «Автоспецпром» є офіційним дилером торгівельних марок
-              Peugeot, Citroen, Ford
+              {tr(language, "ТОВ «Автоспецпром» є офіційним дилером торгівельних марок Peugeot, Citroen, Ford")}
             </p>
           </div>
 
           <div className={styles.dealerCards}>
-            {dealerCards.map((card) => (
+            {dealerCardsT.map((card) => (
               <article key={card.title} className={styles.dealerCard}>
                 <div className={styles.dealerIconWrap}>
                   <Image
@@ -128,21 +122,16 @@ export function AboutPage({ language, page }: AboutPageProps) {
 
         <section className={styles.teamSection}>
           <div className={styles.teamCopy}>
-            <h2 className={styles.teamTitle}>Фахівці</h2>
+            <h2 className={styles.teamTitle}>{tr(language, "Фахівці")}</h2>
             <p className={styles.teamBody}>
-              Команда ТОВ &quot;Автоспецпром&quot; налічує близько 100
-              співробітників, більшість із яких є високопрофесійними технічними
-              спеціалістами з великим досвідом роботи в автомобільній
-              промисловості. Адміністративна частина колективу складає лише 8 %.
-              Близько 12 % працівників компанії зайняті в
-              інженерно-конструкторських розробках.
+              {tr(language, "Команда ТОВ \"Автоспецпром\" налічує близько 100 співробітників, більшість із яких є високопрофесійними технічними спеціалістами з великим досвідом роботи в автомобільній промисловості. Адміністративна частина колективу складає лише 8 %. Близько 12 % працівників компанії зайняті в інженерно-конструкторських розробках.")}
             </p>
           </div>
 
           <div className={styles.teamImageCard}>
             <Image
               src="/figma/about-manufacturing/manufacturing-image.webp"
-              alt="Фахівці"
+              alt={tr(language, "Фахівці")}
               fill
               loading="lazy"
               sizes="(max-width: 767px) 100vw, (max-width: 1439px) 50vw, 650px"
@@ -153,15 +142,14 @@ export function AboutPage({ language, page }: AboutPageProps) {
 
         <section className={styles.partnersSection}>
           <div className={styles.partnersTitleBlock}>
-            <h2 className={styles.sectionTitle}>Маємо честь співпрацювати</h2>
+            <h2 className={styles.sectionTitle}>{tr(language, "Маємо честь співпрацювати")}</h2>
             <p className={styles.partnersBody}>
-              Виробляємо автомобілі швидкої допомоги для державних та приватних
-              медичних установ України, неурядових і міжнародних організацій.
+              {tr(language, "Виробляємо автомобілі швидкої допомоги для державних та приватних медичних установ України, неурядових і міжнародних організацій.")}
             </p>
           </div>
 
           <div className={styles.partnersGrid}>
-            {partnerLogos.map((logo) => (
+            {partnerLogosT.map((logo) => (
               <div key={logo.src} className={styles.partnerCard}>
                 <Image
                   src={logo.src}
