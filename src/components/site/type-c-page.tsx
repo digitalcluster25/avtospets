@@ -819,7 +819,7 @@ export function TypeCPage({ language, page }: TypeCPageProps) {
 
             <div className={styles.specColumn}>
               <h3 className={styles.productTitle}>
-                {copy.productTitle(brandLabel(brandSlug))}
+                {tr(language, copy.productTitle(brandLabel(brandSlug)))}
               </h3>
 
               <section className={styles.panel}>
