@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { SiteButton } from "@/components/site/button";
 import {
@@ -81,6 +82,7 @@ export function Header({
   page,
   transparent = false,
 }: HeaderProps) {
+  const router = useRouter();
   const [language, setLanguage] = useState<SiteLanguage>(initialLanguage);
   const copy = translations[language];
   const [openMenu, setOpenMenu] = useState<"vehicles" | "language" | null>(null);
@@ -138,7 +140,13 @@ export function Header({
     document.documentElement.lang = language === "ua" ? "uk" : "en";
     window.localStorage.setItem(SITE_LANGUAGE_STORAGE_KEY, language);
     document.cookie = `${SITE_LANGUAGE_COOKIE_KEY}=${language}; path=/; max-age=31536000; samesite=lax`;
-  }, [language]);
+
+    // The page content is rendered on the server from the language cookie,
+    // so re-render it right after the user switches the language.
+    if (language !== initialLanguage) {
+      router.refresh();
+    }
+  }, [initialLanguage, language, router]);
 
   function closeAllMenus() {
     setOpenMenu(null);
